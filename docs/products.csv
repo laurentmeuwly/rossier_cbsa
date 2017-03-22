@@ -1,0 +1,2 @@
+Laisser vide,String,true ou false,String ou vide,float,float,String,String,laisser vide,string,true ou false,string,integer
+id,name,active,comment,cost_price,sale_price,in_barcode,out_barecode,image,category,to_display,unit,stock

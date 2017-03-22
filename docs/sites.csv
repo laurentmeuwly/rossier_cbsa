@@ -1,0 +1,2 @@
+Laisser vide,String,String ou vide,Integer,String ou vide,En cours ou Terminé,true ou false
+id,name,address,postcode,city,status,to_display
