@@ -1,0 +1,33 @@
+Hello: Bonjour
+actions: __Actions
+show: __show
+edit: __edit
+'Create a new product': '__Create a new product'
+'Create a new site': '__Create a new site'
+Delivery: __Delivery
+Product: __Product
+Site: __Site
+Home: __Home
+'Listing stock location': '__Listing stock location'
+deliveries: __deliveries
+'Deliveries list': '__Deliveries list'
+Deliverydate: __Deliverydate
+'Create a new delivery': '__Create a new delivery'
+
+inventory:
+  site:
+    list_title: '__Sitedadsadsadads list'
+    name: Nom
+    address: __Address
+inventory.site.postcode: __Postcode
+inventory.site.city: __City
+inventory.product.list_title: 'Liste des produits'
+inventory.product.name: 'Nom article'
+inventory.product.active: __Active
+inventory.product.comment: __Comment
+inventory.product.costprice: __Costprice
+inventory.product.saleprice: __Saleprice
+inventory.product.picture: __Picture
+Actions: __Actions
+'Listing sites': '__Listing sites'
+inventory.product.image: __inventory.product.image

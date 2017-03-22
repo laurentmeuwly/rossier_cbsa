@@ -1,0 +1,39 @@
+site_index:
+    path:     /{page}
+    defaults:
+        _controller: "InventoryBundle:Site:index"
+        page:        1
+    requirements:
+        page: \d*
+    methods:  GET
+
+site_show:
+    path:     /{id}/show
+    defaults: { _controller: "InventoryBundle:Site:show" }
+    methods:  GET
+
+site_new:
+    path:     /new
+    defaults: { _controller: "InventoryBundle:Site:new" }
+    methods:  [GET, POST]
+
+site_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "InventoryBundle:Site:edit" }
+    methods:  [GET, POST]
+
+site_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "InventoryBundle:Site:delete" }
+    methods:  DELETE
+    
+site_deliveries:
+    path:     /{id}/delivery
+    defaults: { _controller: "InventoryBundle:Site:viewdeliveries" }
+    methods:  GET
+    
+    
+site_pdf:
+    path: /pdf
+    defaults: { _controller: "InventoryBundle:Site:pdf" }
+    methods:  [GET, POST]

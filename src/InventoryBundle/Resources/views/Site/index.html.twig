@@ -1,0 +1,57 @@
+{% extends "InventoryBundle::layout.html.twig" %}
+
+{% block body %}
+    <h1>{{ 'inventory.site.list_title'|trans }}</h1>
+
+    <div class="table-responsive"> 
+    <table class="records_list table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>{{ 'inventory.site.name'|trans }}</th>
+                <th>{{ 'inventory.site.address'|trans }}</th>
+                <th>{{ 'inventory.site.postcode'|trans }}</th>
+                <th>{{ 'inventory.site.city'|trans }}</th>
+                <th>{{ 'actions'|trans }}</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for site in sites %}
+            <tr>
+                <td><a href="{{ path('site_show', { 'id': site.id }) }}">{{ site.id }}</a></td>
+                <td>{{ site.name }}</td>
+                <td>{{ site.address }}</td>
+                <td>{{ site.postcode }}</td>
+                <td>{{ site.city }}</td>
+                <td style="text-align: center; vertical-align: middle;">
+                    <ul style="list-style-type: none;">
+                        <li>
+                            <a class="btn btn-default btn-xs" href="{{ path('site_edit', { 'id': site.id }) }}">{{ 'edit'|trans}}</a>
+                        </li>
+                        <li style="margin-top: 10px;">
+                            <a class="btn btn-default btn-xs" href="{{ path('site_deliveries', { 'id': site.id }) }}">{{ 'deliveries'|trans }}</a>
+                        </li>
+                        
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </div>
+    
+    <ul class="pagination">
+  {% for p in range(1, nbPages) %}
+    <li{% if p == page %} class="active"{% endif %}>
+      <a href="{{ path('site_index', {'page': p}) }}">{{ p }}</a>
+    </li>
+  {% endfor %}
+
+    </ul>
+
+    <ul>
+        <li>
+            <a href="{{ path('site_new') }}">{{ 'Create a new site'|trans }}</a>
+        </li>
+    </ul>
+{% endblock %}

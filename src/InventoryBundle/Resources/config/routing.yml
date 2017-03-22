@@ -1,0 +1,27 @@
+
+inventory_home:
+    path: /inventory
+    defaults: { _controller: InventoryBundle:Advert:index }
+
+inventory_view:
+    path: /inventory/advert/{id}
+    defaults:  
+        _controller: InventoryBundle:Advert:view
+    requirements:
+        id: ^[1-9]\d*$
+
+inventory_add:
+    path: /inventory/add
+    defaults: { _controller: InventoryBundle:Advert:add }
+
+inventory_product:
+    resource: "@InventoryBundle/Resources/config/routing/product.yml"
+    prefix:   /product
+
+inventory_site:
+    resource: "@InventoryBundle/Resources/config/routing/site.yml"
+    prefix:   /site
+
+inventory_delivery:
+    resource: "@InventoryBundle/Resources/config/routing/delivery.yml"
+    prefix:   /delivery

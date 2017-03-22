@@ -1,0 +1,57 @@
+{% extends "InventoryBundle::layout.html.twig" %}
+
+{% block body %}
+    <h1>Product</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ product.id }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ product.name }}</td>
+            </tr>
+            <tr>
+                <th>Active</th>
+                <td>{% if product.active %}Yes{% else %}No{% endif %}</td>
+            </tr>
+            <tr>
+                <th>Comment</th>
+                <td>{{ product.comment }}</td>
+            </tr>
+            <tr>
+                <th>Costprice</th>
+                <td>{{ product.costPrice }}</td>
+            </tr>
+            <tr>
+                <th>Saleprice</th>
+                <td>{{ product.salePrice }}</td>
+            </tr>
+
+            <tr>
+                <th>Inbarcode</th>
+                <td>{{ product.inBarcode }}</td>
+            </tr>
+            <tr>
+                <th>Outbarcode</th>
+                <td>{{ product.outBarcode }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('product_index') }}">Back to the list</a>
+        </li>
+        <li>
+            <a href="{{ path('product_edit', { 'id': product.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

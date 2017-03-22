@@ -1,0 +1,30 @@
+{% extends "::layout.html.twig" %}
+
+{% block title %}{{ parent() }} - Inventory{% endblock %}
+
+{% block menu %}
+	<ul class="nav navbar-nav text-md-center justify-content-md-between">
+              <li class="nav-item active">
+                <a class="nav-link" href="#">{{ 'Home'|trans }} <span class="sr-only">(current)</span></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ path('delivery_index') }}">{{ 'Delivery'|trans }}</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ path('product_index') }}">{{ 'Product'|trans }}</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ path('site_index') }}">{{ 'Site'|trans }}</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">{{ 'Listing sites'|trans }}</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">{{ 'Listing stock location'|trans }}</a>
+              </li>
+	</ul>
+{% endblock %}
+
+{% block body %}
+Le corps du bundle "Inventory"
+{% endblock %}

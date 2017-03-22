@@ -1,0 +1,35 @@
+{% extends "InventoryBundle::layout.html.twig" %}
+
+{% block body %}
+    <h1>Livraisons du chantier {{ site.name }}</h1>
+    <p>&nbsp;</p>
+    <div class="table-responsive"> 
+    <table class="records_list table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>{{ 'Deliverydate'|trans }}</th>
+                <th>{{ 'Actions'|trans }}</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for delivery in listDeliveries %}
+            <tr>
+                <td><a href="{{ path('delivery_show', { 'id': delivery.id }) }}">{{ delivery.id }}</a></td>
+                <td>{% if delivery.deliveryDate %}{{ delivery.deliveryDate|date('Y-m-d') }}{% endif %}</td>
+                <td style="text-align: center; vertical-align: middle;">
+                    <ul style="list-style-type: none;">
+                        <li>
+                            <a class="btn btn-default btn-xs" href="{{ path('delivery_show', { 'id': delivery.id }) }}">{{ 'show'|trans }}</a>
+                        </li>
+                        <li style="margin-top: 10px;">
+                            <a class="btn btn-default btn-xs" href="{{ path('delivery_edit', { 'id': delivery.id }) }}">{{ 'edit'|trans }}</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </div>
+{% endblock %}

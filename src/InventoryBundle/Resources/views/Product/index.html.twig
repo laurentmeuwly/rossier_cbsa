@@ -1,0 +1,54 @@
+{% extends "InventoryBundle::layout.html.twig" %}
+
+{% block body %}
+    <h1>{{ 'inventory.product.list_title'|trans }}</h1>
+
+    <div class="table-responsive"> 
+    <table class="records_list table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>{{ 'inventory.product.name'|trans }}</th>
+                <th>{{ 'inventory.product.active'|trans }}</th>
+                <th>{{ 'inventory.product.comment'|trans }}</th>
+                <th>{{ 'inventory.product.costprice'|trans }}</th>
+                <th>{{ 'inventory.product.saleprice'|trans }}</th>
+                <th>{{ 'inventory.product.image'|trans }}</th>
+                <th>{{ 'actions'|trans }}</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for product in products %}
+            <tr>
+                <td><a href="{{ path('product_show', { 'id': product.id }) }}">{{ product.id }}</a></td>
+                <td>{{ product.name }}</td>
+                <td>{% if product.active %}Yes{% else %}No{% endif %}</td>
+                <td>{{ product.comment }}</td>
+                <td>{{ product.costPrice }}</td>
+                <td>{{ product.salePrice }}</td>
+                <td>{% if product.image is not null %}
+                <img src="{{ product.image.url }}" alt="{{ product.image.alt }} width="100px" height="50px">
+                {%  endif %}
+                </td>
+                <td style="text-align: center; vertical-align: middle;">
+                    <ul style="list-style-type: none;">
+                        <li>
+                            <a class="btn btn-default btn-xs" href="{{ path('product_show', { 'id': product.id }) }}">{{ 'show'|trans }}</a>
+                        </li>
+                        <li style="margin-top: 10px;">
+                            <a class="btn btn-default btn-xs" href="{{ path('product_edit', { 'id': product.id }) }}">{{ 'edit'|trans}}</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </div>
+    
+    <ul>
+        <li>
+            <a href="{{ path('product_new') }}">{{ 'Create a new product'|trans }}</a>
+        </li>
+    </ul>
+{% endblock %}
