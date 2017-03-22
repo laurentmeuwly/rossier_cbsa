@@ -3,5 +3,31 @@
 {% block title %}InventoryBundle:Listing:printBarcode{% endblock %}
 
 {% block body %}
-<h1>Le grand livre des codes à barres</h1>
+<h2>Livre code-barre des articles</h2>
+
+{# début de la table #}
+<table>
+<thead>
+<tr>
+	<th>Supprimer</th>
+	<th>Image</th>
+	<th>Nom article</th>
+	<th>Unité</th>
+	<th>Ajouter</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+	<td>{{ product.outbarcode }}</td>
+	<td>{{ product.image }}</td>
+	<td>{{ product.name }}</td>
+	<td>{{ product.unity }}</td>
+	<td>{{ product.inbarcode }}</td>
+</tr>
+</tbody>
+
+</table>
+{# fin de la table #}
+
 {% endblock %}

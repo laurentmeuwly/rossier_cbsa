@@ -1,9 +1,9 @@
 {% extends "InventoryBundle::layout.html.twig" %}
 
-{% block title %}InventoryBundle:Listing:printSiteResume{% endblock %}
+{% block title %}InventoryBundle:Listing:printSite?????{% endblock %}
 
 {% block body %}
-<h2>Résumé des livraisons par dates pour ce chantier</h2>
+<h2>Résumé des livraisons par articles pour ce chantier</h2>
 
 {# début de la table #}
 <div id="header">
@@ -34,12 +34,9 @@
 </div>
 
 <div id="detail">
-<h3>Livraisons par dates</h3>
+<h3>Articles livrés</h3>
 <table>
 <thead>
-<tr>
-	<th colspan="5">Date de livraison: {{ delivery.date }}</th>
-</tr>
 <tr>
 	<th>Article</th>
 	<th>Qté</th>
@@ -56,9 +53,6 @@
 	<td>{{ product.unity }}</td>
 	<td>{{ product.costprice }}</td>
 	<td>{{ calcul ligne costprice }}</td>
-</tr>
-<tr>
-	<th colspan="5">Somme prix de revient de la livraison: {{ calcul.revient }}</th>
 </tr>
 </tbody>
 
