@@ -1,0 +1,41 @@
+{% extends "::layout.html.twig" %}
+
+{% block body_id 'homepage' %}
+
+
+{% block body %}
+    <div class="container body-container">
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="jumbotron">
+                <p>
+                    {{ 'help.browse_app'|trans|raw }}
+                </p>
+                <p>
+                    <a id="focus" class="btn btn-primary btn-lg" href="{{ path('delivery_new') }}">
+                        <i class="fa fa-users" aria-hidden="true"></i> {{ 'action.browse_app'|trans }}
+                    </a>
+                </p>
+            </div>
+        </div>
+
+        <div class="col-sm-6">
+            <div class="jumbotron">
+                <p>
+                    {{ 'help.browse_admin'|trans|raw }}
+                </p>
+                <p>
+                    <a class="btn btn-primary btn-lg" href="{{ path('product_index') }}">
+                        <i class="fa fa-lock" aria-hidden="true"></i> {{ 'action.browse_admin'|trans }}
+                    </a>
+                </p>
+            </div>
+        </div>
+    </div>
+    </div>
+    <script language="JavaScript" type="text/javascript">
+   		window.onload = function() {
+      		document.getElementById('focus').focus();
+   		};
+  	</script>
+{% endblock %}
