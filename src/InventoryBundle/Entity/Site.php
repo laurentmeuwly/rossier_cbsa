@@ -5,6 +5,7 @@ namespace InventoryBundle\Entity;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use InventoryBundle\Form\SiteStatusType;
 
 /**
  * Site
@@ -14,7 +15,26 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Site
 {
+	const STATUS_RUNNING = "En cours";
+	const STATUS_TERMINATED = "Terminé";
+	
+	public static $siteStatus = array(
+		Site::STATUS_RUNNING => "En cours",
+		Site::STATUS_TERMINATED => "Terminé",
+	);
+	
+	
 	/**
+	 * @var string
+	 * 
+	 * @ORM\Column(name="status", type="string", length=255, nullable=true)
+	 * 
+	 */
+	private $status;
+	
+	/**
+	 * @var Delivery[]
+	 * 
 	* @ORM\OneToMany(targetEntity="InventoryBundle\Entity\Delivery", mappedBy="site")
 	*/
 	private $deliveries;
@@ -56,11 +76,51 @@ class Site
      */
     private $city;
     
+    /**
+     * @var bool
+     * 
+     * @ORM\Column(name="to_be_printed", type="boolean")
+     */
+    private $toBePrinted;
+    
     
     public function __construct()
     {
-    	$this->deliveries[] = new ArrayCollection();	
+    	//$this->deliveries[] = new ArrayCollection();	
     }
+    
+    public function __toString()
+    {
+    	return (string)$this->getName();
+    }
+    
+    public function setStatus($status)
+    {
+    	if(!in_array($status, SiteStatusType::getAvailableStatus())) {
+    		throw new \InvalidArgumentException('Invalid status');
+    	}
+    	
+    	$this->status = $status;
+    	return $this;
+    }
+    
+    public function getStatus()
+    {
+    	if(!is_null($this->status)) {
+    		return self::$siteStatus[$this->status];
+    	} else {
+    		return null;
+    	}
+    }
+    
+    public static function getStatusList() {
+    	return self::$siteStatus;
+    }
+    
+    public function getStatusName() {
+    	return (string)$this->getStatus();
+    }
+    
     
     public function addDelivery(Delivery $delivery)
     {
@@ -187,16 +247,23 @@ class Site
     }
     
     
-    
-    
-    /**
-     * Get deliveries
-     *
-     * @return array
-     */
-    public function getDelivery($siteId)
+    public function getDeliveries2()
     {
-    	return $siteId;
+    	return $this->deliveries . ' voir';
     }
+    
+    
+    	
+    public function setToBePrinted($toBePrinted)
+    {
+    	$this->toBePrinted = $toBePrinted;
+    }
+    
+    public function getToBePrinted()
+    {
+    	return $this->toBePrinted;
+    }
+    
+
 }
 

@@ -3,6 +3,7 @@
 namespace InventoryBundle\Controller;
 
 use InventoryBundle\Entity\Delivery;
+use InventoryBundle\Entity\DeliveryProduct;
 use InventoryBundle\Entity\Site;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -72,7 +73,7 @@ class DeliveryController extends Controller
      *
      */
     public function editAction(Request $request, Delivery $delivery)
-    {
+    {	
         $deleteForm = $this->createDeleteForm($delivery);
         $editForm = $this->createForm('InventoryBundle\Form\DeliveryType', $delivery);
         $editForm->handleRequest($request);
@@ -85,7 +86,7 @@ class DeliveryController extends Controller
 
         return $this->render('InventoryBundle:Delivery:edit.html.twig', array(
             'delivery' => $delivery,
-            'edit_form' => $editForm->createView(),
+            'form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
     }

@@ -1,0 +1,33 @@
+{% extends "::layout.html.twig" %}
+
+{% block body_id 'depot' %}
+
+
+{% block body %}
+    <div class="container body-container">
+
+<form method="post" name="form" action="{{ path('depot_dispatcher') }}">
+    
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="jumbotron">
+                <p>
+                    {{ "Scanner le chantier concerné" }}
+                </p>
+                <p>
+                    <input id="site" type="text" name="site">
+                </p>
+            </div>
+        </div>
+    </div>
+    
+</form>
+    
+    </div>
+
+    <script language="JavaScript" type="text/javascript">
+   		window.onload = function() {
+      		document.getElementById('site').focus();
+   		};
+  	</script>
+{% endblock %}

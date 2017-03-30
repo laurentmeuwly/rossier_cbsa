@@ -15,6 +15,15 @@ use Doctrine\ORM\EntityManager;
  */
 class SiteController extends Controller
 {
+	/**
+	 * Test purpose
+	 * 
+	 */
+	public function adminAction()
+	{
+		return new Response('<html><body>Admin page!</body></html>');
+	}
+	
     /**
      * Lists all site entities.
      *
@@ -100,7 +109,7 @@ class SiteController extends Controller
 
         return $this->render('InventoryBundle:Site:edit.html.twig', array(
             'site' => $site,
-            'edit_form' => $editForm->createView(),
+            'form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
         ));
     }

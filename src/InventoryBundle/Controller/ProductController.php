@@ -6,6 +6,7 @@ use InventoryBundle\Entity\Product;
 use InventoryBundle\Entity\Image;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Hackzilla\BarcodeBundle\Utility\Barcode;
 
 /**
@@ -36,14 +37,15 @@ class ProductController extends Controller
     public function newAction(Request $request)
     {
         $product = new Product();
+        $product->setInBarcode('e-12357');
+        
         $form = $this->createForm('InventoryBundle\Form\ProductType', $product);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
         	
         	/* opérations spécifiques à mettre ici */
-        	$product->setInBarcode('e-12357');
-        	$product->setOutBarcode('s-12357');
+        	$product->setDisplayOrder(1);
         	
         	/* image */
         	$image = new Image();
@@ -133,5 +135,19 @@ class ProductController extends Controller
             ->setMethod('DELETE')
             ->getForm()
         ;
+    }
+    
+    /**
+     * Display code using html
+     */
+    public function barcodeHtmlAction(Product $product)
+    {
+    	$code = $product->getId();
+    	$barcode = $this->get('hackzilla_barcode');
+    
+    	$headers = array(
+    	);
+    
+    	return new Response($barcode->outputHtml($code), 200, $headers);
     }
 }

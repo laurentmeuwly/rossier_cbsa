@@ -15,6 +15,15 @@
             </tr>
         </tbody>
     </table>
+    
+    <h2>Product</h2>
+<ul class="record_actions">
+    {% for p in entity.po %}
+    <li>
+        {{ p.product }}
+    </li>
+    {% endfor %}
+</ul> 
 
     <ul>
         <li>

@@ -1,0 +1,20 @@
+depot:
+    path:     /
+    defaults:
+        _controller: FrameworkBundle:Template:template
+        template:    depot.html.twig
+
+depot_dispatcher:
+    path:     /dispatch
+    defaults: { _controller: "InventoryBundle:Depot:dispatch" }
+    methods:  POST
+
+depot_chantier:
+    path:     /livraison
+    defaults: { _controller: "InventoryBundle:Depot:livraison" }
+    methods:  POST
+    
+depot_livraison:
+    path:     /livraison
+    defaults: { _controller: "InventoryBundle:Depot:livraison" }
+    methods:  POST

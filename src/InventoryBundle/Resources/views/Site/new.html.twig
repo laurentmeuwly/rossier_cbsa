@@ -1,11 +1,40 @@
 {% extends "InventoryBundle::layout.html.twig" %}
 
 {% block body %}
-    <h1>Site creation</h1>
+    <h1>{{ 'inventory.site.form'|trans }}</h1>
 
-    {{ form_start(form) }}
-        {{ form_widget(form) }}
-        <input type="submit" value="Create" />
+    {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+        
+        <div class="form-group">
+            {{ form_label(form.name, "Nom du chantier", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+            {{ form_errors(form.name) }}
+    		<div class="col-sm-10">
+              {{ form_widget(form.name) }}
+    		</div>
+  		</div>
+  		
+  		<div class="form-group">
+            {{ form_label(form.address, "Adresse", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+            {{ form_errors(form.address) }}
+    		<div class="col-sm-10">
+              {{ form_widget(form.address) }}
+    		</div>
+  		</div>
+  		
+  		<div class="form-group">
+            {{ form_label(form.postcode, "NPA / Localité", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+            {{ form_errors(form.postcode) }}
+    		<div class="col-sm-10">
+              {{ form_widget(form.postcode) }} / {{ form_widget(form.city) }}
+    		</div>
+  		</div>
+  		
+        <div class="form-group">
+            <div class="col-sm-10">
+                {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}}) }}
+            </div>
+        </div>
+        
     {{ form_end(form) }}
 
     <ul>

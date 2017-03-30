@@ -13,12 +13,18 @@ use Doctrine\ORM\Mapping as ORM;
 class Delivery
 {
 	/**
+	* @var Site
+	* 
 	* @ORM\ManyToOne(targetEntity="InventoryBundle\Entity\Site", inversedBy="deliveries")
 	* @ORM\JoinColumn(nullable=false)
 	*/
 	private $site;
 	
-	/** @ORM\OneToMany(targetEntity="InventoryBundle\Entity\DeliveryProduct", mappedBy="delivery") */
+	/** 
+	 * @var DeliveredProduct[]
+	 * 
+	 * @ORM\OneToMany(targetEntity="InventoryBundle\Entity\DeliveryProduct", mappedBy="delivery") 
+	 */
 	private $deliveredProducts;
 
 	
@@ -44,13 +50,22 @@ class Delivery
     	$this->deliveryDate = new \Datetime();
     }
     
+    public function __toString()
+    {
+    	return (string)$this->getId();
+    }
+    
     public function setSite(Site $site)
     {
     	$this->site = $site;
     	return $this;
     }
     
-    
+    /**
+     * Get site
+     *      
+     * @return Site
+     */
     public function getSite()
     {
     	return $this->site;
@@ -88,6 +103,74 @@ class Delivery
     public function getDeliveryDate()
     {
         return $this->deliveryDate;
+    }
+    
+    public function getProduct()
+    {
+    	$products = new ArrayCollection();
+    
+    	foreach($this->deliveredProducts as $dp)
+    	{
+    		$products[] = $dp->getProduct();
+    	}
+    
+    	return $products;
+    }
+    
+    public function setProduct($products)
+    {
+    	foreach($products as $p)
+    	{
+    		$dp = new DeliveryProduct();
+    
+    		$dp->setOrder($this);
+    		$dp->setProduct($p);
+    
+    		$this->addDeliveryProduct($dp);
+    	}
+    
+    }
+    
+    /**
+     * @param DeliveredProducts[] $deliveredProducts
+     */
+    public function setDeliveredProducts($deliveredProducts)
+    {
+    	$this->deliveredProducts = $deliveredProducts;
+    }
+    
+    /**
+     * @return DeliveredProducts[]
+     */
+    public function getDeliveredProducts()
+    {
+    	return $this->deliveredProducts;
+    }
+    
+    public function addDeliveryProduct($DeliveryProduct)
+    {
+    	$this->deliveredProducts[] = $DeliveryProduct;
+    }
+    
+    public function removeDeliveryProduct($DeliveryProduct)
+    {
+    	return $this->deliveredProducts->removeElement($DeliveryProduct);
+    }
+    
+    public function getSiteName()
+    {
+    	return $this->site->getName();
+    }
+    
+    public function getTotalCost()
+    {
+    	$total = 0.0;
+    
+    	foreach ($this->getDeliveredProducts() as $item) {
+    		$total += $item->getTotalCostPrice();
+    	}
+    
+    	return $total;
     }
 }
 

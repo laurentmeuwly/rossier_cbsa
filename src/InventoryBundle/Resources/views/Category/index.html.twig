@@ -1,0 +1,42 @@
+{% extends "InventoryBundle::layout.html.twig" %}
+
+{% block body %}
+    <h1>Categories list</h1>
+
+    <div class="table-responsive"> 
+    <table class="records_list table table-striped table-bordered">
+            <tr>
+                <th>Id</th>
+                <th>{{ 'inventory.category.name'|trans }}</th>
+                <th>{{ 'inventory.category.displayorder'|trans }}</th>
+                <th>{{ 'actions'|trans }}</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for category in categories %}
+            <tr>
+                <td><a href="{{ path('category_show', { 'id': category.id }) }}">{{ category.id }}</a></td>
+                <td>{{ category.name }}</td>
+                <td>{{ category.displayOrder }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('category_show', { 'id': category.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('category_edit', { 'id': category.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </div>
+    
+    <ul style="list-style-type: none;">
+        <li>
+            <a class="btn btn-default btn-xs" href="{{ path('category_new') }}">Create a new category</a>
+        </li>
+    </ul>
+{% endblock %}

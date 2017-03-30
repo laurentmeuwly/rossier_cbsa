@@ -22,3 +22,9 @@ product_delete:
     path:     /{id}/delete
     defaults: { _controller: "InventoryBundle:Product:delete" }
     methods:  DELETE
+
+product_barcode:
+    path: /{id}/bar
+    defaults: { _controller: "InventoryBundle:Product:barcodeHtml" }
+    methods: GET
+    

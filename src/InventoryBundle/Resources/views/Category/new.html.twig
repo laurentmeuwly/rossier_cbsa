@@ -1,0 +1,44 @@
+{% extends "InventoryBundle::layout.html.twig" %}
+
+{% block body %}
+    <h1>Nouvelle catégorie</h1>
+
+    {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+    
+        <div class="form-group">
+            {{ form_label(form.name, "Nom de la catégorie", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+            {{ form_errors(form.name) }}
+    		<div class="col-sm-10">
+              {{ form_widget(form.name) }}
+    		</div>
+  		</div>
+        
+        <div class="form-group">
+            {{ form_label(form.parent, "Catégorie parente", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+            <div class="col-sm-10">
+                {{ form_widget(form.parent) }}
+            </div>
+        </div>
+        
+        <div class="form-group">
+            {{ form_label(form.displayOrder, "Ordre d'affichage", {'label_attr': {'class': 'col-sm-2 control-label'}}) }}
+            <div class="col-sm-10">
+                {{ form_widget(form.displayOrder) }}
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <div class="col-sm-10">
+                {{ form_widget(form.save, {'attr': {'class': 'btn btn-primary'}}) }}
+            </div>
+        </div>
+        
+    {{ form_end(form) }}
+
+	<p>&nbsp;</p>
+    <ul style="list-style-type: none;">
+        <li>
+            <a class="btn btn-default btn-xs" href="{{ path('category_index') }}">Retour à la liste</a>
+        </li>
+    </ul>
+{% endblock %}

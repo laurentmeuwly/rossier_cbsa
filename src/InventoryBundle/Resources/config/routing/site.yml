@@ -37,3 +37,4 @@ site_pdf:
     path: /pdf
     defaults: { _controller: "InventoryBundle:Site:pdf" }
     methods:  [GET, POST]
+

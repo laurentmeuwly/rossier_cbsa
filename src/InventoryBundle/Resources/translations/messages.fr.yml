@@ -1,12 +1,45 @@
-Hello: Bonjour
-actions: __Actions
-show: __show
-edit: __edit
+
+help:
+  browse_app: Création de bulletins de livraison pour <strong>le dépôt</strong>.
+  browse_admin: Gestion de l'application et de l'inventaire.
+action:
+  browse_app: Espace dépôt
+  browse_admin: Espace admin
+menu:
+  deliveries: Liste des livraisons
+  product:  Article
+  products: Gestion des articles
+  categories: Catégories
+  units: Unités
+  sites: Gestion des chantiers
+  reporting: Livres codes-barres
+  reporting.listsite: Liste chantiers
+  reporting.listinventory: Liste dépôt
+  about: A propos
+  about.docs: Documentation
+  about.impressum: Impressum
+
+
+
+ID: ID
+Label: Nom
+Category: Categorie
+Categories: Categories
+Image: Image
+Products: Produits liés
+Actions: Actions
+Parent category: Catégorie parente
+Product %entity_label%: Produit %entity_label%
+Display order: Ordre d'impression
+
+
+show: détails
+edit: éditer
 'Create a new product': '__Create a new product'
 'Create a new site': '__Create a new site'
 Delivery: __Delivery
 Product: __Product
-Site: __Site
+Site: Chantier
 Home: __Home
 'Listing stock location': '__Listing stock location'
 deliveries: __deliveries
@@ -16,7 +49,7 @@ Deliverydate: __Deliverydate
 
 inventory:
   site:
-    list_title: '__Sitedadsadsadads list'
+    list_title: 'Liste des chantiers'
     name: Nom
     address: __Address
 inventory.site.postcode: __Postcode

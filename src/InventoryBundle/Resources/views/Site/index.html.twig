@@ -12,7 +12,7 @@
                 <th>{{ 'inventory.site.address'|trans }}</th>
                 <th>{{ 'inventory.site.postcode'|trans }}</th>
                 <th>{{ 'inventory.site.city'|trans }}</th>
-                <th>{{ 'actions'|trans }}</th>
+                <th scope="col" class="text-center"><i class="fa fa-cogs" aria-hidden="true"></i> {{ 'actions'|trans }}</th>
             </tr>
         </thead>
         <tbody>
@@ -23,16 +23,16 @@
                 <td>{{ site.address }}</td>
                 <td>{{ site.postcode }}</td>
                 <td>{{ site.city }}</td>
-                <td style="text-align: center; vertical-align: middle;">
-                    <ul style="list-style-type: none;">
-                        <li>
-                            <a class="btn btn-default btn-xs" href="{{ path('site_edit', { 'id': site.id }) }}">{{ 'edit'|trans}}</a>
-                        </li>
-                        <li style="margin-top: 10px;">
-                            <a class="btn btn-default btn-xs" href="{{ path('site_deliveries', { 'id': site.id }) }}">{{ 'deliveries'|trans }}</a>
-                        </li>
-                        
-                    </ul>
+                <td class="text-right">
+                    <div class="item-actions">
+                        <a href="{{ path('site_deliveries', { id: site.id }) }}" class="btn btn-sm btn-default">
+                            {{ 'show'|trans }}
+                        </a>
+
+                        <a href="{{ path('site_edit', { id: site.id }) }}" class="btn btn-sm btn-primary">
+                            <i class="fa fa-edit" aria-hidden="true"></i> {{ 'edit'|trans }}
+                        </a>
+                    </div>
                 </td>
             </tr>
         {% endfor %}
