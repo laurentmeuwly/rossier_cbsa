@@ -1,0 +1,5 @@
+easy_admin:
+    entities:
+        DeliveryProduct:
+            class: InventoryBundle\Entity\DeliveryProduct
+            label: 'Produits livrés'

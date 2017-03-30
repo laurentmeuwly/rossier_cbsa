@@ -1,0 +1,33 @@
+easy_admin:
+    entities:
+        Site:
+            class: InventoryBundle\Entity\Site
+            label: 'Chantiers'
+            list:
+                title: 'Liste des chantiers'
+                #sort: ['name', 'ASC']
+                actions:
+                    - { name: 'show', label: '', icon: 'search' }
+                    - { name: 'edit', label: '', icon: 'edit' }
+                    - { name: 'delete', label: '', icon: 'trash' }
+                fields:
+                    - 'id'
+                    - { property: 'name', label: 'Chantier' }
+                    - { property: 'address', label: 'Adresse' }
+                    - { property: 'postcode', label: 'NPA', format: '%d', css_class: text-right }
+                    - { property: 'city', label: 'Localité' }
+                    - { property: 'status', label: 'Etat' }
+                    - { property: 'deliveries', label: 'Nb livraisons'}
+                    - { property: 'toBePrinted', label: 'Affichage dans liste dépôt' }
+            form:
+                fields:
+                    - { type: 'group', css_class: 'col-sm-6', label: 'Informations', icon: 'pencil' }
+                    - { property: 'name', css_class: 'large', label: 'Nom'}
+                    - { property: 'status', type: 'choice', type_options: { choices: { 'En cours' : 'En cours', 'Terminé': 'Terminé' } } }
+                    - { property: 'toBePrinted', label: 'Affichage dans liste dépôt' }
+                    - { type: 'group', css_class: 'col-sm-6', label: 'Coordonnées', icon: 'envelope-o' }
+                    - { property: 'address', label: 'Adresse' }
+                    - { property: 'postcode', label: 'NPA' }
+                    - { property: 'city', label: 'Localité' }
+                    - { type: 'group', label: 'Historique des livraisons', icon: 'money', css_class: 'col-sm-12' }
+                    #- { property: 'deliveries', css_class: 'col-sm-12' }

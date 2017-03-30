@@ -1,0 +1,38 @@
+easy_admin:
+    entities:
+        Category:
+            class: InventoryBundle\Entity\Category
+            label: 'Categories'
+            list:
+                title: 'Liste des catégories'
+                actions:
+                    - { name: 'show', label: '', icon: 'search' }
+                    - { name: 'edit', label: '', icon: 'edit' }
+                    - { name: 'delete', label: '', icon: 'trash' }
+                fields:
+                    - 'id'
+                    - { property: 'name', label: 'Label' }
+                    - { property: 'parent', label: 'Parent category' }
+                    - { property: 'image', type: 'image', base_path: '%app.path.category_images%' }
+                    - { property: 'displayOrder', label: 'Display order' }
+                    - 'products'
+            show:
+                fields:
+                    - 'id'
+                    - { property: 'name', label: 'Label', css_class: 'large' }
+                    - { property: 'parent', label: 'Parent category' }
+                    - 'products'
+            form:
+                fields:
+                    - { type: 'group', css_class: 'col-sm-4', label: 'Caractéristiques', icon: 'pencil' }
+                    - { property: 'name', label: 'Label', css_class: 'large' }
+                    - { property: 'parent', type: 'easyadmin_autocomplete', label: 'Parent category' }
+                    - displayOrder
+                    - { property: 'imageFile', type: 'vich_image' }
+                    - { type: 'group', css_class: 'col-sm-4', label: 'Produits liés', icon: 'basket' }
+                    # if you want to add products when creating categories, add the 'by_reference' option
+                    - { property: 'products', type_options: { by_reference: false } }
+
+                    
+                    
+                    

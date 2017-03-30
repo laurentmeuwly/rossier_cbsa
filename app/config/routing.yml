@@ -1,3 +1,18 @@
-app:
-    resource: "@AppBundle/Controller/"
+homepage:
+    path: /
+    defaults:
+        _controller: FrameworkBundle:Template:template
+        template:    home.html.twig
+        
+easy_admin_bundle:
+    resource: "@InventoryBundle/Controller/AdminController.php"
     type:     annotation
+    prefix:   /admin
+
+inventory:
+    resource: "@InventoryBundle/Resources/config/routing.yml"
+    prefix:   /
+
+atelier:
+    resource: "@InventoryBundle/Resources/config/routing/depot.yml"
+    prefix:   /depot

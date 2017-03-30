@@ -1,0 +1,31 @@
+easy_admin:
+    site_name: 'Charly Berchier SA <small>Gestion matériel du dépôt</small>'
+    list:
+        max_results: 30
+    show:
+        max_results: 20
+    formats:
+        date:     'd.m.Y'
+        time:     'H:i'
+        datetime: 'd.m.Y H:i:s'
+    design:
+        color_scheme: 'dark'
+        form_theme:   'vertical'
+        menu:
+            - { label: 'menu.deliveries', entity: 'Delivery', icon: 'truck' }
+            - label: 'menu.product'
+              icon: 'shopping-basket'
+              children:
+                  - { entity: 'Product', icon: 'tags', label: 'menu.products' }
+                  - { entity: 'Category', icon: 'tags', label: 'menu.categories' }
+                  - { entity: 'Unit', icon: 'tags', label: 'menu.units' }
+            - { label: 'menu.sites', entity: 'Site', icon: 'list' }
+            - { label: 'menu.reporting' }
+            - { label: 'menu.reporting.listsite', url: 'https://github.com/laurentmeuwly/rossier_cbsa/tree/master/docs', icon: 'barcode' }
+            - { label: 'menu.reporting.listinventory', url: 'https://github.com/laurentmeuwly/rossier_cbsa/tree/master/docs', icon: 'barcode'}
+            - { label: 'menu.about' }
+            - { label: 'menu.about.docs', url: 'https://github.com/laurentmeuwly/rossier_cbsa/tree/master/docs', icon: 'book', target: '_blank' }
+            - { label: 'menu.about.impressum', url: 'https://github.com/laurentmeuwly/rossier_cbsa/tree/master/README.md', icon: 'info', target: '_blank' }
+            
+            
+            

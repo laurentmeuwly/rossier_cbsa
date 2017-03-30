@@ -1,0 +1,24 @@
+easy_admin:
+    entities:
+        Delivery:
+            class: InventoryBundle\Entity\Delivery
+            label: 'Livraisons'
+            list:
+                title: 'Liste des livraisons'
+                sort: ['deliveryDate', 'DESC']
+                actions:
+                    - { name: 'show', label: '', icon: 'search' }
+                    - { name: 'edit', label: '', icon: 'edit' }
+                    - { name: 'delete', label: '', icon: 'trash' }
+                fields:
+                    - 'id'
+                    - { property: 'deliveryDate', label: 'Date' }
+                    - { property: 'site', label: 'Chantier' }
+                    - { property: 'deliveredProducts', label: '# Produits' }
+                    - { property: 'totalCost', label: 'Coût total', format: '%.2f'}
+            form:
+                fields:
+                    - { type: 'group', label: 'Détail livraison', icon: 'truck', css_class: 'col-sm-4' }
+                    - 'deliveryDate'
+                    - { type: 'group', label: 'Articles livrés', icon: 'truck', css_class: 'col-sm-8' }
+                    - 'deliveredProducts'

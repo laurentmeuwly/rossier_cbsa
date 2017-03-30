@@ -1,0 +1,15 @@
+easy_admin:
+    entities:
+        Unit:
+            class: InventoryBundle\Entity\Unit
+            label: 'Unités'
+            list:
+                title: 'Unités disponibles'
+                actions:
+                    - { name: 'edit', label: '', icon: 'edit' }
+                    - { name: 'delete', label: '', icon: 'trash' }
+                fields:
+                    - 'id'
+                    - { property: 'name', label: 'Nom' }
+                sort: 'name'
+                
