@@ -1,77 +1,76 @@
-Laisser vide,String,String ou vide,Integer,
-id,name,parent,display_order,image
-,Liants / Mortiers,,,liant-mortier.jpg
-,Sables et graviers,,,sable-gravier.jpg
-,Mortiers et bétons frais,,,mortier-beton-frais.jpg
-,Briques et linteaux,,,brique-linteau.jpg
-,Produits PVC,,,
-,Produits ciment,,,produits-ciment.jpg
-,Isolation,,,isolation.jpg
-,Colle carrelages,,,colle-carrelage.jpg
-,Étanchéité,,,etancheite.jpg
-,Aciers,,,acier.jpg
-,Divers,,,
-,Kerakoll,Liants / Mortiers,,
-,Granol,Liants / Mortiers,,
-,Fixit,Liants / Mortiers,,
-,Brique terre cuite,Briques et linteaux,,brique-terre-cuite.jpg
-,Brique ciment,Briques et linteaux,,brique-ciment.jpg
-,YTONG,Briques et linteaux,,ytong.jpg
-,Linteau plat,Briques et linteaux,,linteau-plat.jpg
-,Linteau terre cuite,Briques et linteaux,,linteau-terre-cuite.jpg
-,Linteau ciment,Briques et linteaux,,linteau-ciment.jpg
-,Tuyau PVC,Produits PVC,,tuyau-pvc.jpg
-,Tuyau PVC perforé,Produits PVC,,tuyau-pvc-perfore.jpg
-,Coude PVC ∅ 100mm,Produits PVC,,coude-pvc.jpg
-,Coude PVC ∅ 125mm,Produits PVC,,coude-pvc.jpg
-,Coude PVC ∅ 150mm,Produits PVC,,coude-pvc.jpg
-,Coude PVC ∅ 200mm,Produits PVC,,coude-pvc.jpg
-,Coude PVC ∅ 250mm,Produits PVC,,coude-pvc.jpg
-,Coude PVC ∅ 300mm,Produits PVC,,coude-pvc.jpg
-,Manchon PVC,Produits PVC,,manchon-pvc.jpg
-,Embranchement PVC,Produits PVC,,embranchement-pvc.jpg
-,Réduction PVC,Produits PVC,,reduction-pvc.jpg
-,Bouchon PVC,Produits PVC,,bouchon-pvc.jpg
-,Tuyau PE,Produits PVC,,tuyau-pe.jpg
-,Coude PE,Produits PVC,,coude-pe.jpg
-,Manchon PE,Produits PVC,,manchon-pe.png
-,Raccord PVC/ciment,Produits PVC,,raccord-pvc-ciment.jpg
-,Tuyau ciment,Produits ciment,,tuyau-ciment.jpg
-,Tube ciment,Produits ciment,,tube-ciment.jpg
-,Anneau ciment,Produits ciment,,
-,Cône ciment,Produits ciment,,
-,Bouchon ciment,Produits ciment,,
-,Couvercle Begu,Produits ciment,,couvercle-begu.jpg
-,Couvercle en fonte,Produits ciment,,couvercle-fonte.jpg
-,Bordure,Produits ciment,,bordure.png
-,Saut de loup,Produits ciment,,saut-loup.jpg
-,Pavé,Produits ciment,,pave.jpg
-,Escalier,Produits ciment,,escalier.jpg
-,Dalle,Produits ciment,,dalle.jpg
-,Multiline,Produits ciment,,Multiline.jpg
-,Gonon,Isolation,,gonon.jpg
-,Styrodur,Isolation,,styrodur.jpg
-,SW,Isolation,,isolation.jpg
-,HS,Isolation,,isolation.jpg
-,Cermix,Colle carrelages,,cermix.jpeg
-,Rivalcoll,Étanchéité,,
-,Adesilex,Étanchéité,,
-,Mapeband,Étanchéité,,mapeband.jpg
-,Ligature,Aciers,,ligature.jpg
-,Paniers de supports,Aciers,,panier-de-support.jpg
-,Acier III,Aciers,,acier.jpg
-,Treillis,Aciers,,treillis.jpg
-,FI RIPA,Aciers,,fi-ripa.jpg
-,EBEA,Aciers,,ebea.jpg
-,Canaux,Divers,,
-,Cape,Divers,,
-,Pronouvo,Divers,,pronouvo.jpg
-,Grille diverses,Divers,,
-,Clous,Divers,,clous.jpg
-,SAM griffes normal,Divers,,
-,SAM griffes béton,Divers,,
-,Tube distanceur,Divers,,tube-distanceur.jpg
-,Attache d'arrêt,Divers,,
-,Bois,Divers,,bois.jpg
-,Géotextile,Divers,,geotextile.jpg
-,Galvanisé,Divers,,galvanise.JPG
+name,parent,display_order,image
+Liants / Mortiers,,,liant-mortier.jpg
+Sables et graviers,,,sable-gravier.jpg
+Mortiers et bétons frais,,,mortier-beton-frais.jpg
+Briques et linteaux,,,brique-linteau.jpg
+Produits PVC,,,
+Produits ciment,,,produits-ciment.jpg
+Isolation,,,isolation.jpg
+Colle carrelages,,,colle-carrelage.jpg
+Étanchéité,,,etancheite.jpg
+Aciers,,,acier.jpg
+Divers,,,
+Kerakoll,Liants / Mortiers,,
+Granol,Liants / Mortiers,,
+Fixit,Liants / Mortiers,,
+Brique terre cuite,Briques et linteaux,,brique-terre-cuite.jpg
+Brique ciment,Briques et linteaux,,brique-ciment.jpg
+YTONG,Briques et linteaux,,ytong.jpg
+Linteau plat,Briques et linteaux,,linteau-plat.jpg
+Linteau terre cuite,Briques et linteaux,,linteau-terre-cuite.jpg
+Linteau ciment,Briques et linteaux,,linteau-ciment.jpg
+Tuyau PVC,Produits PVC,,tuyau-pvc.jpg
+Tuyau PVC perforé,Produits PVC,,tuyau-pvc-perfore.jpg
+Coude PVC ∅ 100mm,Produits PVC,,coude-pvc.jpg
+Coude PVC ∅ 125mm,Produits PVC,,coude-pvc.jpg
+Coude PVC ∅ 150mm,Produits PVC,,coude-pvc.jpg
+Coude PVC ∅ 200mm,Produits PVC,,coude-pvc.jpg
+Coude PVC ∅ 250mm,Produits PVC,,coude-pvc.jpg
+Coude PVC ∅ 300mm,Produits PVC,,coude-pvc.jpg
+Manchon PVC,Produits PVC,,manchon-pvc.jpg
+Embranchement PVC,Produits PVC,,embranchement-pvc.jpg
+Réduction PVC,Produits PVC,,reduction-pvc.jpg
+Bouchon PVC,Produits PVC,,bouchon-pvc.jpg
+Tuyau PE,Produits PVC,,tuyau-pe.jpg
+Coude PE,Produits PVC,,coude-pe.jpg
+Manchon PE,Produits PVC,,manchon-pe.png
+Raccord PVC/ciment,Produits PVC,,raccord-pvc-ciment.jpg
+Tuyau ciment,Produits ciment,,tuyau-ciment.jpg
+Tube ciment,Produits ciment,,tube-ciment.jpg
+Anneau ciment,Produits ciment,,
+Cône ciment,Produits ciment,,
+Bouchon ciment,Produits ciment,,
+Couvercle Begu,Produits ciment,,couvercle-begu.jpg
+Couvercle en fonte,Produits ciment,,couvercle-fonte.jpg
+Bordure,Produits ciment,,bordure.png
+Saut de loup,Produits ciment,,saut-loup.jpg
+Pavé,Produits ciment,,pave.jpg
+Escalier,Produits ciment,,escalier.jpg
+Dalle,Produits ciment,,dalle.jpg
+Multiline,Produits ciment,,Multiline.jpg
+Gonon,Isolation,,gonon.jpg
+Styrodur,Isolation,,styrodur.jpg
+SW,Isolation,,isolation.jpg
+HS,Isolation,,isolation.jpg
+Cermix,Colle carrelages,,cermix.jpeg
+Rivalcoll,Étanchéité,,
+Adesilex,Étanchéité,,
+Mapeband,Étanchéité,,mapeband.jpg
+Ligature,Aciers,,ligature.jpg
+Paniers de supports,Aciers,,panier-de-support.jpg
+Acier III,Aciers,,acier.jpg
+Treillis,Aciers,,treillis.jpg
+FI RIPA,Aciers,,fi-ripa.jpg
+EBEA,Aciers,,ebea.jpg
+Canaux,Divers,,
+Cape,Divers,,
+Pronouvo,Divers,,pronouvo.jpg
+Grille diverses,Divers,,
+Clous,Divers,,clous.jpg
+SAM griffes normal,Divers,,
+SAM griffes béton,Divers,,
+Tube distanceur,Divers,,tube-distanceur.jpg
+Attache d'arrêt,Divers,,
+Bois,Divers,,bois.jpg
+Géotextile,Divers,,geotextile.jpg
+Galvanisé,Divers,,galvanise.JPG
