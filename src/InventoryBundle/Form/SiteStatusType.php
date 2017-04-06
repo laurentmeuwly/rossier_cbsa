@@ -5,41 +5,34 @@ namespace InventoryBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use InventoryBundle\Entity\Site;
+
 
 class SiteStatusType extends AbstractType
 {
-	const STATUS_RUNNING = 1;
-	const STATUS_TERMINATED = 2;
-	
-	/** @var array user friendly named status */
-	public static $siteStatus = array(
-			Site::STATUS_RUNNING => "En cours",
-			Site::STATUS_TERMINATED => "Terminé",
-	);
-	
-	public function configureOptions(OptionsResolver $resolver)
+	/**
+	 *  {@inheritdoc}
+	 */
+	public function buildForm(FormBuilderInterface $builder, array $options)
 	{
-		$resolver->setDefaults( array(
-				'choices' => array(
-						'1' => 'En cours',
-						'2' => 'Terminé',
-				)
-		));
-	}
-	
-	public function getParent()
-	{
-		return ChoiceType::class;
+		$builder->add('status', ChoiceType::class, array('choices' => Site::getStatus()));
 	}
 	
 	/**
-	 * @return array<string>
+	 *  {@inheritdoc}
 	 */
-	public static function getAvailableStatus()
+	public function setDefaultOptions(OptionsResolverInterface $resolver)
 	{
-		return [
-				self::STATUS_RUNNING,
-				self::STATUS_TERMINATED,
-		];
+		$resolver->setDefaults(array('data_class' => 'InventoryBundle\Entity\Site'));
 	}
+	
+	/**
+	 *  {@inheritdoc}
+	 */
+	public function getName()
+	{
+		return 'siteStatus';
+	}
+	
+	
 }

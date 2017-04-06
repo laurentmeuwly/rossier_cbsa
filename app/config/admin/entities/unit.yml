@@ -5,11 +5,12 @@ easy_admin:
             label: 'Unités'
             list:
                 title: 'Unités disponibles'
+                sort: ['name', 'ASC']
                 actions:
                     - { name: 'edit', label: '', icon: 'edit' }
                     - { name: 'delete', label: '', icon: 'trash' }
                 fields:
                     - 'id'
                     - { property: 'name', label: 'Nom' }
-                sort: 'name'
+                
                 

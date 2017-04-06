@@ -1,4 +1,7 @@
 
+label.null: RIEN
+            
+            
 help:
   browse_app: Création de bulletins de livraison pour <strong>le dépôt</strong>.
   browse_admin: Gestion de l'application et de l'inventaire.
@@ -20,7 +23,6 @@ menu:
   about.impressum: Impressum
 
 
-
 ID: ID
 Label: Nom
 Category: Categorie
@@ -35,17 +37,18 @@ Display order: Ordre d'impression
 
 show: détails
 edit: éditer
-'Create a new product': '__Create a new product'
-'Create a new site': '__Create a new site'
-Delivery: __Delivery
-Product: __Product
+'Create a new product': 'Créer un nouvel article'
+'Create a new site': 'Créer un nouveau chantier'
+Delivery: Livraison
+Product: Article
 Site: Chantier
-Home: __Home
+Unit: Unité
+Home: Home
 'Listing stock location': '__Listing stock location'
 deliveries: __deliveries
-'Deliveries list': '__Deliveries list'
-Deliverydate: __Deliverydate
-'Create a new delivery': '__Create a new delivery'
+'Deliveries list': 'Liste des livraisons'
+Deliverydate: Date de livraison
+'Create a new delivery': 'Créer une nouvelle livraison'
 
 inventory:
   site:

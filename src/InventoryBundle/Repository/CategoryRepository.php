@@ -10,12 +10,21 @@ namespace InventoryBundle\Repository;
  */
 class CategoryRepository extends \Doctrine\ORM\EntityRepository
 {
-	public function getParentOnly()
+	public function getParentOnly($id=0)
 	{
-		return $this
-		->createQueryBuilder('c')
-		->where('c.parent IS NULL')
-		;
+		if ($id > 0) {
+			return $this
+			->createQueryBuilder('c')
+			->where('c.parent IS NULL AND c.id !='.$id)
+			->orderBy('c.name', 'ASC')
+			;
+		} else {
+			return $this
+			->createQueryBuilder('c')
+			->where('c.parent IS NULL')
+			->orderBy('c.name', 'ASC')
+			;
+		}
 	}
 	
 	public function getLikeQueryBuilder($pattern)

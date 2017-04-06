@@ -23,7 +23,7 @@ class Delivery
 	/** 
 	 * @var DeliveredProduct[]
 	 * 
-	 * @ORM\OneToMany(targetEntity="InventoryBundle\Entity\DeliveryProduct", mappedBy="delivery") 
+	 * @ORM\OneToMany(targetEntity="InventoryBundle\Entity\DeliveryProduct", mappedBy="delivery", cascade={"persist"}) 
 	 */
 	private $deliveredProducts;
 
@@ -43,6 +43,12 @@ class Delivery
      * @ORM\Column(name="delivery_date", type="date")
      */
     private $deliveryDate;
+    
+    /**
+     * 
+     * @var float
+     */
+    private $totalCost;
 
 
     public function __construct()
@@ -50,10 +56,12 @@ class Delivery
     	$this->deliveryDate = new \Datetime();
     }
     
+    /** {@inheritdoc} */
     public function __toString()
     {
-    	return (string)$this->getId();
+    	return 'Livraison du '. $this->getDeliveryDate()->format('d.m.Y');
     }
+    
     
     public function setSite(Site $site)
     {
@@ -162,6 +170,11 @@ class Delivery
     	return $this->site->getName();
     }
     
+    /**
+     * Get totalCost
+     *
+     * @return float
+     */
     public function getTotalCost()
     {
     	$total = 0.0;

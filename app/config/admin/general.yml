@@ -8,9 +8,12 @@ easy_admin:
         date:     'd.m.Y'
         time:     'H:i'
         datetime: 'd.m.Y H:i:s'
+        number: '%.2f'
     design:
         color_scheme: 'dark'
         form_theme:   'vertical'
+        templates:
+            label_null: '::label_null.html.twig'
         menu:
             - { label: 'menu.deliveries', entity: 'Delivery', icon: 'truck' }
             - label: 'menu.product'
@@ -25,7 +28,7 @@ easy_admin:
             - { label: 'menu.reporting.listinventory', url: 'https://github.com/laurentmeuwly/rossier_cbsa/tree/master/docs', icon: 'barcode'}
             - { label: 'menu.about' }
             - { label: 'menu.about.docs', url: 'https://github.com/laurentmeuwly/rossier_cbsa/tree/master/docs', icon: 'book', target: '_blank' }
-            - { label: 'menu.about.impressum', url: 'https://github.com/laurentmeuwly/rossier_cbsa/tree/master/README.md', icon: 'info', target: '_blank' }
+            - { label: 'menu.about.impressum', route: 'impressum', icon: 'info' }
             
             
             

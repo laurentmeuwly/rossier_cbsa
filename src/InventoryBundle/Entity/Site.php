@@ -3,9 +3,9 @@
 namespace InventoryBundle\Entity;
 
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use InventoryBundle\Form\SiteStatusType;
 
 /**
  * Site
@@ -15,19 +15,22 @@ use InventoryBundle\Form\SiteStatusType;
  */
 class Site
 {
-	const STATUS_RUNNING = "En cours";
-	const STATUS_TERMINATED = "Terminé";
+	const STATUS_RUNNING = "1";
+	const STATUS_TERMINATED = "2";
+	const STATUS_WAITING = "3";
 	
 	public static $siteStatus = array(
-		Site::STATUS_RUNNING => "En cours",
-		Site::STATUS_TERMINATED => "Terminé",
+		self::STATUS_RUNNING => "En cours",
+		self::STATUS_TERMINATED => "Terminé",
+		self::STATUS_WAITING => "En attente",
 	);
 	
 	
 	/**
-	 * @var string
+	 * @var integer
 	 * 
-	 * @ORM\Column(name="status", type="string", length=255, nullable=true)
+	 * @ORM\Column(name="status", type="smallint")
+	 * @Assert\Choice(callback="getAvailableStatus")
 	 * 
 	 */
 	private $status;
@@ -106,19 +109,19 @@ class Site
     
     public function getStatus()
     {
-    	if(!is_null($this->status)) {
-    		return self::$siteStatus[$this->status];
-    	} else {
-    		return null;
-    	}
-    }
-    
-    public static function getStatusList() {
     	return self::$siteStatus;
     }
     
     public function getStatusName() {
     	return (string)$this->getStatus();
+    }
+    
+    /**
+     * @return array
+     */
+    public static function getAvailableStatus()
+    {
+    	return array_keys(self::getStatus());
     }
     
     

@@ -40,8 +40,14 @@ framework:
 
 # Twig Configuration
 twig:
+    globals:
+        product_images_path: "%app.path.product_images%"
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
+    number_format:
+        decimals: 2
+        decimal_point: '.'
+        thousands_separator: "'"
 
 # Doctrine Configuration
 doctrine:
@@ -91,10 +97,6 @@ vich_uploader:
 knp_snappy:
     pdf:
         enabled: true
-        binary: "wkhtmltopdf"
-        options:
-          no-outline: true
-          page-size: A4
-          encoding: UTF-8
-    temporary_folder: '%kernel.cache_dir%/snappy'
+        binary: /usr/bin/wkhtmltopdf.sh
+        options: []
 

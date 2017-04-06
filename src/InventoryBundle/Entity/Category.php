@@ -149,7 +149,7 @@ class Category
         return $this->displayOrder;
     }
     
-    public function setParent(Category $parent)
+    public function setParent(Category $parent=NULL)
     {
     	$this->parent = $parent;
     	return $this;

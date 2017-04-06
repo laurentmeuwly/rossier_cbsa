@@ -1,4 +1,4 @@
-{% extends "InventoryBundle::layout.html.twig" %}
+{% extends "base.html.twig" %}
 
 {% block title %}InventoryBundle:Listing:printBarcode{% endblock %}
 
@@ -6,25 +6,37 @@
 <h2>Livre code-barre des articles</h2>
 
 {# début de la table #}
-<table>
+<table width="850px">
 <thead>
 <tr>
-	<th>Supprimer</th>
-	<th>Image</th>
-	<th>Nom article</th>
-	<th>Unité</th>
-	<th>Ajouter</th>
+	<th width="200px">Supprimer</th>
+	<th width="150px">Image</th>
+	<th width="250px">Nom article</th>
+	<th width="50px">Unité</th>
+	<th width="200px">Ajouter</th>
 </tr>
 </thead>
 
 <tbody>
+{% for product in products %}
 <tr>
-	<td>{{ product.outbarcode }}</td>
-	<td>{{ product.image }}</td>
+	<td><img src="{{ absolute_url(asset('/uploads/images/products/barcode/' ~ product.getOutBarcodeImg )) }}"  width="162px" height="90px"/></td>
+	<td>{% if product.image is not null and product.image != '' %}
+                <img src="{{ absolute_url(asset('/uploads/images/products/' ~ product.image )) }}"  width="120px" height="120px"/>
+                 
+        {%  else %}
+        <img src="{{ absolute_url(asset('/uploads/images/categories/' ~ product.category.image )) }}"  width="120px" height="120px"/>
+                
+        {% endif %}
+    </td>
 	<td>{{ product.name }}</td>
-	<td>{{ product.unity }}</td>
-	<td>{{ product.inbarcode }}</td>
+	<td>{{ product.unit }}</td>
+	<td>
+	<img src="{{ absolute_url(asset('/uploads/images/products/barcode/' ~ product.getInBarcodeImg )) }}"  width="162px" height="90px"/>
+                
+                </td>
 </tr>
+{%  endfor %}
 </tbody>
 
 </table>

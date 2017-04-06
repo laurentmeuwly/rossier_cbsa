@@ -6,13 +6,15 @@ easy_admin:
             list:
                 title: 'Liste des articles'
                 actions:
+                    - { name: 'restock', label: '', icon: 'plus-square' }
+                    - { name: 'updateCost', label: '', icon: 'money' }
                     - { name: 'show', label: '', icon: 'search' }
                     - { name: 'edit', label: '', icon: 'edit' }
                     - { name: 'delete', label: '', icon: 'trash' }
                 fields:
                     - id
                     - name
-                    - unit
+                    - { property: 'unit', sortable: false }
                     - { property: 'costPrice', format: '%.2f', css_class: text-right }
                     - { property: 'image', type: 'image', base_path: '%app.path.product_images%' }
                     - category
@@ -25,15 +27,21 @@ easy_admin:
                 fields:
                     - id
                     - { property: 'name', css_class: 'large' }
-                    - comment
-                    - isActive
-                    - costPrice
-                    - salePrice
-                    - { property: 'inBarcode', type: 'string'}
-                    - { property: 'outBarcode', type: 'string' }
+                    - { property: 'comment', label: 'Remarque' }
+                    - { property: 'isActive', label: 'Actif ?' }
+                    - { property: 'costPrice', label: 'Prix de revient' }
+                    - { property: 'salePrice', label: "Prix d'achat" }
+                    - { property: 'unit', label: 'Unité', css_class: 'small'}
+                    - { property: 'stock', label: 'Stock courant' }
+                    - { property: 'inBarcode', type: 'string', label: 'Code barre pour entrée en stock' }
+                    - { property: 'inBarcodeImg', label: ' ', type: 'image', base_path: '%app.path.product_images%/barcode/'}
+                    - { property: 'outBarcode', type: 'string', label: 'Code barre pour sortie de stock' }
+                    - { property: 'outBarcodeImg', label: ' ', type: 'image', base_path: '%app.path.product_images%/barcode/'}
                     - { property: 'image', type: 'image', base_path: '%app.path.product_images%' }
-                    - category
-                    - displayOrder
+                    - { property: 'category', label: 'Catégorie' }
+                    - { property: 'toBePrinted', label: 'Doit être imprimé' }
+                    - { property: 'displayOrder', label: "Ordre d'impression" }
+                    - { property: 'isManualAllowed', label: 'Saisie manuelle des quantités autorisée' }
             form:
                 title: 'Edition article (%%product%%)'
                 fields:
@@ -44,9 +52,6 @@ easy_admin:
                     - { property: 'unit', label: 'Unité', css_class: 'small'}
                     - { property: 'category' }
                     - { property: 'imageFile', label: 'Fichier image', type: 'vich_image' }
-                    - { type: 'group', css_class: 'col-sm-4', label: 'Codes barres', icon: 'cube' }
-                    - { property: 'inBarcode', type_options: {disabled: 'true'}, label: 'Code barre pour entrée en stock' }
-                    - { property: 'outBarcode', type_options: {disabled: 'true'}, label: 'Code barre pour sortie de stock' }
                     - { type: 'group', css_class: 'col-sm-4', label: 'Divers', icon: 'dollar' }
                     - { property: 'costPrice', label: 'Prix de revient' }
                     - { property: 'salePrice', label: 'Prix de vente' }
@@ -55,4 +60,9 @@ easy_admin:
                     - { property: 'displayOrder', label: "Ordre d'impression" }
                     - { property: 'toBePrinted', label: 'Doit être imprimé' }
                     - { property: 'isManualAllowed', label: 'Saisie manuelle des quantités autorisée' }
+                    - { type: 'group', css_class: 'col-sm-4', label: 'Codes barres', icon: 'cube' }
+                    - { property: 'inBarcode', type_options: {disabled: 'true'}, label: 'Code barre pour entrée en stock' }
+                    - { property: 'outBarcode', type_options: {disabled: 'true'}, label: 'Code barre pour sortie de stock' }
+                    
+                    
                     

@@ -1,0 +1,110 @@
+{% block collection_widget %}
+{% spaceless %}
+
+{% if prototype is defined %}
+{% set body = prototype %}
+{% set attr = attr|merge({'data-prototype': block('collection_body') }) %}
+{% set header = prototype %}
+{% set attr = attr|merge({'data-header': block('collection_header') }) %}
+{% endif %}
+
+        {% if form.vars.allow_delete is defined and form.vars.allow_delete %}
+            {% set allow_delete = true %}
+        {% else %}
+            {% set allow_delete = false %}
+        {% endif %}
+
+
+        <div {{ block('widget_container_attributes') }} class="protoype">
+            {{ form_errors(form) }}
+            
+            <table class="subtable table">
+                <thead>
+                    <tr class="headers" >
+                        {% if form.children|length > 0 %}
+                            {% if form.children[0]|length > 0 %}
+                                {% set header = form.children[0] %}
+                                {{ block('collection_header') }}
+                            {% endif %}
+                        {% endif %}
+                    </tr>
+                </thead>
+                <tbody class="container_rows">
+
+                {% for rows in form %}
+                {% spaceless %}
+                    {% if rows.children|length > 0 %}
+                            {% set body = rows %}
+                            {{ block('collection_body') }}
+                    {% endif %}
+                {% endspaceless %}
+                {% endfor %}
+
+                </tbody>
+            </table>
+            {% if prototype is defined %}
+                {% if form.vars.attr['data-add_label'] is defined %}
+                    {% set add_label = form.vars.attr['data-add_label'] ~ ' ' %}
+                {% else %}
+                    {% set add_label = 'Ajouter  ' %}
+                {% endif %}
+                <a href="#/" class="add_button btn btn-default btn-sm pull-right">{{ add_label }}<i class="fa fa-plus"></i></a>
+            {% endif %}
+            <br>
+        </div>
+    </div>
+{% endspaceless %}
+{% endblock collection_widget %}
+
+
+
+{% block collection_header %}
+{% for field in header %}
+
+<th>
+{% if 'checkbox' not in field.vars.block_prefixes %}
+{{ form_label(field)|raw }}
+{% else %}
+{% if field.vars.attr['data-label'] is defined %}
+{{ field.vars.attr['data-label'] }}
+{% else %}
+Options
+{% endif %}
+{% endif %}
+
+</th>
+{% endfor %}
+{% if allow_delete %}
+<th>
+Supprimer
+</th>
+{% endif %}
+{% endblock %}
+
+
+
+{% block collection_body %}
+<tr>
+{% set fieldNum = 1 %}
+
+{{ form_errors(body) }}
+{% for field in body %}
+<td>
+{{ form_widget(field) }}
+{{ form_errors(field) }}
+
+{% set fieldNum = fieldNum + 1 %}
+</td>
+{% endfor %}
+{% if allow_delete %}
+<td>
+X
+</td>
+{% endif %}
+
+</tr>
+{% endblock %}
+
+
+
+

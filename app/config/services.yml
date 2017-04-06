@@ -10,3 +10,12 @@ services:
     
     import.csvtoarray:
         class: InventoryBundle\Services\ConvertCsvToArray
+
+    app.test_subscriber:
+        class: InventoryBundle\EventListener\TestSubscriber
+        tags:
+            - { name: kernel.event_subscriber }
+    app.barcode:
+        class: InventoryBundle\Utils\Barcode
+
+    

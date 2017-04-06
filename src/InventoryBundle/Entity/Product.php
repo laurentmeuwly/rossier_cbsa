@@ -7,6 +7,9 @@ use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Hackzilla\BarcodeBundle\Utility\Barcode;
+use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 
 /**
  * Product
@@ -19,7 +22,7 @@ class Product
 {
     /**
      * @var DeliveryProduct[]
-     * @ORM\OneToMany(targetEntity="InventoryBundle\Entity\DeliveryProduct", mappedBy="product"), cascade={"remove"})
+     * @ORM\OneToMany(targetEntity="InventoryBundle\Entity\DeliveryProduct", mappedBy="product"), cascade={"persist"})
      */
 	private $deliveredProducts;
 	
@@ -157,6 +160,7 @@ class Product
     	$tempCode = $this->getPartialBarCode();
     	
     	$this->setInBarcode($this->generateBarCode('add',$tempCode));
+    	//$this->generateBarcodeImage($this->getInBarcode());
     	$this->setOutBarcode($this->generateBarCode('del',$tempCode));
     }
     
@@ -468,6 +472,39 @@ class Product
     	return $this->isManualAllowed;
     }
     
+    public function setInBarCodeImg()
+    {	
+    }
+    
+    /**
+     * @return string
+     */
+    public function getInBarcodeImg()
+    {
+    	$code = $this->getInBarcode();
+    	//$this->get('app.barcode')->existsBarcodeImage($code);
+    	//$this->existsBarcodeImage($code);
+    	/*if($this->existsBarcodeImage($this->getInBarcode())) {
+    		//$this->generateBarcodeImage($this->getInBarcode());
+    	}*/
+    	return $this->getInBarcode() . '.png';
+    }
+    
+    public function setOutBarcodeImg()
+    {
+    }
+    
+    /**
+     * @return string
+     */
+    public function getOutBarcodeImg()
+    {
+    	/*if(!$this->existsBarcodeImage($this->getOutBarcode())) {
+    		$this->generateBarcodeImage($this->getOutBarcode());
+    	}*/
+    	return $this->getOutBarcode() . '.png';
+    }
+    
     
     private function getPartialBarCode()
     {
@@ -508,5 +545,36 @@ class Product
     	}
     	
     	return (10 - ($sum % 10)) % 10;
+    }
+
+    public function existsBarcodeImage($code)
+    {
+    	$fs = new FileSystem();
+    	$path = $this->container->getParameter('web_dir') . $this->container->getParameter('app.path.product_images') . '/barcode/';
+    	$filename = $code.'.png';
+    		
+    	return $fs->exists($path . $filename);
+    }
+    
+    public function generateBarcodeImage($code)
+    {
+    	$barcode = $this->get('hackzilla_barcode');
+    	$barcode->setMode(Barcode::MODE_PNG);
+    
+    	$filename = $code.'.png';
+    
+    
+    	$fs = new FileSystem();
+    	$path = $this->container->getParameter('web_dir') . $this->container->getParameter('app.path.product_images') . '/barcode/';
+    
+    	if(!$fs->exists($path)) {
+    		try {
+    			$fs->mkdir($path, 0700);
+    		} catch (IOExceptionInterface $e) {
+    			echo "An error occurred while creating your directory at ".$e->getPath();
+    		}
+    	}
+    
+    	return $barcode->save($code, $path . $filename);
     }
 }

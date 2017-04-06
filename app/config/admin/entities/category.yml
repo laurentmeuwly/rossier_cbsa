@@ -5,6 +5,7 @@ easy_admin:
             label: 'Categories'
             list:
                 title: 'Liste des catégories'
+                sort: ['parent', 'ASC']
                 actions:
                     - { name: 'show', label: '', icon: 'search' }
                     - { name: 'edit', label: '', icon: 'edit' }
@@ -26,13 +27,9 @@ easy_admin:
                 fields:
                     - { type: 'group', css_class: 'col-sm-4', label: 'Caractéristiques', icon: 'pencil' }
                     - { property: 'name', label: 'Label', css_class: 'large' }
-                    - { property: 'parent', type: 'easyadmin_autocomplete', label: 'Parent category' }
+                    - { property: 'parent', label: 'Parent category' }
                     - displayOrder
                     - { property: 'imageFile', type: 'vich_image' }
                     - { type: 'group', css_class: 'col-sm-4', label: 'Produits liés', icon: 'basket' }
                     # if you want to add products when creating categories, add the 'by_reference' option
                     - { property: 'products', type_options: { by_reference: false } }
-
-                    
-                    
-                    

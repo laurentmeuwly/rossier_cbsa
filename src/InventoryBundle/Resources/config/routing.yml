@@ -14,6 +14,10 @@ inventory_category:
     resource: "@InventoryBundle/Resources/config/routing/category.yml"
     prefix:   /category
 
+generate_barcode:
+    path:     /genCode
+    defaults: { _controller: InventoryBundle:Listing:generateImgBarcode }
+    
 print_barcode:
     path:     /printLivre
     defaults: { _controller: InventoryBundle:Listing:printBarcode }
@@ -21,3 +25,7 @@ print_barcode:
 print_site_resume:
     path:     /printRapportChantier
     defaults: { _controller: InventoryBundle:Listing:printSiteResume }
+
+test_barcode:
+    path:     /barcode/{code}
+    defaults: { _controller: InventoryBundle:App:barcodeImg }

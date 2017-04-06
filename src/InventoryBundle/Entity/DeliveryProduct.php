@@ -58,7 +58,7 @@ class DeliveryProduct
     /** {@inheritdoc} */
     public function __toString()
     {
-    	return $this->getProduct()->getName().' [x'.$this->getQuantity().']: '.$this->getTotalCostPrice();
+    	return $this->getProduct()->getName().' ['.$this->getQuantity().' '.$this->getUnit().'], coût total (CHF): '. number_format($this->getTotalCostPrice(),2,".","'");
     }
     
     public function getId()
@@ -137,7 +137,7 @@ class DeliveryProduct
      */
     public function getTotalCostPrice()
     {
-    	return $this->product->getCostPrice() * $this->quantity;
+    	return $this->getDeliveryCostPrice() * $this->quantity;
     }
 }
 

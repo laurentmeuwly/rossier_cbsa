@@ -5,7 +5,7 @@ easy_admin:
             label: 'Chantiers'
             list:
                 title: 'Liste des chantiers'
-                #sort: ['name', 'ASC']
+                sort: ['name', 'ASC']
                 actions:
                     - { name: 'show', label: '', icon: 'search' }
                     - { name: 'edit', label: '', icon: 'edit' }
@@ -19,15 +19,27 @@ easy_admin:
                     - { property: 'status', label: 'Etat' }
                     - { property: 'deliveries', label: 'Nb livraisons'}
                     - { property: 'toBePrinted', label: 'Affichage dans liste dépôt' }
+            show:
+                fields:
+                    - { property: 'name', label: 'Chantier' }
+                    - { property: 'address', label: 'Adresse' }
+                    - { property: 'postcode', label: 'NPA', format: '%d' }
+                    - { property: 'city', label: 'Localité' }
+                    - { property: 'status', label: 'Etat' }
+                    - { property: 'toBePrinted', label: 'Affichage dans liste dépôt' }
+                    - { property: 'deliveries', label: 'Livraisons'}
+                    #- { property: 'deliveries', label: 'Livraisons', type: 'collection', type_options: {entry_type: 'InventoryBundle\Form\DeliveryType', allow_delete: false, allow_add: false} }
             form:
                 fields:
                     - { type: 'group', css_class: 'col-sm-6', label: 'Informations', icon: 'pencil' }
                     - { property: 'name', css_class: 'large', label: 'Nom'}
-                    - { property: 'status', type: 'choice', type_options: { choices: { 'En cours' : 'En cours', 'Terminé': 'Terminé' } } }
+                    #- { property: 'status', type: 'choice', type_options: { choices: { 'En cours' : 'En cours', 'Terminé': 'Terminé' } } }
                     - { property: 'toBePrinted', label: 'Affichage dans liste dépôt' }
                     - { type: 'group', css_class: 'col-sm-6', label: 'Coordonnées', icon: 'envelope-o' }
                     - { property: 'address', label: 'Adresse' }
                     - { property: 'postcode', label: 'NPA' }
                     - { property: 'city', label: 'Localité' }
                     - { type: 'group', label: 'Historique des livraisons', icon: 'money', css_class: 'col-sm-12' }
-                    #- { property: 'deliveries', css_class: 'col-sm-12' }
+                    #- { property: 'deliveries', label: 'Livraisons'}
+                    - { property: 'deliveries', label: 'Livraisons', type: 'collection', type_options: {entry_type: 'InventoryBundle\Form\DeliveryType', allow_delete: false, allow_add: false} }
+                    
