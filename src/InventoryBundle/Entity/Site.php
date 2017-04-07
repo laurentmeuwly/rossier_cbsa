@@ -14,24 +14,10 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity(repositoryClass="InventoryBundle\Repository\SiteRepository")
  */
 class Site
-{
-	const STATUS_RUNNING = "1";
-	const STATUS_TERMINATED = "2";
-	const STATUS_WAITING = "3";
-	
-	public static $siteStatus = array(
-		self::STATUS_RUNNING => "En cours",
-		self::STATUS_TERMINATED => "Terminé",
-		self::STATUS_WAITING => "En attente",
-	);
-	
-	
+{	
 	/**
-	 * @var integer
-	 * 
-	 * @ORM\Column(name="status", type="smallint")
-	 * @Assert\Choice(callback="getAvailableStatus")
-	 * 
+	 * @ORM\ManyToOne(targetEntity="InventoryBundle\Entity\SiteStatus")
+	 * @ORM\JoinColumn(nullable=false)
 	 */
 	private $status;
 	
@@ -98,18 +84,14 @@ class Site
     }
     
     public function setStatus($status)
-    {
-    	if(!in_array($status, SiteStatusType::getAvailableStatus())) {
-    		throw new \InvalidArgumentException('Invalid status');
-    	}
-    	
+    {	
     	$this->status = $status;
     	return $this;
     }
     
     public function getStatus()
     {
-    	return self::$siteStatus;
+    	return $this->status;
     }
     
     public function getStatusName() {

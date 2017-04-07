@@ -33,7 +33,7 @@ easy_admin:
                 fields:
                     - { type: 'group', css_class: 'col-sm-6', label: 'Informations', icon: 'pencil' }
                     - { property: 'name', css_class: 'large', label: 'Nom'}
-                    #- { property: 'status', type: 'choice', type_options: { choices: { 'En cours' : 'En cours', 'Terminé': 'Terminé' } } }
+                    - { property: 'status', label: 'Etat' }
                     - { property: 'toBePrinted', label: 'Affichage dans liste dépôt' }
                     - { type: 'group', css_class: 'col-sm-6', label: 'Coordonnées', icon: 'envelope-o' }
                     - { property: 'address', label: 'Adresse' }
