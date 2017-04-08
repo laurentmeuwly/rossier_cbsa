@@ -83,10 +83,9 @@ class Site
     	return (string)$this->getName();
     }
     
-    public function setStatus($status)
+    public function setStatus(SiteStatus $status)
     {	
     	$this->status = $status;
-    	return $this;
     }
     
     public function getStatus()
