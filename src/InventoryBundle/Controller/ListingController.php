@@ -26,7 +26,7 @@ class ListingController extends Controller
 				$this->generateBarcodeImage($product->getOutBarcode());
 			}
 		}
-		
+		return $this->render('::impressum.html.twig');
 	}
 	
     public function printBarcodeAction()
