@@ -23,7 +23,7 @@ class Delivery
 	/** 
 	 * @var DeliveredProduct[]
 	 * 
-	 * @ORM\OneToMany(targetEntity="InventoryBundle\Entity\DeliveryProduct", mappedBy="delivery", cascade={"persist"}) 
+	 * @ORM\OneToMany(targetEntity="InventoryBundle\Entity\DeliveryProduct", mappedBy="delivery", orphanRemoval=true) 
 	 */
 	private $deliveredProducts;
 
@@ -49,6 +49,12 @@ class Delivery
      * @var float
      */
     private $totalCost;
+    
+    /**
+     * @var status
+     * @ORM\Column(name="status", type="integer")
+     */
+    private $status = 0;
 
 
     public function __construct()
@@ -131,7 +137,7 @@ class Delivery
     	{
     		$dp = new DeliveryProduct();
     
-    		$dp->setOrder($this);
+    		$dp->setDelivery($this);
     		$dp->setProduct($p);
     
     		$this->addDeliveryProduct($dp);
@@ -170,6 +176,16 @@ class Delivery
     	return $this->site->getName();
     }
     
+    public function getStatus()
+    {
+    	return $this->status;
+    }
+    
+    public function setStatus($status)
+    {
+    	$this->status = $status;
+    }
+    
     /**
      * Get totalCost
      *
@@ -184,6 +200,16 @@ class Delivery
     	}
     
     	return $total;
+    }
+    
+    /**
+     * activate status
+     * @return integer 
+     */
+    public function activateStatus()
+    {
+    	$this->status = 1;
+    	return $this->status;
     }
 }
 

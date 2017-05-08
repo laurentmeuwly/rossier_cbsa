@@ -1,41 +1,103 @@
 {% extends "InventoryBundle::layout.html.twig" %}
 
 {% block body %}
-    <h1>Delivery</h1>
+    <h1>{{ 'Delivery'|trans }}</h1>
 
-    <table>
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ delivery.id }}</td>
-            </tr>
-            <tr>
-                <th>Deliverydate</th>
-                <td>{% if delivery.deliveryDate %}{{ delivery.deliveryDate|date('Y-m-d') }}{% endif %}</td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="row">
+        <div class="col-xs-4 table-responsive">
+            <table class="table table-striped">
+                <tbody>
+                    <tr>
+                        <th>{{ 'Site'|trans }}</th>
+                        <td>{{ delivery.site }}</td>
+                    </tr>
+                    <tr>
+                        <th>{{ 'Deliverydate'|trans }}</th>
+                        <td>{% if delivery.deliveryDate %}{{ delivery.deliveryDate|date('d-m-Y') }}{% endif %}</td>
+                    </tr>
+                    
+                </tbody>
+            </table>
+        </div>
+    </div>
+ 
+ 	 <div class="row">
+ 	 	<div class="col-xs-4 table-responsive">
+ 	 
+ 	 <form method="post" name="form" action="{{ path('depot_livraison') }}">
+     <input type="hidden" name="delivery" value="{{ delivery.id }}">
+        
+                    <p>
+                        {{ "Article à ajouter/enlever au bulletin" }}
+                    </p>
+                    </p>
+                        {% if error is defined %}
+                        {% if error %}
+                            <div class="has-error">
+                                <p class="error-block">
+                                    <span class="label label-danger">
+                                        {{ 'error' }}
+                                    </span>
+                                    {{ error }}
+                                </p>
+                            </div>
+                        {% endif %}
+                        {% endif %}
+                    <p>
+                    <p>
+                        
+                        {% if product==NULL or ean==NULL or not setQty %}
+     						<input id="product" type="text" name="product">
+    	                {% else %}
+                            {{ product.name }}, {{ product.unit }} : quantité
+                        	<input id="product" type="hidden" name="product" value="{{ ean }}">
+                        	<input id="qty" type="text" name="qty">
+                        {% endif %}
+                       
+                    </p>
+               
+        
+    </form>
+
+ 	 	</div>
+ 	 	<p>&nbsp;</p>
+ 	 </div>
+ 
+    <div class="row">
+        <div class="col-xs-12 table-responsive">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>id</th>
+                    <th>Catégorie</th>
+                    <th>Article</th>
+                    <th>Unité</th>
+                    <th>Quantité</th>
+                </tr>
+                </thead>
+				<tbody>
+				{% for product in delivery.deliveredproducts %}
+					<tr>
+                        <td>{{ loop.index }}</td>
+                        <td>{{ product.product.category.name }}</td>
+                        <td>{{ product.product.name }}</td>
+                        <td>{{ product.unit }}</td>
+						<td>{{ product.quantity }}</td>
+					</tr>
+				{% endfor %}
+				</tbody>
+            </table>
+        </div>
+	</div>
     
-    <h2>Product</h2>
-<ul class="record_actions">
-    {% for p in entity.po %}
-    <li>
-        {{ p.product }}
-    </li>
-    {% endfor %}
-</ul> 
-
-    <ul>
-        <li>
-            <a href="{{ path('delivery_index') }}">Back to the list</a>
-        </li>
-        <li>
-            <a href="{{ path('delivery_edit', { 'id': delivery.id }) }}">Edit</a>
-        </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
-    </ul>
+    <script language="JavaScript" type="text/javascript">
+   		window.onload = function() {
+   			{% if product==NULL or ean==NULL or not setQty %}
+   				document.getElementById('product').focus();
+   			{% else %}
+   				document.getElementById('qty').focus();
+   			{%  endif %}
+   		};
+  	</script>
+  	
 {% endblock %}

@@ -9,6 +9,7 @@
             <tr>
                 <th>Id</th>
                 <th>{{ 'Deliverydate'|trans }}</th>
+                <th>{{ 'Site'|trans }}</th>
                 <th>{{ 'Actions'|trans }}</th>
             </tr>
         </thead>
@@ -17,6 +18,7 @@
             <tr>
                 <td><a href="{{ path('delivery_show', { 'id': delivery.id }) }}">{{ delivery.id }}</a></td>
                 <td>{% if delivery.deliveryDate %}{{ delivery.deliveryDate|date('Y-m-d') }}{% endif %}</td>
+                <td>{{ delivery.site }}</td>
                 <td style="text-align: center; vertical-align: middle;">
                     <ul style="list-style-type: none;">
                         <li>

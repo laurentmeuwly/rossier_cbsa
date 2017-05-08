@@ -10,4 +10,25 @@ namespace InventoryBundle\Repository;
  */
 class ProductRepository extends \Doctrine\ORM\EntityRepository
 {
+	public function getActiveProductByEANCode($eanCode, $direction='IN')
+	{
+		$q = $this->createQueryBuilder('q');
+		$q
+		->where('q.isActive = true');
+		
+		if($direction=='IN') {
+			$q
+			->andwhere('q.inBarcode = :p')
+			->setParameter(':p', $eanCode);
+		} else {
+			$q
+			->andwhere('q.outBarcode = :p')
+			->setParameter(':p', $eanCode);
+		}
+	
+		return $q
+		->getQuery()
+		->getOneOrNullResult()
+		;
+	}
 }

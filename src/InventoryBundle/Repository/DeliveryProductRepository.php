@@ -1,6 +1,8 @@
 <?php
 
 namespace InventoryBundle\Repository;
+use InventoryBundle\Entity\Delivery;
+use InventoryBundle\Entity\Product;
 
 /**
  * DeliveryProductRepository
@@ -10,4 +12,21 @@ namespace InventoryBundle\Repository;
  */
 class DeliveryProductRepository extends \Doctrine\ORM\EntityRepository
 {
+	public function getExistingDeliveryProduct(Delivery $delivery, Product $product)
+	{
+		$q = $this->createQueryBuilder('q');
+		$q
+		->where('q.delivery = :d')
+		->setParameter(':d', $delivery->getId());
+		;
+	
+		$q
+		->andwhere('q.product = :p')
+		->setParameter(':p', $product->getId());
+	
+		return $q
+		->getQuery()
+		->getOneOrNullResult()
+		;
+	}
 }

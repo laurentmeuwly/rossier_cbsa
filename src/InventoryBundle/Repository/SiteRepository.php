@@ -10,4 +10,23 @@ namespace InventoryBundle\Repository;
  */
 class SiteRepository extends \Doctrine\ORM\EntityRepository
 {
+	public function getSiteWithStatus($siteId, array $status)
+	{
+		$qsite = $this->createQueryBuilder('site');
+		$qsite
+			->join('site.status', 'status')
+			->addSelect('status')
+		;
+		
+		$qsite
+			->where('site.id = :id')
+			->setParameter(':id', $siteId);
+		
+		$qsite->andWhere($qsite->expr()->in('status.status', $status));
+		
+		return $qsite
+			->getQuery()
+			->getOneOrNullResult()
+		;
+	}
 }

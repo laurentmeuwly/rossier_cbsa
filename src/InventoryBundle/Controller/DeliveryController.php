@@ -5,6 +5,7 @@ namespace InventoryBundle\Controller;
 use InventoryBundle\Entity\Delivery;
 use InventoryBundle\Entity\DeliveryProduct;
 use InventoryBundle\Entity\Site;
+use InventoryBundle\Entity\Product;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -36,11 +37,23 @@ class DeliveryController extends Controller
      */
     public function newAction(Request $request)
     {
-        $delivery = new Delivery();
+    	$delivery = new Delivery();
+    	
+    	$data = $request->query->all();
+    	if(!isset($data['site']) || $data['site']== NULL) {
+    		$data['site']=4;
+    	}
+    	if(isset($data['site'])) {
+    		$site = $this->getDoctrine()->getManager()->getRepository('InventoryBundle:Site')->find($data['site']);
+    		$delivery->setSite($site);
+    	}
+        
         $form = $this->createForm('InventoryBundle\Form\DeliveryType', $delivery);
         $form->handleRequest($request);
 
+  
         if ($form->isSubmitted() && $form->isValid()) {
+        	
             $em = $this->getDoctrine()->getManager();
             $em->persist($delivery);
             $em->flush($delivery);
@@ -48,22 +61,69 @@ class DeliveryController extends Controller
             return $this->redirectToRoute('delivery_show', array('id' => $delivery->getId()));
         }
 
+        
+        
         return $this->render('InventoryBundle:Delivery:new.html.twig', array(
             'delivery' => $delivery,
+        	'site' => $data['site'],
             'form' => $form->createView(),
         ));
+    }
+    
+    public function new2Action(Request $request)
+    {
+    	$delivery = new Delivery();
+    
+    	$form = $this->createForm('InventoryBundle\Form\DeliveryType', $delivery);
+    	$form->handleRequest($request);
+    
+    
+    	if ($form->isSubmitted() && $form->isValid()) {
+    		$em = $this->getDoctrine()->getManager();
+    		$em->persist($delivery);
+    		$em->flush($delivery);
+    
+    		return $this->redirectToRoute('delivery_show', array('id' => $delivery->getId()));
+    	}
+    
+    
+    
+    	return $this->render('InventoryBundle:Delivery:new.html.twig', array(
+    			'delivery' => $delivery,
+    			'site' => 4,
+    			'form' => $form->createView(),
+    	));
+    	
+    }
+    
+    public function createAction(Site $site)
+    {
+    	$delivery = new Delivery();
+    	
+    	if(isset($site)) {
+    		$delivery->setSite($site);
+    	}
+    	
+    	$em = $this->getDoctrine()->getManager();
+    	$em->persist($delivery);
+    	$em->flush($delivery);
+    	
+    	return $this->redirectToRoute('delivery_show', array('id' => $delivery->getId()));
     }
 
     /**
      * Finds and displays a delivery entity.
      *
      */
-    public function showAction(Delivery $delivery)
+    public function showAction(Delivery $delivery, Product $product=NULL, $ean=NULL, $setQty=false)
     {
         $deleteForm = $this->createDeleteForm($delivery);
 
         return $this->render('InventoryBundle:Delivery:show.html.twig', array(
             'delivery' => $delivery,
+        	'product' => $product,
+        	'ean' => $ean,
+        	'setQty' => $setQty,
             'delete_form' => $deleteForm->createView(),
         ));
     }
@@ -107,6 +167,59 @@ class DeliveryController extends Controller
         }
 
         return $this->redirectToRoute('delivery_index');
+    }
+    
+    public function customDeleteAction(Delivery $delivery)
+    {
+    	
+    		$em = $this->getDoctrine()->getManager();
+    		$em->remove($delivery);
+    		$em->flush($delivery);
+    	
+    
+    	return $this->redirectToRoute('delivery_index');
+    }
+    
+    public function activateDeliveryAction(Delivery $delivery)
+    {
+    	$delivery->activateStatus();
+    	$this->getDoctrine()->getManager()->flush($delivery);
+    	return $this->redirectToRoute('delivery_index');
+    }
+    
+    public function updateProductDeliveryAction(Delivery $delivery, Product $product, $action='plus', $qty=1)
+    {
+    	$em = $this->getDoctrine()->getManager();
+    	
+    	// search already existing product for this delivery
+    	$dp = $em->getRepository('InventoryBundle:DeliveryProduct')
+    		->getExistingDeliveryProduct($delivery, $product);
+    		
+    	if($dp) {
+    		if($action=='plus') $dp->setQuantity($dp->getQuantity()+$qty);
+    		if($action=='minus') {
+    			if($dp->getQuantity() > 1)
+    				$dp->setQuantity($dp->getQuantity()-$qty);
+    			else {
+    				$em->remove($dp);
+    			}
+    		}
+    	} else {
+    		if($action=='plus') {
+	    	$dp = new DeliveryProduct();
+	    	$dp->setDelivery($delivery);
+	    	$dp->setProduct($product);
+	    	$dp->setUnit($product->getUnit());
+	    	$dp->setDeliveryCostPrice($product->getCostPrice());
+	    	$dp->setQuantity(1);
+    		
+	    	$em->persist($dp);
+    		}
+    	}
+    	
+    	$em->flush($dp);
+    	
+    	return $this->redirectToRoute('delivery_index');
     }
 
     /**

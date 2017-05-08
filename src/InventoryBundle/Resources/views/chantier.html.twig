@@ -14,6 +14,20 @@
                 <p>
                     {{ "Scanner le chantier concerné" }}
                 </p>
+                </p>
+                    {% if error is defined %}
+                    {% if error %}
+                        <div class="has-error">
+                            <p class="error-block">
+                                <span class="label label-danger">
+                                    {{ 'error' }}
+                                </span>
+                                {{ error }}
+                            </p>
+                        </div>
+                    {% endif %}
+                    {% endif %}
+                <p>
                 <p>
                     <input id="site" type="text" name="site">
                 </p>
