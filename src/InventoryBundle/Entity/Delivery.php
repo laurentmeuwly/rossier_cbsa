@@ -40,7 +40,7 @@ class Delivery
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="delivery_date", type="date")
+     * @ORM\Column(name="delivery_date", type="datetime")
      */
     private $deliveryDate;
     
