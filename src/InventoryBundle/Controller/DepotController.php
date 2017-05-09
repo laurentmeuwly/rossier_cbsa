@@ -127,7 +127,6 @@ class DepotController extends Controller
 						));
 						return $response;	
 					} else {
-					
 						$response = $this->forward('InventoryBundle:Delivery:updateProductDelivery', 
 							array('delivery' => $delivery, 
 									'product' => $product,
