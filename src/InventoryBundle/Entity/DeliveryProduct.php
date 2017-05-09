@@ -35,7 +35,7 @@ class DeliveryProduct
     /**
      * @var int
      *
-     * @ORM\Column(name="quantity", type="integer")
+     * @ORM\Column(name="quantity", type="decimal", precision=6, scale=1)
      */
     private $quantity;
     
