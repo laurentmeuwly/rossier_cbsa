@@ -23,11 +23,11 @@ class DepotController extends Controller
 			switch($action) {
 				case 'RETOUR':
 					//return $this->redirectToRoute('category_index');
-					return $this->render('InventoryBundle::chantier.html.twig');
+					return $this->render('InventoryBundle::chantier.html.twig', array('docType' => $action));
 					break;
 				case 'SORTIE':
 					//return $this->redirectToRoute('site_index');
-					return $this->render('InventoryBundle::chantier.html.twig');
+					return $this->render('InventoryBundle::chantier.html.twig', array('docType' => $action));
 					break;
 				default:
 					//return $this->redirectToRoute('depot');
@@ -46,7 +46,7 @@ class DepotController extends Controller
 						->getSiteWithStatus($data['site'], array('En cours'));
 			if($site ) {
 				//return $this->redirectToRoute('delivery_new', array('site' => $site->getId()));
-				return $this->forward('InventoryBundle:Delivery:create', array('site' => $site ));
+				return $this->forward('InventoryBundle:Delivery:create', array('site' => $site, 'docType' => $data['docType'] ));
 			} else {
 				// erreur
 				$error = 'Chantier invalide.';

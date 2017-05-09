@@ -7,7 +7,6 @@
     <div class="container body-container">
 
 <form method="post" name="form" action="{{ path('depot_dispatcher') }}">
-    
     <div class="row">
         <div class="col-sm-6">
             <div class="jumbotron">
@@ -29,6 +28,7 @@
                     {% endif %}
                 <p>
                 <p>
+                    <input id="docType" type="hidden" name="docType" value="{{ docType }}">
                     <input id="site" type="text" name="site">
                 </p>
             </div>

@@ -40,12 +40,13 @@ class DeliveryController extends Controller
     	$delivery = new Delivery();
     	
     	$data = $request->query->all();
-    	if(!isset($data['site']) || $data['site']== NULL) {
-    		$data['site']=4;
-    	}
+    	
     	if(isset($data['site'])) {
     		$site = $this->getDoctrine()->getManager()->getRepository('InventoryBundle:Site')->find($data['site']);
     		$delivery->setSite($site);
+    	}
+    	if(isset($data['docType'])) {
+    		$delivery->setDocType($data['docType']);
     	}
         
         $form = $this->createForm('InventoryBundle\Form\DeliveryType', $delivery);
@@ -96,13 +97,14 @@ class DeliveryController extends Controller
     	
     }
     
-    public function createAction(Site $site)
+    public function createAction(Site $site, $docType='SORTIE')
     {
     	$delivery = new Delivery();
     	
     	if(isset($site)) {
     		$delivery->setSite($site);
     	}
+    	$delivery->setDocType($docType);
     	
     	$em = $this->getDoctrine()->getManager();
     	$em->persist($delivery);
