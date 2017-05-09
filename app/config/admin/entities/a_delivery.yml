@@ -14,6 +14,7 @@ easy_admin:
                     - 'id'
                     - { property: 'deliveryDate', label: 'Date' }
                     - { property: 'site', label: 'Chantier' }
+                    - { property: 'docType', label: 'Type' }
                     - { property: 'deliveredProducts', label: '# Produits' }
                     - { property: 'totalCost', label: 'Coût total', format: '%.2f'}
             show:
@@ -21,11 +22,13 @@ easy_admin:
                     - 'id'
                     - { property: 'deliveryDate', label: 'Date' }
                     - { property: 'site', label: 'Chantier' }
+                    - { property: 'docType', label: 'Type' }
                     - { property: 'totalCost', label: 'Coût total'}
                     - { property: 'deliveredProducts', label: 'Liste des articles' }
             form:
                 fields:
                     - { type: 'group', label: 'Détail livraison', icon: 'truck', css_class: 'col-sm-4' }
+                    - { property: 'docType', label: 'Type' }
                     - 'deliveryDate'
                     - { property: 'site', label: 'Chantier' }
                     - { type: 'group', label: 'Articles livrés', icon: 'truck', css_class: 'col-sm-8' }

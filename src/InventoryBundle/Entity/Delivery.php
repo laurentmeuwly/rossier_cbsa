@@ -45,6 +45,12 @@ class Delivery
     private $deliveryDate;
     
     /**
+     * @var string
+     * @ORM\Column(name="doc_type", type="string", length=20)
+     */
+    private $docType = 'SORTIE';
+    
+    /**
      * 
      * @var float
      */
@@ -184,6 +190,16 @@ class Delivery
     public function setStatus($status)
     {
     	$this->status = $status;
+    }
+    
+    public function getDocType()
+    {
+    	return $this->docType;
+    }
+    
+    public function setDocType($docType)
+    {
+    	$this->docType = $docType;
     }
     
     /**
