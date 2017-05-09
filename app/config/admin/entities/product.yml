@@ -6,8 +6,6 @@ easy_admin:
             list:
                 title: 'Liste des articles'
                 actions:
-                    - { name: 'restock', label: '', icon: 'plus-square' }
-                    - { name: 'updateCost', label: '', icon: 'money' }
                     - { name: 'show', label: '', icon: 'search' }
                     - { name: 'edit', label: '', icon: 'edit' }
                     - { name: 'delete', label: '', icon: 'trash' }
