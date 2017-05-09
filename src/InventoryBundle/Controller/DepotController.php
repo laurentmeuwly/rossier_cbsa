@@ -51,7 +51,7 @@ class DepotController extends Controller
 				// erreur
 				$error = 'Chantier invalide.';
 				return $this->renderChantier(array(
-						'error' => $error
+						'error' => $error, 'docType' => $data['docType']
 				));
 			}
 		}
