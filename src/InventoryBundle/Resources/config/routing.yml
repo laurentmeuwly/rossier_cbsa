@@ -18,13 +18,13 @@ generate_barcode:
     path:     /genCode
     defaults: { _controller: InventoryBundle:Listing:generateImgBarcode }
     
-print_product_barcode:
-    path:     /printProductBook
-    defaults: { _controller: InventoryBundle:Listing:printProductBook }
+print_products_book:
+    path:     /printProductsBook
+    defaults: { _controller: InventoryBundle:Listing:printProductsBook }
     
-print_site_barcode:
-    path:     /printSiteBook
-    defaults: { _controller: InventoryBundle:Listing:printSiteBook }
+print_sites_book:
+    path:     /printSitesBook
+    defaults: { _controller: InventoryBundle:Listing:printSitesBook }
 
 print_site_resume:
     path:     /printRapportChantier

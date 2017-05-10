@@ -29,7 +29,7 @@ class ListingController extends Controller
 		return $this->render('::impressum.html.twig');
 	}
 	
-    public function printProductBookAction()
+    public function printProductsBookAction()
     {
     	$filePath = '/var/www/test.pdf';
     	
@@ -48,7 +48,7 @@ class ListingController extends Controller
     	}*/
     	
     	/* $html = $this->renderView ...*/
-    	$html = $this->renderView('InventoryBundle:Listing:print_barcode.html.twig', array(
+    	$html = $this->renderView('InventoryBundle:Listing:print_products_book.html.twig', array(
     			'products' => $products
     	));
     	/*<td>{% if product.image is not null and product.image != '' %}
@@ -90,7 +90,7 @@ class ListingController extends Controller
     	//return $this->redirect($this->generateUrl('inventory_bundle_admin_index'));
     }
     
-    public function printSiteBookAction()
+    public function printSitesBookAction()
     {
     	$filePath = '/var/www/test.pdf';
     	 
