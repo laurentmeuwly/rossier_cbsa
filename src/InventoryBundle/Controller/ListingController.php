@@ -29,7 +29,7 @@ class ListingController extends Controller
 		return $this->render('::impressum.html.twig');
 	}
 	
-    public function printBarcodeAction()
+    public function printProductBookAction()
     {
     	$filePath = '/var/www/test.pdf';
     	
@@ -88,6 +88,36 @@ class ListingController extends Controller
     	//$this->get('session')->getFlashBag()->add('notice', 'PDF généré');
     	
     	//return $this->redirect($this->generateUrl('inventory_bundle_admin_index'));
+    }
+    
+    public function printSiteBookAction()
+    {
+    	$filePath = '/var/www/test.pdf';
+    	 
+    	$em = $this->getDoctrine()->getManager();
+    	$sites = $em->getRepository('InventoryBundle:Site')->findBy(
+    			array('toBePrinted' => true),
+    			array('name' => 'ASC')
+    			);
+
+    	$html = $this->renderView('InventoryBundle:Listing:print_sites_book.html.twig', array(
+    			'sites' => $sites
+    	));
+    	
+    	// remove old file
+    	if (file_exists($filePath)) {
+    		unlink($filePath);
+    	}
+
+    	return new Response(
+    			$this->get('knp_snappy.pdf')->getOutputFromHtml($html),
+    			200,
+    			array(
+    					'Content-Type'          => 'application/pdf',
+    					'Content-Disposition'   => 'attachment; filename="file.pdf"'
+    			)
+    			);
+
     }
 
     public function printSiteResumeAction()

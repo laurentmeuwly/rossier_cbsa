@@ -1,0 +1,33 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Book print{% endblock %}
+
+{% block body %}
+<h2>Livre code-barre des chantiers</h2>
+
+{# début de la table #}
+<table width="850px">
+<thead>
+<tr>
+	<th width="200px">Code</th>
+	<th width="300px">Nom chantier</th>
+	<th width="350px">Adresse</th>
+</tr>
+</thead>
+
+<tbody>
+{% for site in sites %}
+<tr style="page-break-inside: avoid;">
+	<td style="align: center; padding: 10px">
+		{{ site.code }}
+    </td>
+	<td>{{ site.name }}</td>
+	<td>{{ site.address }}, {{ site.postcode }} {{ site.city }}</td>
+</tr>
+{%  endfor %}
+</tbody>
+
+</table>
+{# fin de la table #}
+
+{% endblock %}

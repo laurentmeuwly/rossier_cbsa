@@ -9,19 +9,21 @@
 <table width="850px">
 <thead>
 <tr>
-	<th width="200px">Supprimer</th>
+	<th width="200px">Ajouter</th>
 	<th width="150px">Image</th>
 	<th width="250px">Nom article</th>
 	<th width="50px">Unité</th>
-	<th width="200px">Ajouter</th>
+	<th width="200px">Supprimer</th>
 </tr>
 </thead>
 
 <tbody>
 {% for product in products %}
-<tr>
-	<td><img src="{{ absolute_url(asset('/uploads/images/products/barcode/' ~ product.getOutBarcodeImg )) }}"  width="162px" height="90px"/></td>
-	<td>{% if product.image is not null and product.image != '' %}
+<tr style="page-break-inside: avoid;">
+	<td style="align: center; background-color: green; padding: 10px">
+		<img src="{{ absolute_url(asset('/uploads/images/products/barcode/' ~ product.getInBarcodeImg )) }}"  width="162px" height="90px"/>
+    </td>
+    <td>{% if product.image is not null and product.image != '' %}
                 <img src="{{ absolute_url(asset('/uploads/images/products/' ~ product.image )) }}"  width="120px" height="120px"/>
                  
         {%  else %}
@@ -31,10 +33,9 @@
     </td>
 	<td>{{ product.name }}</td>
 	<td>{{ product.unit }}</td>
-	<td>
-	<img src="{{ absolute_url(asset('/uploads/images/products/barcode/' ~ product.getInBarcodeImg )) }}"  width="162px" height="90px"/>
-                
-                </td>
+	<td style="align: center; background-color: red; padding: 10px">
+		<img src="{{ absolute_url(asset('/uploads/images/products/barcode/' ~ product.getOutBarcodeImg )) }}"  width="162px" height="90px"/>
+	</td>
 </tr>
 {%  endfor %}
 </tbody>

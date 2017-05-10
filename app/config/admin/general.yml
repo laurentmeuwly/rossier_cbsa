@@ -24,8 +24,8 @@ easy_admin:
                   - { entity: 'Unit', icon: 'tags', label: 'menu.units' }
             - { label: 'menu.sites', entity: 'Site', icon: 'list' }
             - { label: 'menu.reporting' }
-            - { label: 'menu.reporting.listsite', url: 'https://github.com/laurentmeuwly/rossier_cbsa/tree/master/docs', icon: 'barcode' }
-            - { label: 'menu.reporting.listinventory', url: 'https://github.com/laurentmeuwly/rossier_cbsa/tree/master/docs', icon: 'barcode'}
+            - { label: 'menu.reporting.listsite', route: 'print_site_barcode', icon: 'barcode' }
+            - { label: 'menu.reporting.listinventory', route: 'print_product_barcode', icon: 'barcode'}
             - { label: 'menu.about' }
             - { label: 'menu.about.docs', url: 'https://github.com/laurentmeuwly/rossier_cbsa/tree/master/docs', icon: 'book', target: '_blank' }
             - { label: 'menu.about.impressum', route: 'impressum', icon: 'info' }
