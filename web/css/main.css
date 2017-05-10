@@ -9,6 +9,29 @@ body {
 	width: 100%;
 }
 
+.has-error .error-block {
+    color: #d42124;
+    font-weight: bold;
+    padding-top: 5px;
+    font-size: 13px;
+}
+
+.has-error .error-block .label-danger {
+    margin-right: 3px;
+    font-size: 11px;
+}
+.label-danger {
+    background: #d42124 none repeat scroll 0 0;
+}
+.label {
+    color: #ffffff;
+    display: inline-block;
+    font-size: 11px;
+    padding: 4px;
+    text-transform: uppercase;
+}
+
+
 #page-wrapper {
   padding: 0 15px;
   min-height: 568px;

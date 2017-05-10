@@ -117,13 +117,14 @@ class DeliveryController extends Controller
      * Finds and displays a delivery entity.
      *
      */
-    public function showAction(Delivery $delivery, Product $product=NULL, $ean=NULL, $setQty=false)
+    public function showAction(Delivery $delivery, Product $product=NULL, $ean=NULL, $setQty=false, $error=NULL)
     {
         $deleteForm = $this->createDeleteForm($delivery);
 
         return $this->render('InventoryBundle:Delivery:show.html.twig', array(
             'delivery' => $delivery,
         	'product' => $product,
+        	'error' => $error,
         	'ean' => $ean,
         	'setQty' => $setQty,
             'delete_form' => $deleteForm->createView(),

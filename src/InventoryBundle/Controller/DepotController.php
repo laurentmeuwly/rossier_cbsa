@@ -104,9 +104,10 @@ class DepotController extends Controller
 							} else {
 								// product not found
 								$error = 'Article invalide! Réessayez.';
-								return $this->redirectToRoute('delivery_show', array('id' => $data['delivery'],
-										'error' => $error
-								));
+								return $this->forward('InventoryBundle:Delivery:show',
+										array('id' => $data['delivery'],
+												'error' => $error,
+										));
 						}
 					}
 					
@@ -135,10 +136,8 @@ class DepotController extends Controller
 							));
 					}
 					
-					
-					return $this->redirectToRoute('delivery_show', array('id' => $data['delivery'],
-							'error' => $error
-					));
+					// at the end, we display the delivery again
+					return $this->forward('InventoryBundle:Delivery:show', array('id' => $data['delivery']));
 					
 			}
 		}
