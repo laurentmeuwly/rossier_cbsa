@@ -200,22 +200,22 @@ class DeliveryController extends Controller
     	if($dp) {
     		if($action=='plus') $dp->setQuantity($dp->getQuantity()+$qty);
     		if($action=='minus') {
-    			if($dp->getQuantity() > 1)
-    				$dp->setQuantity($dp->getQuantity()-$qty);
-    			else {
+    			if( ($dp->getQuantity() - $qty) <= 0) {
     				$em->remove($dp);
+    			} else {
+    				$dp->setQuantity($dp->getQuantity()-$qty);
     			}
     		}
     	} else {
     		if($action=='plus') {
-	    	$dp = new DeliveryProduct();
-	    	$dp->setDelivery($delivery);
-	    	$dp->setProduct($product);
-	    	$dp->setUnit($product->getUnit());
-	    	$dp->setDeliveryCostPrice($product->getCostPrice());
-	    	$dp->setQuantity(1);
+		    	$dp = new DeliveryProduct();
+		    	$dp->setDelivery($delivery);
+		    	$dp->setProduct($product);
+		    	$dp->setUnit($product->getUnit());
+		    	$dp->setDeliveryCostPrice($product->getCostPrice());
+		    	$dp->setQuantity($qty);
     		
-	    	$em->persist($dp);
+	    		$em->persist($dp);
     		}
     	}
     	
