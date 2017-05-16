@@ -7,6 +7,8 @@ easy_admin:
                 title: 'Liste des chantiers'
                 sort: ['name', 'ASC']
                 actions:
+                    - { name: 'report01', label: '', icon: 'bar-chart' }
+                    - { name: 'report02', label: '', icon: 'line-chart' }
                     - { name: 'show', label: '', icon: 'search' }
                     - { name: 'edit', label: '', icon: 'edit' }
                     - { name: 'delete', label: '', icon: 'trash' }
@@ -18,7 +20,7 @@ easy_admin:
                     - { property: 'city', label: 'Localité' }
                     - { property: 'status', label: 'Etat' }
                     - { property: 'deliveries', label: 'Nb livraisons'}
-                    - { property: 'toBePrinted', label: 'Affichage dans liste dépôt' }
+                    - { property: 'toBePrinted', label: 'Aff. dans liste' }
             show:
                 fields:
                     - { property: 'name', label: 'Chantier' }

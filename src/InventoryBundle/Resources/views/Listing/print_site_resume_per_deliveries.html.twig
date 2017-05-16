@@ -24,8 +24,8 @@
 	<td>{{ site.name }}</td>
 	<td>{{ site.postcode }}</td>
 	<td>{{ site.address }}</td>
-	<td>{{ calcul revient }}</td>
-	<td>{{ calcul revente }}</td>
+	<td>{{ site.id }}</td>
+	<td>{{ site.id }}</td>
 </tr>
 </tbody>
 
@@ -35,10 +35,13 @@
 
 <div id="detail">
 <h3>Livraisons par dates</h3>
+
+{% for delivery in site.deliveries %}
+{%  set sum_delivery = 0 %}
 <table>
 <thead>
 <tr>
-	<th colspan="5">Date de livraison: {{ delivery.date }}</th>
+	<th colspan="5">Date de livraison: {{ delivery.deliveryDate|date('d-m-Y H:i') }}</th>
 </tr>
 <tr>
 	<th>Article</th>
@@ -50,20 +53,25 @@
 </thead>
 
 <tbody>
+{% for dp in delivery.deliveredProducts %}
+{% set row_total = dp.quantity * dp.deliveryCostPrice %}
 <tr>
-	<td>{{ product.name }}</td>
-	<td>{{ delivery.quantity }}</td>
-	<td>{{ product.unity }}</td>
-	<td>{{ product.costprice }}</td>
-	<td>{{ calcul ligne costprice }}</td>
+	<td>{{ dp.product.name }}</td>
+	<td>{{ dp.quantity }}</td>
+	<td>{{ dp.unit }}</td>
+	<td>{{ dp.deliveryCostPrice }}</td>
+	<td>{{ row_total }}</td>
 </tr>
+{%  set sum_delivery = sum_delivery + row_total %}
+{%  endfor %}
 <tr>
-	<th colspan="5">Somme prix de revient de la livraison: {{ calcul.revient }}</th>
+	<th colspan="5">Somme prix de revient de la livraison: {{ sum_delivery }}</th>
 </tr>
 </tbody>
 
 </table>
-{# fin de la table #}
+{%  endfor %}
+
 </div>
 
 {% endblock %}

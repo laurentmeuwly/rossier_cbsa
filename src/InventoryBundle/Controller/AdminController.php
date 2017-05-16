@@ -51,6 +51,24 @@ class AdminController extends EasyAdminController
      * 
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
+    public function report01Action()
+    {
+    	return $this->forward('InventoryBundle:Listing:printSiteResume', array('id' => $this->request->query->get('id'), 'report' => 'perDeliveries'));
+    }
+    
+    /**
+     *
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
+    public function report02Action()
+    {
+    	return $this->forward('InventoryBundle:Listing:printSiteResume', array('id' => $this->request->query->get('id'), 'report' => 'perProducts'));
+    }
+    
+    /**
+     * 
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
     public function restockAction()
     {
     	$form = $this->createFormBuilder()->add('quantity')->getForm();

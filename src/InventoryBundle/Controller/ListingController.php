@@ -129,11 +129,34 @@ class ListingController extends Controller
 
     }
 
-    public function printSiteResumeAction()
+    public function printSiteResumeAction($id=NULL, $report='perDeliveries')
     {
-        return $this->render('InventoryBundle:Listing:print_site_resume.html.twig', array(
-            // ...
-        ));
+    	// $report = perDeliveries or perProducts. Default = perDeliveries
+    	$filePath = '/var/www/test.pdf';
+    	
+    	$em = $this->getDoctrine()->getManager();
+    	$site = $em->getRepository('InventoryBundle:Site')->findOneBy(
+    			array('id' => $id)
+    			);
+    	
+    	if($report=='perProducts') {
+    		$html = $this->renderView('InventoryBundle:Listing:print_site_resume_per_products.html.twig', array(
+    				'site' => $site
+    		));
+    	} else {
+	    	$html = $this->renderView('InventoryBundle:Listing:print_site_resume_per_deliveries.html.twig', array(
+	    			'site' => $site
+	    	));
+    	}
+        
+    	return new Response(
+    			$this->get('knp_snappy.pdf')->getOutputFromHtml($html),
+    			200,
+    			array(
+    					'Content-Type'          => 'application/pdf',
+    					'Content-Disposition'   => 'attachment; filename="file.pdf"'
+    			)
+    			);
     }
     
     
