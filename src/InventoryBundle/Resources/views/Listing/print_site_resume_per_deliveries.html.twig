@@ -1,4 +1,24 @@
-{% extends "InventoryBundle::layout.html.twig" %}
+{% extends "InventoryBundle::layout-pdf.html.twig" %}
+
+{% block stylesheets %}
+<style>
+#header th {
+    background-color: #999999;
+    padding: 5px 3px;
+    white-space: nowrap;
+}
+
+table {
+	border: 1px solid #ccc;
+	width: 850px;
+}
+
+#detail table {
+	border-bottom: 2px double #ccc;
+}
+
+</style>
+{% endblock %}
 
 {% block title %}InventoryBundle:Listing:printSiteResume{% endblock %}
 
@@ -11,7 +31,7 @@
 <table>
 <thead>
 <tr>
-	<th>Nom chantier</th>
+	<th>Chantier</th>
 	<th>NPA</th>
 	<th>Adresse</th>
 	<th>Prix de revient</th>
@@ -24,8 +44,8 @@
 	<td>{{ site.name }}</td>
 	<td>{{ site.postcode }}</td>
 	<td>{{ site.address }}</td>
-	<td>{{ site.id }}</td>
-	<td>{{ site.id }}</td>
+	<td align="right">{{ sumCost|number_format(2, '.', '\'') }}</td>
+	<td align="right">{{ sumSale|number_format(2, '.', '\'') }}</td>
 </tr>
 </tbody>
 
@@ -41,31 +61,32 @@
 <table>
 <thead>
 <tr>
-	<th colspan="5">Date de livraison: {{ delivery.deliveryDate|date('d-m-Y H:i') }}</th>
+	<td colspan="5" align="left"><strong>Date de livraison:</strong> {{ delivery.deliveryDate|date('d-m-Y H:i') }}</td>
 </tr>
-<tr>
-	<th>Article</th>
-	<th>Qté</th>
-	<th>Unité</th>
-	<th>Prix achat unit.</th>
-	<th>Total PA ligne</th>
+<tr style="page-break-inside: avoid;">
+	<th width="50%">Article</th>
+	<th width="10%">Qté</th>
+	<th width="10%">Unité</th>
+	<th width="15%" align="right">Prix achat unit.</th>
+	<th width="15%" align="right">Total PA ligne</th>
 </tr>
 </thead>
 
 <tbody>
 {% for dp in delivery.deliveredProducts %}
 {% set row_total = dp.quantity * dp.deliveryCostPrice %}
-<tr>
+<tr style="page-break-inside: avoid;">
 	<td>{{ dp.product.name }}</td>
 	<td>{{ dp.quantity }}</td>
 	<td>{{ dp.unit }}</td>
-	<td>{{ dp.deliveryCostPrice }}</td>
-	<td>{{ row_total }}</td>
+	<td align="right">{{ dp.deliveryCostPrice|number_format(2, '.', '\'') }}</td>
+	<td align="right">{{ row_total|number_format(2, '.', '\'') }}</td>
 </tr>
 {%  set sum_delivery = sum_delivery + row_total %}
 {%  endfor %}
 <tr>
-	<th colspan="5">Somme prix de revient de la livraison: {{ sum_delivery }}</th>
+	<td colspan="4" align="right"><strong>Somme prix de revient de la livraison:</strong></td>
+	<td align="right"><strong>{{ sum_delivery|number_format(2, '.', '\'') }}</strong></td>
 </tr>
 </tbody>
 

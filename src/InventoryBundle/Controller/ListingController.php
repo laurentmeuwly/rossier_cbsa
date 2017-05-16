@@ -135,17 +135,51 @@ class ListingController extends Controller
     	$filePath = '/var/www/test.pdf';
     	
     	$em = $this->getDoctrine()->getManager();
+    	
+    	$sumCost = 0;
+    	$sumSale = 0;
+    	
     	$site = $em->getRepository('InventoryBundle:Site')->findOneBy(
     			array('id' => $id)
     			);
     	
+    	
+    	
     	if($report=='perProducts') {
+    		$deliveries = $em->getRepository('InventoryBundle:Delivery')->findBySite(
+    				array('id' => $id)
+    				);
+    		$tProd = array();
+    		foreach($deliveries as $delivery) {
+    			foreach($delivery->getDeliveredProducts() as $product) {
+    				$sumCost += $product->getQuantity() * $product->getDeliveryCostPrice();
+    				$sumSale += $product->getQuantity() * $product->getProduct()->getSalePrice();
+    				
+    				if(!array_key_exists($product->getProduct()->getId(), $tProd)) {
+    					$tProd[$product->getProduct()->getId()]['product'] = $product->getProduct();
+    					$tProd[$product->getProduct()->getId()]['quantity'] = $product->getQuantity();
+    					$tProd[$product->getProduct()->getId()]['totalCostPrice'] = ($product->getDeliveryCostPrice() * $product->getQuantity());
+    				} else {
+	    				$tProd[$product->getProduct()->getId()]['quantity'] += $product->getQuantity();
+	    				$tProd[$product->getProduct()->getId()]['totalCostPrice'] += ($product->getDeliveryCostPrice() * $product->getQuantity());
+    				}
+    			}
+    		}
     		$html = $this->renderView('InventoryBundle:Listing:print_site_resume_per_products.html.twig', array(
-    				'site' => $site
+    				'site' => $site, 'products' => $tProd, 'sumCost' => $sumCost, 'sumSale' => $sumSale
     		));
     	} else {
+    		if($site) {
+    			foreach($site->getDeliveries() as $delivery) {
+    				foreach($delivery->getDeliveredProducts() as $product) {
+    					$sumCost += $product->getQuantity() * $product->getDeliveryCostPrice();
+    					$sumSale += $product->getQuantity() * $product->getProduct()->getSalePrice();
+    				}
+    			}
+    		}
+    		
 	    	$html = $this->renderView('InventoryBundle:Listing:print_site_resume_per_deliveries.html.twig', array(
-	    			'site' => $site
+	    			'site' => $site, 'sumCost' => $sumCost, 'sumSale' => $sumSale
 	    	));
     	}
         

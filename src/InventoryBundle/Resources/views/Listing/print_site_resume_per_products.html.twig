@@ -1,5 +1,25 @@
 {% extends "InventoryBundle::layout.html.twig" %}
 
+{% block stylesheets %}
+<style>
+#header th {
+    background-color: #999999;
+    padding: 5px 3px;
+    white-space: nowrap;
+}
+
+table {
+	border: 1px solid #ccc;
+	width: 850px;
+}
+
+#detail table {
+	border-bottom: 2px double #ccc;
+}
+
+</style>
+{% endblock %}
+
 {% block title %}InventoryBundle:Listing:printSiteResume{% endblock %}
 
 {% block body %}
@@ -24,8 +44,8 @@
 	<td>{{ site.name }}</td>
 	<td>{{ site.postcode }}</td>
 	<td>{{ site.address }}</td>
-	<td>{{ site.id }}</td>
-	<td>{{ site.id }}</td>
+	<td align="right">{{ sumCost|number_format(2, '.', '\'') }}</td>
+	<td align="right">{{ sumSale|number_format(2, '.', '\'') }}</td>
 </tr>
 </tbody>
 
@@ -35,25 +55,28 @@
 
 <div id="detail">
 <h3>Articles livrés</h3>
-<table>
+<table style="border-bottom: 2px double #ccc;">
 <thead>
 <tr>
-	<th>Article</th>
-	<th>Qté</th>
-	<th>Unité</th>
-	<th>Prix achat unit.</th>
-	<th>Total PA ligne</th>
+	<th width="50%">Article</th>
+	<th width="10%">Qté</th>
+	<th width="10%">Unité</th>
+	<th width="15%" align="right">Prix achat unit.</th>
+	<th width="15%" align="right">Total PA ligne</th>
 </tr>
 </thead>
 
 <tbody>
+{% for product in products %}
+{% set middleCost = product.totalCostPrice / product.quantity %}
 <tr>
+	<td>{{ product.product.name }}</td>
+	<td align="right">{{ product.quantity }}</td>
 	<td></td>
-	<td></td>
-	<td></td>
-	<td></td>
-	<td></td>
+	<td align="right">{{ middleCost|number_format(2, '.', '\'') }}</td>
+	<td align="right">{{ product.totalCostPrice|number_format(2, '.', '\'') }}</td>
 </tr>
+{%  endfor %}
 </tbody>
 
 </table>
