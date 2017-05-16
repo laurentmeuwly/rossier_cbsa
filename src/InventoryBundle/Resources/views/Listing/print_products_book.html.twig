@@ -20,20 +20,20 @@
 <tbody>
 {% for product in products %}
 <tr style="page-break-inside: avoid;">
-	<td style="align: center; background-color: green; padding: 10px">
+	<td style="text-align: center; background-color: green; padding: 10px">
 		<img src="{{ absolute_url(asset('/uploads/images/products/barcode/' ~ product.getInBarcodeImg )) }}"  width="162px" height="90px"/>
     </td>
     <td>{% if product.image is not null and product.image != '' %}
-                <img src="{{ absolute_url(asset('/uploads/images/products/' ~ product.image )) }}"  width="120px" height="120px"/>
-                 
-        {%  else %}
-        <img src="{{ absolute_url(asset('/uploads/images/categories/' ~ product.category.image )) }}"  width="120px" height="120px"/>
-                
+        	<img src="{{ absolute_url(asset('/uploads/images/products/' ~ product.image )) }}"  width="120px" height="120px"/>             
+        {%  elseif product.category.image is not null and product.category.image != '' %}
+       		<img src="{{ absolute_url(asset('/uploads/images/categories/' ~ product.category.image )) }}"  width="120px" height="120px"/>
+        {% else %}
+        	&nbsp;
         {% endif %}
     </td>
 	<td>{{ product.name }}</td>
 	<td>{{ product.unit }}</td>
-	<td style="align: center; background-color: red; padding: 10px">
+	<td style="text-align: center; background-color: red; padding: 10px">
 		<img src="{{ absolute_url(asset('/uploads/images/products/barcode/' ~ product.getOutBarcodeImg )) }}"  width="162px" height="90px"/>
 	</td>
 </tr>
