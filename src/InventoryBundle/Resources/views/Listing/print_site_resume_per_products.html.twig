@@ -72,7 +72,7 @@ table {
 <tr>
 	<td>{{ product.product.name }}</td>
 	<td align="right">{{ product.quantity }}</td>
-	<td></td>
+	<td>{{ product.product.unit.name }}</td>
 	<td align="right">{{ middleCost|number_format(2, '.', '\'') }}</td>
 	<td align="right">{{ product.totalCostPrice|number_format(2, '.', '\'') }}</td>
 </tr>
