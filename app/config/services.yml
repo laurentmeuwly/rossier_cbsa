@@ -16,6 +16,6 @@ services:
         tags:
             - { name: kernel.event_subscriber }
     app.barcode:
-        class: InventoryBundle\Utils\Barcode
+        class: InventoryBundle\Utils\ExtendedBarcode
 
     

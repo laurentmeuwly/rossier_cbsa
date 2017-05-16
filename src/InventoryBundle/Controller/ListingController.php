@@ -18,6 +18,8 @@ class ListingController extends Controller
 		$em = $this->getDoctrine()->getManager();
 		$products = $em->getRepository('InventoryBundle:Product')->findAll();
 		
+		$bc = $this->container->get('app.barcode');
+		
 		foreach($products as $product) {
 			if(strlen($product->getInBarcode())==13) {
 				$this->generateBarcodeImage($product->getInBarcode());
@@ -25,6 +27,13 @@ class ListingController extends Controller
 			if(strlen($product->getOutBarcode())==13) {
 				$this->generateBarcodeImage($product->getOutBarcode());
 			}
+		}
+		
+		$sites = $em->getRepository('InventoryBundle:Site')->findAll();
+		foreach($sites as $site) {
+			$code = str_pad($site->getId(), 12, "0", STR_PAD_RIGHT);
+			$code .= $bc->eanCheckDigit($code);
+			$this->generateBarcodeImage($code, 'site_' . $site->getId());
 		}
 		return $this->render('::impressum.html.twig');
 	}
@@ -138,16 +147,20 @@ class ListingController extends Controller
     	return $fs->exists($path . $filename);
     }
     
-    public function generateBarcodeImage($code)
+    public function generateBarcodeImage($code, $filename=NULL)
     {
     	$barcode = $this->get('hackzilla_barcode');
     	$barcode->setMode(Barcode::MODE_PNG);
     
-    	$filename = $code.'.png';
+    	if($filename==NULL) {
+    		$filename = $code.'.png';
+    	} else {
+    		$filename .= '.png';
+    	}
     
     
     	$fs = new FileSystem();
-    	$path = $this->container->getParameter('web_dir') . $this->container->getParameter('app.path.product_images') . '/barcode/';
+    	$path = $this->container->getParameter('web_dir') . $this->container->getParameter('app.path.barcodes') . '/';
     
     	if(!$fs->exists($path)) {
     		try {

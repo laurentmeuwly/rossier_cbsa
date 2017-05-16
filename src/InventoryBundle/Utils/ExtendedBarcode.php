@@ -6,7 +6,7 @@ use Hackzilla\BarcodeBundle\Utility\Barcode;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 
-class Barcode
+class ExtendedBarcode extends Barcode
 {
 	public function existsBarcodeImage($code)
 	{
@@ -37,6 +37,18 @@ class Barcode
 		}
 	
 		return $barcode->save($code, $path . $filename);
+	}
+	
+	public function eanCheckDigit($code)
+	{
+		$code = str_pad($code, 12, "0", STR_PAD_LEFT);
+		$sum = 0;
+	
+		for($i=(strlen($code)-1); $i>=0; $i--) {
+			$sum += (($i%2)*2 + 1) * $code[$i];
+		}
+	
+		return (10 - ($sum % 10)) % 10;
 	}
 	
 }
