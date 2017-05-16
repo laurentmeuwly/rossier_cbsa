@@ -19,7 +19,7 @@
 {% for site in sites %}
 <tr style="page-break-inside: avoid;">
 	<td style="align: center; padding: 10px">
-		{{ site.id }}
+		<img src="{{ absolute_url(asset('/uploads/images/barcodes/site_' ~ site.id ~ '.png' )) }}"  width="162px" height="90px"/>
     </td>
 	<td>{{ site.name }}</td>
 	<td>{{ site.address }}, {{ site.postcode }} {{ site.city }}</td>
