@@ -221,7 +221,7 @@ class ListingController extends Controller
     
     	if(!$fs->exists($path)) {
     		try {
-    			$fs->mkdir($path, 0700);
+    			$fs->mkdir($path, 0770);
     		} catch (IOExceptionInterface $e) {
     			echo "An error occurred while creating your directory at ".$e->getPath();
     		}

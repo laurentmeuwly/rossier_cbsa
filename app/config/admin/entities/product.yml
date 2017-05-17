@@ -33,9 +33,9 @@ easy_admin:
                     - { property: 'unit', label: 'Unité', css_class: 'small'}
                     - { property: 'stock', label: 'Stock courant' }
                     - { property: 'inBarcode', type: 'string', label: 'Code barre pour entrée en stock' }
-                    - { property: 'inBarcodeImg', label: ' ', type: 'image', base_path: '%app.path.product_images%/barcode/'}
+                    - { property: 'inBarcodeImg', label: ' ', type: 'image', base_path: '%app.path.barcodes%/'}
                     - { property: 'outBarcode', type: 'string', label: 'Code barre pour sortie de stock' }
-                    - { property: 'outBarcodeImg', label: ' ', type: 'image', base_path: '%app.path.product_images%/barcode/'}
+                    - { property: 'outBarcodeImg', label: ' ', type: 'image', base_path: '%app.path.barcodes%/'}
                     - { property: 'image', type: 'image', base_path: '%app.path.product_images%' }
                     - { property: 'category', label: 'Catégorie' }
                     - { property: 'toBePrinted', label: 'Doit être imprimé' }
