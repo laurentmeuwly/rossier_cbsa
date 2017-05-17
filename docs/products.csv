@@ -305,8 +305,8 @@ id,name,active,comment,cost_price,sale_price,in_barcode,out_barecode,image,categ
 ,Prestocem  sac de 25 kg,true,,11.7,,,,prestocem.jpg,Liants / Mortiers,true,sac,,false
 ,"Pronouvo ép. 5 mm, larg. 120mm",true,,5.27,,,,,Pronouvo,true,m,,false
 ,"Pronouvo ép. 5 mm, larg. 150mm",true,,6.63,,,,,Pronouvo,true,m,,false
-,PV pour 4 battues AK-80,true,,3.51,,,,,SW,true,m2,,false
-,PV pour 4 battues AK-80,true,,3.96,,,,,HS,true,m2,,false
+,"PV pour 4 battues AK-80, SW",true,,3.51,,,,,SW,true,m2,,false
+,"PV pour 4 battues AK-80, HS",true,,3.96,,,,,HS,true,m2,,false
 ,Raccord PVC/ciment Ø 150/125mm,true,,22.5,,,,,Raccord PVC/ciment,true,pce,,false
 ,Raccord PVC/ciment Ø 150/150mm,true,,32,,,,,Raccord PVC/ciment,true,pce,,false
 ,Raccord PVC/ciment Ø 200/150mm,true,,50.5,,,,,Raccord PVC/ciment,true,pce,,false
