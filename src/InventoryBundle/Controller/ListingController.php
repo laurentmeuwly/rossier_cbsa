@@ -50,30 +50,14 @@ class ListingController extends Controller
     		array('name' => 'ASC')
     			);
     	
-    	/*foreach($products as $product) {
-    		if($product->getImage()=='') {
-    			$product->setImage($product->getCategory()->getImage());
-    		}
-    	}*/
-    	
-    	/* $html = $this->renderView ...*/
     	$html = $this->renderView('InventoryBundle:Listing:print_products_book.html.twig', array(
     			'products' => $products
     	));
-    	/*<td>{% if product.image is not null and product.image != '' %}
-                <img src="{{ absolute_url(asset('/uploads/images/products/' ~ product.image )) }}"  width="100px" height="50px"/>
-                 
-        {%  endif %}
-    </td>*/
+    	
     	// remove old file
     	if (file_exists($filePath)) {
     		unlink($filePath);
     	}
-
-    	$url = 'https://wiki.monitoring-fr.org/securite/architecture-oss/start';
-    	
-    	//$this->get('knp_snappy.pdf');
-    	//$this->get('knp_snappy.pdf')->generateFromHtml($html, $filePath);
     	
     	return new Response(
     			$this->get('knp_snappy.pdf')->getOutputFromHtml($html),
@@ -83,20 +67,6 @@ class ListingController extends Controller
     					'Content-Disposition'   => 'attachment; filename="file.pdf"'
     			)
     			);
-    	
-    	/*return new Response(
-    			$this->get('knp_snappy.pdf')->getOutputFromHtml($html),
-    			200,
-    			array(
-    					'Content-Type'          => 'application/pdf',
-    					'Content-Disposition'   => 'attachment; filename="file.pdf"'
-    			)
-    			);*/
-    	
-    	// set flash bag message
-    	//$this->get('session')->getFlashBag()->add('notice', 'PDF généré');
-    	
-    	//return $this->redirect($this->generateUrl('inventory_bundle_admin_index'));
     }
     
     public function printSitesBookAction()
