@@ -52,16 +52,16 @@ id,name,active,comment,cost_price,sale_price,in_barcode,out_barecode,image,categ
 ,Brique ciment pleine DB 12.5,true,,1.33,,,,,Brique ciment,true,pce,,false
 ,Brique ciment pleine DB 15,true,,1.53,,,,,Brique ciment,true,pce,,false
 ,Brique ciment pleine DB 17.5,true,,1.86,,,,,Brique ciment,true,pce,,false
-,Brique ciment RAPID 10,true,,1.67,,,,,Brique ciment,true,pce,,false
-,Brique ciment RAPID 10,true,,16.74,,,,,Brique ciment,true,pal,,false
-,Brique ciment RAPID 12.5,true,,1.7,,,,,Brique ciment,true,pce,,false
-,Brique ciment RAPID 12.5,true,,17.02,,,,,Brique ciment,true,pal,,false
-,Brique ciment RAPID 15,true,,1.79,,,,,Brique ciment,true,pce,,false
-,Brique ciment RAPID 15,true,,17.92,,,,,Brique ciment,true,pal,,false
-,Brique ciment RAPID 17.5,true,,1.97,,,,,Brique ciment,true,pce,,false
-,Brique ciment RAPID 17.5,true,,19.66,,,,,Brique ciment,true,pal,,false
-,Brique ciment RAPID 20,true,,2.83,,,,,Brique ciment,true,pce,,false
-,Brique ciment RAPID 20,true,,28.34,,,,,Brique ciment,true,pal,,false
+,"Brique ciment RAPID 10, pce",true,,1.67,,,,,Brique ciment,true,pce,,false
+,"Brique ciment RAPID 10, pal",true,,16.74,,,,,Brique ciment,true,pal,,false
+,"Brique ciment RAPID 12.5, pce",true,,1.7,,,,,Brique ciment,true,pce,,false
+,"Brique ciment RAPID 12.5, pal",true,,17.02,,,,,Brique ciment,true,pal,,false
+,"Brique ciment RAPID 15, pce",true,,1.79,,,,,Brique ciment,true,pce,,false
+,"Brique ciment RAPID 15, pal",true,,17.92,,,,,Brique ciment,true,pal,,false
+,"Brique ciment RAPID 17.5, pce",true,,1.97,,,,,Brique ciment,true,pce,,false
+,"Brique ciment RAPID 17.5, pal",true,,19.66,,,,,Brique ciment,true,pal,,false
+,"Brique ciment RAPID 20, pce",true,,2.83,,,,,Brique ciment,true,pce,,false
+,"Brique ciment RAPID 20, pal",true,,28.34,,,,,Brique ciment,true,pal,,false
 ,Brique ciment RAPID 7.5,true,,1.58,,,,,Brique ciment,true,pce,,false
 ,"Brique coffra ép. 15 cm, 50/25 cm",true,,39.75,,,,,Briques et linteaux,true,pal,,false
 ,Brique terre cuite ME 10,true,,0.95,,,,,Brique terre cuite,true,pce,,false
