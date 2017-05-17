@@ -170,7 +170,6 @@ id,name,active,comment,cost_price,sale_price,in_barcode,out_barecode,image,categ
 ,Ferrofix 30mm (paquet de 100m),true,,0.31,,,,ferrofix-30mm.jpg,Divers,true,pqt,,false
 ,FI RIPA 130N,true,,9.9,,,,,FI RIPA,true,m,,false
 ,FI RIPA 140M,true,,18.11,,,,,FI RIPA,true,m,,false
-,FI RIPA 140M,true,,18.11,,,,,FI RIPA,true,m,,false
 ,FI RIPA 140V,true,,22.53,,,,,FI RIPA,true,m,,false
 ,FI RIPA 180N,true,,9.9,,,,,FI RIPA,true,m,,false
 ,FI RIPA 240S,true,,33.66,,,,,FI RIPA,true,m,,false
