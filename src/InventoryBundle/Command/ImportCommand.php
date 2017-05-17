@@ -168,6 +168,7 @@ class ImportCommand extends ContainerAwareCommand
     		$product->setComment($row['comment']);
     		$product->setCostPrice($row['cost_price']);
     		$product->setToBePrinted($row['to_display']);
+    		$product->setIsManualAllowed($row['manual_allowed']);
     	
     		if($row['unit']!='') {
     			$unit = $em->getRepository('InventoryBundle:Unit')
