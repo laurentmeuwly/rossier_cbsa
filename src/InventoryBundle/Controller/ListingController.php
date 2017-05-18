@@ -142,8 +142,13 @@ class ListingController extends Controller
     		if($site) {
     			foreach($site->getDeliveries() as $delivery) {
     				foreach($delivery->getDeliveredProducts() as $product) {
-    					$sumCost += $product->getQuantity() * $product->getDeliveryCostPrice();
-    					$sumSale += $product->getQuantity() * $product->getProduct()->getSalePrice();
+    					if($delivery->getDocType()=="RETOUR") {
+	    					$sumCost -= $product->getQuantity() * $product->getDeliveryCostPrice();
+	    					$sumSale -= $product->getQuantity() * $product->getProduct()->getSalePrice();
+    					} else {
+    						$sumCost += $product->getQuantity() * $product->getDeliveryCostPrice();
+    						$sumSale += $product->getQuantity() * $product->getProduct()->getSalePrice();
+    					}
     				}
     			}
     		}

@@ -89,7 +89,12 @@ table {
 {%  endfor %}
 <tr>
 	<td colspan="4" align="right"><strong>Somme prix de revient de la livraison:</strong></td>
-	<td align="right"><strong>{{ sum_delivery|number_format(2, '.', '\'') }}</strong></td>
+	<td align="right"><strong>
+	     {% if delivery.docType == 'RETOUR' %}
+	     {% set sum_delivery *= -1 %}
+	     {% endif %}
+	    {{ sum_delivery|number_format(2, '.', '\'') }}
+	</strong></td>
 </tr>
 </tbody>
 
