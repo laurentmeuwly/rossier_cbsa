@@ -71,7 +71,7 @@ class Delivery
     /** {@inheritdoc} */
     public function __toString()
     {
-    	return 'Livraison du '. $this->getDeliveryDate()->format('d.m.Y');
+    	return 'Livraison du '. $this->getDeliveryDate()->format('d.m.Y H:i');
     }
     
     
