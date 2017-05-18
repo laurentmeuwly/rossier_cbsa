@@ -61,7 +61,8 @@ table {
 <table>
 <thead>
 <tr>
-	<td colspan="5" align="left"><strong>Date de livraison:</strong> {{ delivery.deliveryDate|date('d-m-Y H:i') }}</td>
+	<td colspan="5" align="left"><strong>Type:</strong> {{ delivery.docType }}</td>
+	<td colspan="5" align="left"><strong>Date:</strong> {{ delivery.deliveryDate|date('d-m-Y H:i') }}</td>
 </tr>
 <tr style="page-break-inside: avoid;">
 	<th width="50%">Article</th>
