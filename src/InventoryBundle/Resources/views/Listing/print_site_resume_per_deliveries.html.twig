@@ -61,16 +61,17 @@ table {
 <table>
 <thead>
 <tr>
-	<td colspan="3" align="left"><strong>Date:</strong> {{ delivery.deliveryDate|date('d-m-Y H:i') }}</td>
-	<td colspan="2" align="left"><strong>Type:</strong> {{ delivery.docType }}</td>
-	
+	<td colspan="5" align="left"><strong>Type:</strong> {{ delivery.docType }}</td>
+</tr>
+<tr>
+	<td colspan="5" align="left"><strong>Date:</strong> {{ delivery.deliveryDate|date('d-m-Y H:i') }}</td>
 </tr>
 <tr style="page-break-inside: avoid;">
-	<th width="50%">Article</th>
-	<th width="10%">Qté</th>
-	<th width="10%">Unité</th>
-	<th width="15%" align="right">Prix achat unit.</th>
-	<th width="15%" align="right">Total PA ligne</th>
+	<th style="text-align:left;" width="50%">Article</th>
+	<th style="text-align:right;"width="10%">Qté</th>
+	<th style="text-align:left;" width="10%">Unité</th>
+	<th style="text-align:right;" width="15%">PA unit.</th>
+	<th style="text-align:right;" width="15%">Total PA</th>
 </tr>
 </thead>
 
@@ -78,11 +79,11 @@ table {
 {% for dp in delivery.deliveredProducts %}
 {% set row_total = dp.quantity * dp.deliveryCostPrice %}
 <tr style="page-break-inside: avoid;">
-	<td>{{ dp.product.name }}</td>
-	<td>{{ dp.quantity }}</td>
-	<td>{{ dp.unit }}</td>
-	<td align="right">{{ dp.deliveryCostPrice|number_format(2, '.', '\'') }}</td>
-	<td align="right">{{ row_total|number_format(2, '.', '\'') }}</td>
+	<td style="text-align:left;">{{ dp.product.name }}</td>
+	<td style="text-align:right;">{{ dp.quantity }}</td>
+	<td style="text-align:left;">{{ dp.unit }}</td>
+	<td style="text-align:right;">{{ dp.deliveryCostPrice|number_format(2, '.', '\'') }}</td>
+	<td style="text-align:right;">{{ row_total|number_format(2, '.', '\'') }}</td>
 </tr>
 {%  set sum_delivery = sum_delivery + row_total %}
 {%  endfor %}
