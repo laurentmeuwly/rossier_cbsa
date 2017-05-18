@@ -58,11 +58,11 @@ table {
 <table style="border-bottom: 2px double #ccc;">
 <thead>
 <tr>
-	<th width="50%">Article</th>
-	<th width="10%">Qté</th>
-	<th width="10%">Unité</th>
-	<th width="15%" align="right">Prix achat unit.</th>
-	<th width="15%" align="right">Total PA ligne</th>
+	<th style="text-align:left;" width="50%">Article</th>
+	<th style="text-align:right;" width="10%">Qté</th>
+	<th style="text-align:left;" width="10%">Unité</th>
+	<th style="text-align:right;" width="15%">PA unit.</th>
+	<th style="text-align:right;" width="15%">Total PA</th>
 </tr>
 </thead>
 
@@ -70,11 +70,11 @@ table {
 {% for product in products %}
 {% set middleCost = product.totalCostPrice / product.quantity %}
 <tr>
-	<td>{{ product.product.name }}</td>
-	<td align="right">{{ product.quantity }}</td>
-	<td>{{ product.product.unit.name }}</td>
-	<td align="right">{{ middleCost|number_format(2, '.', '\'') }}</td>
-	<td align="right">{{ product.totalCostPrice|number_format(2, '.', '\'') }}</td>
+	<td style="text-align:left;">{{ product.product.name }}</td>
+	<td style="text-align:right;">{{ product.quantity }}</td>
+	<td style="text-align:left;">{{ product.product.unit.name }}</td>
+	<td style="text-align:right;">{{ middleCost|number_format(2, '.', '\'') }}</td>
+	<td style="text-align:right;">{{ product.totalCostPrice|number_format(2, '.', '\'') }}</td>
 </tr>
 {%  endfor %}
 </tbody>
