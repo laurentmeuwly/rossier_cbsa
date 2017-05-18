@@ -91,7 +91,7 @@ table {
 	<td colspan="4" align="right"><strong>Somme prix de revient de la livraison:</strong></td>
 	<td align="right"><strong>
 	     {% if delivery.docType == 'RETOUR' %}
-	     {% set sum_delivery *= -1 %}
+	     {% set sum_delivery = -1 * sum_delivery %}
 	     {% endif %}
 	    {{ sum_delivery|number_format(2, '.', '\'') }}
 	</strong></td>
