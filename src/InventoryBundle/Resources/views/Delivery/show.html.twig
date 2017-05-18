@@ -22,7 +22,7 @@
     </div>
  
  	 <div class="row">
- 	 	<div class="col-xs-4 table-responsive">
+ 	 	<div class="col-xs-6 table-responsive">
  	 
  	 <form method="post" name="form" action="{{ path('depot_livraison') }}">
      <input type="hidden" name="delivery" value="{{ delivery.id }}">
@@ -47,9 +47,10 @@
                         {% if product==NULL or ean==NULL or not setQty %}
      						<input id="product" type="text" name="product">
     	                {% else %}
-                            {{ product.name }}, {{ product.unit }} : quantité
+                            <span class="info_product">{{ product.name }}, {{ product.unit }}</span><br/>
+                            <span class="important">Précisez la quantité : <input id="qty" type="text" name="qty" size="10"></span>
                         	<input id="product" type="hidden" name="product" value="{{ ean }}">
-                        	<input id="qty" type="text" name="qty">
+                        	
                         {% endif %}
                        
                     </p>

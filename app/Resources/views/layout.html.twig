@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>{% block title %}Rossier{% endblock %}</title>
+    <title>{% block title %}Charly Berchier SA{% endblock %}</title>
     {% block stylesheets %}
     <link rel="stylesheet" type="text/css" href="{{asset('css/bootstrap.min.css')}}" />
     <link rel="stylesheet" type="text/css" href="{{asset('css/bootstrap-theme.min.css')}}" />
@@ -13,7 +13,7 @@
   </head>
 
   <body>
-  <div class="container">
+  <div id="wrapper">
   	<div id="header">
   	  <h1>Charly Berchier SA <small>Gestion matériel du dépôt</small></h1>
   	</div>
@@ -23,15 +23,14 @@
         {% block body %}
         {% endblock %}
     </div>
-   
-  </div>
-  
-      <!-- Site footer -->
+
+	</div>
+     <!-- Site footer -->
       <footer class="footer">
         <p>&copy; 2017, Rossier / Meuwly</p>
       </footer>
 
-    </div> <!-- /container -->
+    
     
   
   {% block javascripts %}
