@@ -42,6 +42,6 @@ easy_admin:
                     - { property: 'postcode', label: 'NPA' }
                     - { property: 'city', label: 'Localité' }
                     - { type: 'group', label: 'Historique des livraisons', icon: 'money', css_class: 'col-sm-12' }
-                    #- { property: 'deliveries', label: 'Livraisons'}
-                    - { property: 'deliveries', label: 'Livraisons', type: 'collection', type_options: {entry_type: 'InventoryBundle\Form\DeliveryType', allow_delete: false, allow_add: false} }
+                    - { property: 'deliveries', label: 'Livraisons' }
+                    #- { property: 'deliveries', label: 'Livraisons', type: 'collection', type_options: {entry_type: 'InventoryBundle\Form\DeliveryType', allow_delete: false, allow_add: false} }
                     
