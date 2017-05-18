@@ -42,8 +42,9 @@ class DepotController extends Controller
 			if($data['site']=='ANNULER'){
 				return $this->redirectToRoute('depot');
 			}
+			$siteId = ltrim(substr($data['site'], 1, 11), '0');
 			$site = $em->getRepository('InventoryBundle:Site')
-						->getSiteWithStatus($data['site'], array('En cours'));
+						->getSiteWithStatus($siteId, array('En cours'));
 			if($site ) {
 				//return $this->redirectToRoute('delivery_new', array('site' => $site->getId()));
 				return $this->forward('InventoryBundle:Delivery:create', array('site' => $site, 'docType' => $data['docType'] ));
