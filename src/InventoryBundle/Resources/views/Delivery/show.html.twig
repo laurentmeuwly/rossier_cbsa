@@ -13,7 +13,7 @@
                     </tr>
                     <tr>
                         <th>{{ 'Deliverydate'|trans }}</th>
-                        <td>{% if delivery.deliveryDate %}{{ delivery.deliveryDate|date('d-m-Y') }}{% endif %}</td>
+                        <td>{% if delivery.deliveryDate %}{{ delivery.deliveryDate|date('d-m-Y H:i') }}{% endif %}</td>
                     </tr>
                     
                 </tbody>
