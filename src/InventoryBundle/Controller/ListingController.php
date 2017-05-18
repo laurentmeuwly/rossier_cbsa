@@ -121,17 +121,22 @@ class ListingController extends Controller
     				);
     		$tProd = array();
     		foreach($deliveries as $delivery) {
+    			if($delivery->getDocType()=="RETOUR") {
+    				$factor = -1;
+    			} else {
+    				$factor = 1;
+    			}
     			foreach($delivery->getDeliveredProducts() as $product) {
-    				$sumCost += $product->getQuantity() * $product->getDeliveryCostPrice();
-    				$sumSale += $product->getQuantity() * $product->getProduct()->getSalePrice();
+    					$sumCost += $factor * $product->getQuantity() * $product->getDeliveryCostPrice();
+    					$sumSale += $factor * $product->getQuantity() * $product->getProduct()->getSalePrice();
     				
     				if(!array_key_exists($product->getProduct()->getId(), $tProd)) {
     					$tProd[$product->getProduct()->getId()]['product'] = $product->getProduct();
-    					$tProd[$product->getProduct()->getId()]['quantity'] = $product->getQuantity();
-    					$tProd[$product->getProduct()->getId()]['totalCostPrice'] = ($product->getDeliveryCostPrice() * $product->getQuantity());
+    					$tProd[$product->getProduct()->getId()]['quantity'] = $factor * $product->getQuantity();
+    					$tProd[$product->getProduct()->getId()]['totalCostPrice'] = $factor * $product->getDeliveryCostPrice() * $product->getQuantity();
     				} else {
-	    				$tProd[$product->getProduct()->getId()]['quantity'] += $product->getQuantity();
-	    				$tProd[$product->getProduct()->getId()]['totalCostPrice'] += ($product->getDeliveryCostPrice() * $product->getQuantity());
+	    				$tProd[$product->getProduct()->getId()]['quantity'] += $factor * $product->getQuantity();
+	    				$tProd[$product->getProduct()->getId()]['totalCostPrice'] += $factor * $product->getDeliveryCostPrice() * $product->getQuantity();
     				}
     			}
     		}
