@@ -31,7 +31,7 @@ class ListingController extends Controller
 		
 		$sites = $em->getRepository('InventoryBundle:Site')->findAll();
 		foreach($sites as $site) {
-			$code = str_pad($site->getId(), 12, "0", STR_PAD_RIGHT);
+			$code = "1" . str_pad($site->getId(), 11, "0", STR_PAD_LEFT);
 			$code .= $bc->eanCheckDigit($code);
 			$this->generateBarcodeImage($code, 'site_' . $site->getId());
 		}
