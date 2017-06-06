@@ -185,8 +185,23 @@ class DeliveryController extends Controller
     
     public function activateDeliveryAction(Delivery $delivery)
     {
+    	$em = $this->getDoctrine()->getManager();
+    	
+    	// update stock information
+    	$dps = $delivery->getDeliveredProducts();
+    	foreach($dps as $dp)
+    	{
+    		$p = $dp->getProduct();
+    		if($delivery->getDocType() == 'SORTIE')
+    			$p->setStock($p->getStock() - $dp->getQuantity());
+    		else
+    			$p->setStock($p->getStock() + $dp->getQuantity());
+    		$em->flush($p);
+    	}
+    	
+    	// update status of delivery
     	$delivery->activateStatus();
-    	$this->getDoctrine()->getManager()->flush($delivery);
+    	$em->flush($delivery);
     	return $this->redirectToRoute('delivery_index');
     }
     
