@@ -221,6 +221,7 @@ class ListingController extends Controller
     
     public function generateSiteBarcodeImg($site)
     {
+    	$bc = $this->container->get('app.barcode');
     	$code = "1" . str_pad($site->getId(), 11, "0", STR_PAD_LEFT);
     	$code .= $bc->eanCheckDigit($code);
     	$this->generateBarcodeImage($code, 'site_' . $site->getId());
