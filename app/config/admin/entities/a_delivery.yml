@@ -15,7 +15,7 @@ easy_admin:
                     - { property: 'deliveryDate', label: 'Date' }
                     - { property: 'site', label: 'Chantier' }
                     - { property: 'docType', label: 'Type' }
-                    - { property: 'deliveredProducts', label: '# Produits' }
+                    - { property: 'deliveryProducts', label: '# Produits' }
                     - { property: 'totalCost', label: 'Coût total', format: '%.2f'}
             show:
                 fields:
@@ -24,13 +24,12 @@ easy_admin:
                     - { property: 'site', label: 'Chantier' }
                     - { property: 'docType', label: 'Type' }
                     - { property: 'totalCost', label: 'Coût total'}
-                    - { property: 'deliveredProducts', label: 'Liste des articles' }
+                    - { property: 'deliveryProducts', label: 'Liste des articles' }
             form:
                 fields:
                     - { type: 'group', label: 'Détail livraison', icon: 'truck', css_class: 'col-sm-4' }
                     - { property: 'docType', label: 'Type' }
-                    - 'deliveryDate'
+                    - { property: 'deliveryDate', label: 'Date du bulletin' } 
                     - { property: 'site', label: 'Chantier' }
-                    - { type: 'group', label: 'Articles livrés', icon: 'truck', css_class: 'col-sm-8' }
-                    - { property: 'deliveredProducts', label: 'Articles', type: 'collection', type_options: {entry_type: 'InventoryBundle\Form\DeliveryProductType', by_reference: false, allow_add: false} }
-                    #- { property: 'deliveredProducts', label: 'Liste des articles', type_options: {by_reference: false} }   
+                    - { type: 'group', css_class: 'new-row' }
+                    - { property: 'deliveryProducts', label: 'Articles', type: 'collection', type_options: {entry_type: 'InventoryBundle\Form\DeliveryProductType', by_reference: false} }

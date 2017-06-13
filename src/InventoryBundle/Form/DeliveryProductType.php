@@ -29,13 +29,13 @@ class DeliveryProductType extends AbstractType
                     	'placeholder' => ''
                     ))
            	->add('quantity', NumberType::class ,array('attr' => array('class' => 'col-sm-1')))
-        	/*->add('unit', EntityType::class ,
+        	->add('unit', EntityType::class ,
                         		array('class' => 'InventoryBundle\Entity\Unit',
-                        				'attr' => array('class' => 'col-sm-1')))*/
+                        				'attr' => array('class' => 'col-sm-1')))
            	->add('deliveryCostPrice', NumberType::class ,array('attr' => array('class' => 'col-sm-1')))
                         
 		;
-           	$formModifier = function (FormInterface $form, Product $product = null) {
+           	/*$formModifier = function (FormInterface $form, Product $product = null) {
            		$unit = null === $product ? '' : $product->getUnit();
            	
            		$form->add('unit', TextType::class, array(
@@ -66,6 +66,7 @@ class DeliveryProductType extends AbstractType
            					$formModifier($event->getForm()->getParent(), $product);
            				}
            				);
+           				*/
 	}
 	
 	/**

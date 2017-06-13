@@ -3,6 +3,7 @@
 namespace InventoryBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Delivery
@@ -21,11 +22,9 @@ class Delivery
 	private $site;
 	
 	/** 
-	 * @var DeliveredProduct[]
-	 * 
-	 * @ORM\OneToMany(targetEntity="InventoryBundle\Entity\DeliveryProduct", mappedBy="delivery", orphanRemoval=true) 
+	 * @ORM\OneToMany(targetEntity="InventoryBundle\Entity\DeliveryProduct", mappedBy="delivery", cascade={"persist","remove"}, orphanRemoval=true) 
 	 */
-	private $deliveredProducts;
+	private $deliveryProducts;
 
 	
     /**
@@ -66,6 +65,7 @@ class Delivery
     public function __construct()
     {
     	$this->deliveryDate = new \Datetime();
+    	$this->deliveryProducts = new ArrayCollection();
     }
     
     /** {@inheritdoc} */
@@ -129,7 +129,7 @@ class Delivery
     {
     	$products = new ArrayCollection();
     
-    	foreach($this->deliveredProducts as $dp)
+    	foreach($this->deliveryProducts as $dp)
     	{
     		$products[] = $dp->getProduct();
     	}
@@ -151,30 +151,27 @@ class Delivery
     
     }
     
+        
     /**
-     * @param DeliveredProducts[] $deliveredProducts
+     * @return DeliveryProducts[]
      */
-    public function setDeliveredProducts($deliveredProducts)
+    public function getDeliveryProducts()
     {
-    	$this->deliveredProducts = $deliveredProducts;
+    	return $this->deliveryProducts;
     }
     
-    /**
-     * @return DeliveredProducts[]
-     */
-    public function getDeliveredProducts()
+    public function addDeliveryProduct(DeliveryProduct $deliveryProduct)
     {
-    	return $this->deliveredProducts;
+    	$this->deliveryProducts[] = $deliveryProduct;
+    	// On lie la ligne à la livraiosn
+    	$deliveryProduct->setDelivery($this);
+    	 
+    	return $this;
     }
     
-    public function addDeliveryProduct($DeliveryProduct)
+    public function removeDeliveryProduct(DeliveryProduct $deliveryProduct)
     {
-    	$this->deliveredProducts[] = $DeliveryProduct;
-    }
-    
-    public function removeDeliveryProduct($DeliveryProduct)
-    {
-    	return $this->deliveredProducts->removeElement($DeliveryProduct);
+    	return $this->deliveryProducts->removeElement($deliveryProduct);
     }
     
     public function getSiteName()
@@ -211,7 +208,7 @@ class Delivery
     {
     	$total = 0.0;
     
-    	foreach ($this->getDeliveredProducts() as $item) {
+    	foreach ($this->getDeliveryProducts() as $item) {
     		$total += $item->getTotalCostPrice();
     	}
     

@@ -3,6 +3,7 @@
 namespace InventoryBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * DeliveryProduct
@@ -22,7 +23,8 @@ class DeliveryProduct
     
     /**
 	 * @ORM\ManyToOne(targetEntity="InventoryBundle\Entity\Delivery", inversedBy="deliveredProducts")
-	 * @ORM\JoinColumn(name="delivery_id", referencedColumnName="id", nullable=false)
+	 * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
+	 * @Assert\NotNull()
 	 */
 	private $delivery;
 	
