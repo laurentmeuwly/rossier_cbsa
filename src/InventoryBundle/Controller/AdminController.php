@@ -9,6 +9,7 @@ use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use InventoryBundle\Repository\CategoryRepository;
 use InventoryBundle\Entity\Product;
 use InventoryBundle\Entity\Category;
+use InventoryBundle\Entity\Site;
 
 class AdminController extends EasyAdminController
 {
@@ -19,11 +20,6 @@ class AdminController extends EasyAdminController
 	public function indexAction(Request $request)
     {
     	return parent::indexAction($request);
-    }
-    
-    public function createNewProductEntity()
-    {
-    	return new Product();
     }
     
     public function createCategoryEntityFormBuilder($entity, $view)

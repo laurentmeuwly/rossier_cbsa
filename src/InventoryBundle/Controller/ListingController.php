@@ -79,6 +79,15 @@ class ListingController extends Controller
     			array('name' => 'ASC')
     			);
 
+    	// barcode image already exists ? When no, generate it
+    	foreach($sites as $site)
+    	{
+    		$srcFile = '/uploads/images/barcodes/site_' . $site->getId() . '.png';
+    		if (!file_exists($srcFile)) {
+    			$this->generateSiteBarcodeImg($site);
+    		}
+    	}
+    	
     	$html = $this->renderView('InventoryBundle:Listing:print_sites_book.html.twig', array(
     			'sites' => $sites
     	));
@@ -208,6 +217,13 @@ class ListingController extends Controller
     	}
     
     	return $barcode->save($code, $path . $filename);
+    }
+    
+    public function generateSiteBarcodeImg($site)
+    {
+    	$code = "1" . str_pad($site->getId(), 11, "0", STR_PAD_LEFT);
+    	$code .= $bc->eanCheckDigit($code);
+    	$this->generateBarcodeImage($code, 'site_' . $site->getId());
     }
 
 }
