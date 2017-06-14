@@ -3,7 +3,6 @@
 namespace InventoryBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\HttpFoundation\File\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
@@ -24,7 +23,7 @@ class Product
      * @var DeliveryProduct[]
      * @ORM\OneToMany(targetEntity="InventoryBundle\Entity\DeliveryProduct", mappedBy="product"), cascade={"persist"})
      */
-	private $deliveredProducts;
+	private $deliveryProducts;
 	
 	/**
 	 * @var Category
@@ -441,14 +440,14 @@ class Product
     	return $this->category;
     }
     
-    public function getDeliveredProducts()
+    public function getDeliveryProducts()
     {
-    	return $this->deliveredProducts;
+    	return $this->deliveryProducts;
     }
     
-    public function setDeliveredProducts($dp)
+    public function setDeliveryProducts($dp)
     {
-    	$this->deliveredProducts = $dp;
+    	$this->deliveryProducts = $dp;
     	return $this;
     }
     
