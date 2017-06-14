@@ -4,12 +4,16 @@ namespace InventoryBundle\Controller;
 
 use JavierEguiluz\Bundle\EasyAdminBundle\Controller\AdminController as EasyAdminController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use InventoryBundle\Repository\CategoryRepository;
 use InventoryBundle\Entity\Product;
 use InventoryBundle\Entity\Category;
 use InventoryBundle\Entity\Site;
+
 
 class AdminController extends EasyAdminController
 {
@@ -20,6 +24,38 @@ class AdminController extends EasyAdminController
 	public function indexAction(Request $request)
     {
     	return parent::indexAction($request);
+    }
+    
+    public function editDeliveryAction()
+    {
+    	$response = parent::editAction();
+    	
+    	if ($response instanceof RedirectResponse)
+    	{
+    		return $this->redirectToRoute('admin', ['entity' => 'Delivery', 'action' => 'edit', 'id' => $this->request->query->get('id')]);
+    	}
+    	return $response;
+    }
+    
+    public function prefillProductAction()
+    {
+    	$reuqest = $this->request();
+    	if($request->isXmlHttpRequest()) // pour vérifier la présence d'une requete Ajax
+    	{
+    		$id = $request->request->get('id');
+    		$selecteur = $request->request->get('select');
+    		 
+    		if ($id != null)
+    		{
+    			$data = $this->getDoctrine()
+    			->getManager()
+    			->getRepository('InventoryBundle:'.$selecteur)
+    			->$selecteur($id);
+    			 
+    			return new JsonResponse($data);
+    		}
+    	}
+    	return new Response("Zut, pas ajax ....");
     }
     
     public function createCategoryEntityFormBuilder($entity, $view)
