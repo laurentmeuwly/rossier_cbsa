@@ -135,7 +135,7 @@ class ListingController extends Controller
     			} else {
     				$factor = 1;
     			}
-    			foreach($delivery->getDeliveredProducts() as $product) {
+    			foreach($delivery->getDeliveryProducts() as $product) {
     					$sumCost += $factor * $product->getQuantity() * $product->getDeliveryCostPrice();
     					$sumSale += $factor * $product->getQuantity() * $product->getProduct()->getSalePrice();
     				
@@ -155,7 +155,7 @@ class ListingController extends Controller
     	} else {
     		if($site) {
     			foreach($site->getDeliveries() as $delivery) {
-    				foreach($delivery->getDeliveredProducts() as $product) {
+    				foreach($delivery->getDeliveryProducts() as $product) {
     					if($delivery->getDocType()=="RETOUR") {
 	    					$sumCost -= $product->getQuantity() * $product->getDeliveryCostPrice();
 	    					$sumSale -= $product->getQuantity() * $product->getProduct()->getSalePrice();
