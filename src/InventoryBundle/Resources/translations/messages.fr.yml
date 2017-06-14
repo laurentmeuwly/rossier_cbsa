@@ -25,8 +25,15 @@ menu:
 
 ID: ID
 Label: Nom
-Category: Categorie
-Categories: Categories
+Name: Nom
+Comment: Commentaire
+Is active: Actif
+To be printed: Imprimer
+Is manual allowed: Qté manuelle
+Stock: Stock
+Cost price: Prix revient
+Category: Catégorie
+Categories: Catégories
 Image: Image
 Products: Produits liés
 Actions: Actions
@@ -43,6 +50,8 @@ Delivery: Livraison
 Product: Article
 Site: Chantier
 Unit: Unité
+Quantity: Quantité
+Delivery cost price: Prix de revient unitaire
 Home: Home
 'Listing stock location': '__Listing stock location'
 deliveries: __deliveries

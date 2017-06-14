@@ -11,7 +11,7 @@ easy_admin:
                     - { name: 'delete', label: '', icon: 'trash' }
                 fields:
                     - id
-                    - name
+                    - { property: 'name'}
                     - { property: 'unit', sortable: false }
                     - { property: 'costPrice', format: '%.2f', css_class: text-right }
                     - { property: 'image', type: 'image', base_path: '%app.path.product_images%' }
@@ -32,9 +32,9 @@ easy_admin:
                     - { property: 'salePrice', label: "Prix d'achat" }
                     - { property: 'unit', label: 'Unité', css_class: 'small'}
                     - { property: 'stock', label: 'Stock courant' }
-                    - { property: 'inBarcode', type: 'string', label: 'Code barre pour entrée en stock' }
+                    - { property: 'inBarcode', type: 'string', label: 'Code barre pour sortie de stock' }
                     - { property: 'inBarcodeImg', label: ' ', type: 'image', base_path: '%app.path.barcodes%/'}
-                    - { property: 'outBarcode', type: 'string', label: 'Code barre pour sortie de stock' }
+                    - { property: 'outBarcode', type: 'string', label: 'Code barre pour entrée en stock' }
                     - { property: 'outBarcodeImg', label: ' ', type: 'image', base_path: '%app.path.barcodes%/'}
                     - { property: 'image', type: 'image', base_path: '%app.path.product_images%' }
                     - { property: 'category', label: 'Catégorie' }
@@ -42,13 +42,13 @@ easy_admin:
                     - { property: 'displayOrder', label: "Ordre d'impression" }
                     - { property: 'isManualAllowed', label: 'Saisie manuelle des quantités autorisée' }
             form:
-                title: 'Edition article (%%product%%)'
+                title: 'Edition article'
                 fields:
                     - { type: 'group', css_class: 'col-sm-8', label: 'Caractéristiques', icon: 'pencil' }
                     - { property: 'name', css_class: 'large' }
                     - { property: 'comment', label: 'Remarque' }
                     - { type: 'divider' }
-                    - { property: 'unit', label: 'Unité', css_class: 'small'}
+                    - { property: 'unit', label: 'Unité'}
                     - { property: 'category' }
                     - { property: 'imageFile', label: 'Fichier image', type: 'vich_image' }
                     - { type: 'group', css_class: 'col-sm-4', label: 'Divers', icon: 'dollar' }
@@ -60,8 +60,8 @@ easy_admin:
                     - { property: 'toBePrinted', label: 'Doit être imprimé' }
                     - { property: 'isManualAllowed', label: 'Saisie manuelle des quantités autorisée' }
                     - { type: 'group', css_class: 'col-sm-4', label: 'Codes barres', icon: 'cube' }
-                    - { property: 'inBarcode', type_options: {disabled: 'true'}, label: 'Code barre pour entrée en stock' }
-                    - { property: 'outBarcode', type_options: {disabled: 'true'}, label: 'Code barre pour sortie de stock' }
+                    - { property: 'inBarcode', type_options: {disabled: 'true'}, label: 'Code barre pour sortie de stock' }
+                    - { property: 'outBarcode', type_options: {disabled: 'true'}, label: 'Code barre pour entrée en stock' }
                     
                     
                     

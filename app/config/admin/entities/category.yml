@@ -33,3 +33,14 @@ easy_admin:
                     - { type: 'group', css_class: 'col-sm-4', label: 'Produits liés', icon: 'basket' }
                     # if you want to add products when creating categories, add the 'by_reference' option
                     - { property: 'products', type_options: { by_reference: false } }
+                    
+        CategorySelector:
+            class: InventoryBundle\Entity\Category
+            list:
+                actions: ['-edit', '-delete', '-new', '-search']
+                sort: ['parent', 'ASC']
+                fields:
+                    - { property: 'parent', label: 'Parent category' }
+                    - { property: 'name', label: 'Label' }
+                    
+            

@@ -3,3 +3,32 @@ easy_admin:
         DeliveryProduct:
             class: InventoryBundle\Entity\DeliveryProduct
             label: 'Produits livrés'
+            list:
+                title: 'Articles livrés'
+                fields:
+                    - 'id'
+                    - { property: 'delivery', label: 'Livraison' }
+                    - { property: 'product', label: 'Article' }
+                    - { property: 'unit', label: 'Unité' }
+                    - { property: 'deliveryCostPrice', label: 'Prix de revient unitaire' }
+                    - { property: 'quantity', label: 'Quantité' }
+            show:
+                title: 'Article interne à la livraison'
+                fields:
+                    - 'id'
+                    - { property: 'delivery', label: 'Livraison' }
+                    - { property: 'product', label: 'Article' }
+                    - { property: 'unit', label: 'Unité' }
+                    - { property: 'deliveryCostPrice', label: 'Prix de revient unitaire' }
+                    - { property: 'quantity', label: 'Quantité' }
+            form:
+                title: 'Modifier article interne à la livraison'
+                fields:
+                    - { property: 'delivery', label: 'Livraison' }
+                    - { property: 'product', label: 'Article' }
+                    - { property: 'unit', label: 'Unité' }
+                    - { property: 'deliveryCostPrice', label: 'Prix de revient unitaire' }
+                    - { property: 'quantity', label: 'Quantité' }
+                    
+                    
+                    
