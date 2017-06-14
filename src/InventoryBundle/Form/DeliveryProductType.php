@@ -31,7 +31,9 @@ class DeliveryProductType extends AbstractType
            	->add('quantity', NumberType::class ,array('attr' => array('class' => 'col-sm-1')))
         	->add('unit', EntityType::class ,
                         		array('class' => 'InventoryBundle\Entity\Unit',
-                        				'attr' => array('class' => 'col-sm-1')))
+                        				'attr' => array('class' => 'col-sm-1'),
+                        				'placeholder' => ''
+                        		))
            	->add('deliveryCostPrice', NumberType::class ,array('attr' => array('class' => 'col-sm-1')))
                         
 		;

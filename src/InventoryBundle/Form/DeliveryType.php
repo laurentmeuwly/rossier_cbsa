@@ -37,7 +37,7 @@ class DeliveryType extends AbstractType
           		)
           		))
           ->add('original_site', TextType::class, array('mapped' => false))
-          ->add('deliveredProducts', DeliveryProductType::class)
+          ->add('deliveryProducts', DeliveryProductType::class)
           ->add('save',      SubmitType::class)
         ;
           

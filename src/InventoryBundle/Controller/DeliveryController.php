@@ -188,7 +188,7 @@ class DeliveryController extends Controller
     	$em = $this->getDoctrine()->getManager();
     	
     	// update stock information
-    	$dps = $delivery->getDeliveredProducts();
+    	$dps = $delivery->getDeliveryProducts();
     	foreach($dps as $dp)
     	{
     		$p = $dp->getProduct();

@@ -22,14 +22,14 @@ class DeliveryProduct
 	private $id = null;
     
     /**
-	 * @ORM\ManyToOne(targetEntity="InventoryBundle\Entity\Delivery", inversedBy="deliveredProducts")
+	 * @ORM\ManyToOne(targetEntity="InventoryBundle\Entity\Delivery", inversedBy="deliveryProducts")
 	 * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
 	 * @Assert\NotNull()
 	 */
 	private $delivery;
 	
 	/**
-	 * @ORM\ManyToOne(targetEntity="InventoryBundle\Entity\Product", inversedBy="deliveredProducts")
+	 * @ORM\ManyToOne(targetEntity="InventoryBundle\Entity\Product", inversedBy="deliveryProducts")
 	 * @ORM\JoinColumn(name="product_id", referencedColumnName="id", nullable=false)
 	 */
 	private $product;
@@ -42,9 +42,8 @@ class DeliveryProduct
     private $quantity;
     
     /**
-     * @var string
-     *
-     * @ORM\Column(name="unit", type="string")
+     * @ORM\ManyToOne(targetEntity="InventoryBundle\Entity\Unit")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $unit;
     

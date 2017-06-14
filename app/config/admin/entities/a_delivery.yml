@@ -1,4 +1,6 @@
 easy_admin:
+    design:
+        form_theme:   'horizontal'
     entities:
         Delivery:
             class: InventoryBundle\Entity\Delivery
@@ -27,9 +29,10 @@ easy_admin:
                     - { property: 'deliveryProducts', label: 'Liste des articles' }
             form:
                 fields:
-                    - { type: 'group', label: 'Détail livraison', icon: 'truck', css_class: 'col-sm-4' }
+                    - { type: 'group', label: 'Informations livraison', icon: 'truck', css_class: 'col-sm-4' }
                     - { property: 'docType', label: 'Type' }
                     - { property: 'deliveryDate', label: 'Date du bulletin' } 
                     - { property: 'site', label: 'Chantier' }
-                    - { type: 'group', css_class: 'new-row' }
-                    - { property: 'deliveryProducts', label: 'Articles', type: 'collection', type_options: {entry_type: 'InventoryBundle\Form\DeliveryProductType', by_reference: false} }
+                    
+                    - { type: 'group', label: 'Détail de la livraison', icon: 'caddy', css_class: 'new-row' }
+                    - { property: 'deliveryProducts', label: 'Articles livrés', type: 'collection', type_options: {entry_type: 'InventoryBundle\Form\DeliveryProductType', by_reference: false} }

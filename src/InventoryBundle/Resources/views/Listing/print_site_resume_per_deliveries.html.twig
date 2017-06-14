@@ -76,7 +76,7 @@ table {
 </thead>
 
 <tbody>
-{% for dp in delivery.deliveredProducts %}
+{% for dp in delivery.deliveryProducts %}
 {% set row_total = dp.quantity * dp.deliveryCostPrice %}
 <tr style="page-break-inside: avoid;">
 	<td style="text-align:left;">{{ dp.product.name }}</td>
