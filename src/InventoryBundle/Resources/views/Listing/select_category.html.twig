@@ -1,0 +1,64 @@
+{% extends 'EasyAdminBundle:default:layout.html.twig' %} 
+
+
+
+{% block content_title %}
+{% spaceless %}
+   Impression du livre pour le dépôt
+{% endspaceless %}
+{% endblock %}
+
+{% block main %}
+
+<div class="container body-container">
+
+<form method="post" name="form" action="{{ path('print_products_book') }}">
+    <div class="row">
+        <div class="col-sm-6 col-sm-offset-3">
+            <div class="jumbotron">
+               <div id="liste">
+                <p>
+                    {{ "Sélectionner la catégorie" }}
+                </p>
+                
+                <p>
+                <select id="cat_parent" name="cat_parent"></select>
+                </p>
+                <p>
+                <select id="category" name="category"></select>
+                </p>
+                <input type="submit">
+               </div>
+            </div>
+        </div>
+    </div>
+    
+</form>
+</div>
+
+<script>
+var tbl_cat_parent = [
+	{% for catParent in catParents %}
+	{"id": "{{ catParent.id }}", "name": "{{ catParent.name }}"},
+	{%  endfor %}
+	];
+
+var tbl_category = [
+	{% for category in categories %}
+	{"id": "{{ category.id }}", "name": "{{ category.name }}", "parent": "{{ category.parent.id }}"},
+	{%  endfor %}
+	];
+
+
+tbl_category.sort(function(a, b){
+  if( a.name < b.name)
+     return( -1);
+  if( a.name > b.name)
+     return( 1);
+  return( 0);    
+});
+</script>
+<script src="js/categories_lists.js" charset="UTF-8"></script>
+
+
+{% endblock %}
