@@ -3,13 +3,13 @@
 namespace InventoryBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Hackzilla\BarcodeBundle\Utility\Barcode;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 use InventoryBundle\Entity\Category;
 use InventoryBundle\Entity\Product;
-use InventoryBundle\Entity\Unit;
 
 class ListingController extends Controller
 {
@@ -38,35 +38,71 @@ class ListingController extends Controller
 		return $this->render('::impressum.html.twig');
 	}
 	
-    public function printProductsBookAction()
+    public function selectCategoriesAction()
     {
-    	$filePath = '/var/www/test.pdf';
-    	
     	$em = $this->getDoctrine()->getManager();
-    	$categories = $em->getRepository('InventoryBundle:Category')->findAll();
-    	//$products = $em->getRepository('InventoryBundle:Product')->findAll();
-    	$products = $em->getRepository('InventoryBundle:Product')->findBy(
-    		array('toBePrinted' => true),
-    		array('name' => 'ASC')
-    			);
+    	 
+    	// TODO: show form with category to print, to let the user reduce the print size when only part of the book needs to be reprinted.
+    	return $this->renderView('InventoryBundle:Listing:select_category.html.twig');
+    	//$categories = $em->getRepository('InventoryBundle:Category')->findAll();
+    }
+    
+    public function printProductsBookAction(Request $request)
+    {
+    	$em = $this->getDoctrine()->getManager();
     	
-    	$html = $this->renderView('InventoryBundle:Listing:print_products_book.html.twig', array(
-    			'products' => $products
-    	));
+    	$catParents = $em->getRepository('InventoryBundle:Category')->findBy(array('parent' => NULL));
+    	$cat = $em->getRepository('InventoryBundle:Category')->findAll();
     	
-    	// remove old file
-    	if (file_exists($filePath)) {
-    		unlink($filePath);
+    	$categories = array_diff($cat, $catParents);
+ 
+    	$data = $request->request->all();
+    	
+    	if(!isset($data['cat_parent'])) {
+    		return $this->render('InventoryBundle:Listing:select_category.html.twig', array('catParents' => $catParents, 'categories' => $categories));
+    	} else {
+    		
+
+	    	$filePath = '/var/www/test.pdf';
+	    	
+	    	if($data['cat_parent'] == 0) { // 0 => Tout le catalogue
+	    		$products = $em->getRepository('InventoryBundle:Product')->findBy(
+		    		array('toBePrinted' => true),
+		    		array('name' => 'ASC')
+		    			);
+	    	} else {
+	    		if(isset($data['category']) && $data['category']>0) {
+	    			$products = $em->getRepository('InventoryBundle:Product')->findBy(
+	    					array('toBePrinted' => true, 'category' => $data['category']),
+	    					array('name' => 'ASC')
+	    					);
+	    		} else {
+	    			$products = $em->getRepository('InventoryBundle:Product')->findAllPrintableByParentCategory(
+	    					$data['cat_parent']
+	    					);
+	    		}
+	    		
+	    		
+	    	}
+	    	
+	    	$html = $this->renderView('InventoryBundle:Listing:print_products_book.html.twig', array(
+	    			'products' => $products
+	    	));
+	    	
+	    	// remove old file
+	    	if (file_exists($filePath)) {
+	    		unlink($filePath);
+	    	}
+	    	
+	    	return new Response(
+	    			$this->get('knp_snappy.pdf')->getOutputFromHtml($html),
+	    			200,
+	    			array(
+	    					'Content-Type'          => 'application/pdf',
+	    					'Content-Disposition'   => 'attachment; filename="file.pdf"'
+	    			)
+	    			);
     	}
-    	
-    	return new Response(
-    			$this->get('knp_snappy.pdf')->getOutputFromHtml($html),
-    			200,
-    			array(
-    					'Content-Type'          => 'application/pdf',
-    					'Content-Disposition'   => 'attachment; filename="file.pdf"'
-    			)
-    			);
     }
     
     public function printSitesBookAction()

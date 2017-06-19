@@ -31,4 +31,31 @@ class ProductRepository extends \Doctrine\ORM\EntityRepository
 		->getOneOrNullResult()
 		;
 	}
+	
+	public function findAllPrintableByParentCategory($parentCategory)
+	{
+		$subQueryBuider = $this->createQueryBuilder('sq');
+		
+		$subQuery = $subQueryBuider
+			->select(['c.id'])
+			->from('InventoryBundle:Category', 'c')
+			->where('c.parent = :param')
+			->setParameter('param', $parentCategory)
+			->getQuery()
+			->getArrayResult()
+		;
+			
+		$qb = $this->createQueryBuilder('q');
+		
+		$query = $qb
+			->select(['p'])
+			->from('InventoryBundle:Product', 'p')
+			->where($qb->expr()->in('p.category', ':subQuery'))
+			->setParameter('subQuery', $subQuery)
+			->getQuery()
+			;
+
+		return $query->getResult();
+	
+	}
 }

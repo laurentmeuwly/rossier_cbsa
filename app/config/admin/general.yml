@@ -29,6 +29,3 @@ easy_admin:
             - { label: 'menu.about' }
             - { label: 'menu.about.docs', url: 'https://github.com/laurentmeuwly/rossier_cbsa/tree/master/docs', icon: 'book', target: '_blank' }
             - { label: 'menu.about.impressum', route: 'impressum', icon: 'info' }
-            
-            
-            
