@@ -1,6 +1,6 @@
 <?php
 
-namespace InventoryBundle\EventListener;
+namespace InventoryBundle\Form\EventListener;
 
 use JavierEguiluz\Bundle\EasyAdminBundle\Event\EasyAdminEvents;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;

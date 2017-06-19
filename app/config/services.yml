@@ -12,7 +12,7 @@ services:
         class: InventoryBundle\Services\ConvertCsvToArray
 
     app.test_subscriber:
-        class: InventoryBundle\EventListener\TestSubscriber
+        class: InventoryBundle\Form\EventListener\TestSubscriber
         tags:
             - { name: kernel.event_subscriber }
     app.barcode:
