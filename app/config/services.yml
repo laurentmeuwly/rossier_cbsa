@@ -7,6 +7,11 @@ services:
 #    service_name:
 #        class: AppBundle\Directory\ClassName
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+        abstract: true
     
     import.csvtoarray:
         class: InventoryBundle\Services\ConvertCsvToArray
@@ -17,5 +22,11 @@ services:
             - { name: kernel.event_subscriber }
     app.barcode:
         class: InventoryBundle\Utils\ExtendedBarcode
+        
+    app.form.type.deliveryproduct:
+        class: InventoryBundle\Form\DeliveryProductType
+        arguments: ["@doctrine.orm.entity_manager"]
+        tags:
+            - { name: form.type }
 
     
