@@ -13,6 +13,10 @@ use InventoryBundle\Repository\CategoryRepository;
 use InventoryBundle\Entity\Product;
 use InventoryBundle\Entity\Category;
 use InventoryBundle\Entity\Site;
+use InventoryBundle\Entity\Delivery;
+use InventoryBundle\Entity\DeliveryProduct;
+
+use InventoryBundle\Form\TestType;
 
 
 class AdminController extends EasyAdminController
@@ -35,6 +39,52 @@ class AdminController extends EasyAdminController
     		return $this->redirectToRoute('admin', ['entity' => 'Delivery', 'action' => 'edit', 'id' => $this->request->query->get('id')]);
     	}
     	return $response;
+    }
+    
+    public function preUpdateDeliveryEntity(Delivery $delivery)
+    {
+    	$dps = $this->request->get('delivery')['deliveryProducts'];
+    	$em = $this->getDoctrine()->getManager();
+    	
+    	var_dump($dps);
+    	foreach($dps as $dp)
+    	{
+    		$product = $em->getRepository('InventoryBundle:Product')->findOneById($dp['product']);
+    		//var_dump($product->getCostPrice());
+    		if($dp['deliveryCostPrice']=='') {
+    			$dp['deliveryCostPrice'] = $product->getCostPrice();
+    		}
+    		//$this->request->get('delivery')['deliveryProducts'][$i]['deliveryCostPrice'] = $product->getCostPrice();
+    		//$dp['deliveryCostPrice'] = $product->getCostPrice();
+    		
+    	}
+    	
+    	//var_dump($this->request->get('delivery')['deliveryProducts']);
+    	
+    }
+    
+    public function formTestAction()
+    {
+    	$request = $this->getRequest();
+    	$em = $this->getDoctrine()->getManager();
+    	
+    	if($request->isXmlHttpRequest()) { // pour vérifier la présence d'une requete Ajax
+    		$id = '';
+    		$id = $request->get('id');
+    		$product = $em->getRepository('InventoryBundle:Product')->getbyId($id);
+    		
+    		$tRes['id']=1;
+    		$tRes['nom']='hello';
+    		$response = new Response();
+    		$data = json_encode(tRes); // formater le résultat de la requête en json
+    		
+    		$response->headers->set('Content-Type', 'application/json');
+    		$response->setContent($data);
+    		
+    		return $response;
+    	} else {
+    		return new Response('et BIM ça plante');
+    	}
     }
     
     public function prefillProductAction()
@@ -144,4 +194,30 @@ class AdminController extends EasyAdminController
     {
     	return $this->render('::impressum.html.twig');
     }
+    
+    /**
+     * @Route("/docs", name="docs")
+     */
+    
+    public function docsAction()
+    {
+    	$files=array();
+    	$dir = $this->container->getParameter('web_dir') . $this->container->getParameter('app.path.docs');
+    	$d = opendir($dir."/.");
+    	
+    	while($item = readdir($d))
+    	{
+    		if(is_file($sub = $dir."/".$item)) {
+	    		$files[] = array(
+	    				"name" => "$item",
+	    				"url" => $this->container->getParameter('app.path.docs') . "/$item",
+	    		);
+    		}
+    	}
+    	
+    	return $this->render('::docs.html.twig', array('files' => $files));
+    }
+    
+    
+    
 }

@@ -12,6 +12,7 @@ parameters:
     app.path.product_images: /uploads/images/products
     app.path.category_images: /uploads/images/categories
     app.path.barcodes: /uploads/images/barcodes
+    app.path.docs: /docs
     web_dir: "%kernel.root_dir%/../web/"
 
 framework:

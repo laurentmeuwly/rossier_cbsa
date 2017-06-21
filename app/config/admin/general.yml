@@ -27,5 +27,6 @@ easy_admin:
             - { label: 'menu.reporting.listsite', route: 'print_sites_book', icon: 'barcode' }
             - { label: 'menu.reporting.listinventory', route: 'print_products_book', icon: 'barcode'}
             - { label: 'menu.about' }
-            - { label: 'menu.about.docs', url: 'https://github.com/laurentmeuwly/rossier_cbsa/tree/master/docs', icon: 'book', target: '_blank' }
+            - { label: 'menu.about.docs', route: 'docs', icon: 'book' }
             - { label: 'menu.about.impressum', route: 'impressum', icon: 'info' }
+            

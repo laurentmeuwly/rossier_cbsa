@@ -1,0 +1,20 @@
+{% extends 'EasyAdminBundle:default:layout.html.twig' %} 
+
+
+
+{% block content_title %}
+{% spaceless %}
+   Documentations internes
+{% endspaceless %}
+{% endblock %}
+
+{% block main %}
+
+
+<ul>
+	{% for file in files %}
+	<li><a href="{{ absolute_url(asset( file.url )) }}" target="_blank">{{ file.name }}</a></li>
+	{% endfor %}
+</ul>
+
+{% endblock %}
