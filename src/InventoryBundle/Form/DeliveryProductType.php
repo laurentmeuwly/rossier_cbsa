@@ -43,14 +43,16 @@ class DeliveryProductType extends AbstractType
                         		))
             ->add('deliveryCostPrice', NumberType::class ,array('attr' => array('class' => 'col-sm-1')))
            	->add('quantity', NumberType::class ,array('attr' => array('class' => 'col-sm-1')))
+           	
 		;
 		
            	// Add listeners
-           	//$builder->addEventListener(FormEvents::PRE_SET_DATA, array($this, 'onPreSetData'));
            	$builder->addEventListener(FormEvents::POST_SUBMIT, array($this, 'onPostSubmit'));
            	
 
 	}
+	
+	
 	
 	function onPostSubmit(FormEvent $event) {
 		$form = $event->getForm();
@@ -59,6 +61,9 @@ class DeliveryProductType extends AbstractType
 		$product = $this->em->getRepository('InventoryBundle:Product')->find($data->getProduct());
 		
 		
+		if($data->getQuantity()=="") {
+			$data->setQuantity(1);
+		}
 		if($data->getUnit()=="") {
 			$data->setUnit($product->getUnit());
 		}
