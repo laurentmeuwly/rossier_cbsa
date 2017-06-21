@@ -40,6 +40,7 @@ class ProductRepository extends \Doctrine\ORM\EntityRepository
 			->select(['c.id'])
 			->from('InventoryBundle:Category', 'c')
 			->where('c.parent = :param')
+			->orwhere('c.id = :param')
 			->setParameter('param', $parentCategory)
 			->getQuery()
 			->getArrayResult()

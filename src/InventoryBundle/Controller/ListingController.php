@@ -71,14 +71,12 @@ class ListingController extends Controller
 		    		array('name' => 'ASC')
 		    			);
 	    	} else {
-	    		if(isset($data['category']) && $data['category']>0) {
+	    		if( !isset($data['category'])  || (isset($data['category']) && $data['category']<=0)) {
+	    			$products = $em->getRepository('InventoryBundle:Product')->findAllPrintableByParentCategory($data['cat_parent']);
+	    		} else {
 	    			$products = $em->getRepository('InventoryBundle:Product')->findBy(
 	    					array('toBePrinted' => true, 'category' => $data['category']),
 	    					array('name' => 'ASC')
-	    					);
-	    		} else {
-	    			$products = $em->getRepository('InventoryBundle:Product')->findAllPrintableByParentCategory(
-	    					$data['cat_parent']
 	    					);
 	    		}
 	    		
