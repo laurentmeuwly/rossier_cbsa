@@ -46,7 +46,7 @@ class Category
      *
      * @ORM\Column(name="display_order", type="integer", nullable=true)
      */
-    private $displayOrder = 1;
+    private $displayOrder = 100;
     
     /**
      * It only stores the name of the image associated with the category.

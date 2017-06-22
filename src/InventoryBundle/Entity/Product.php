@@ -54,7 +54,7 @@ class Product
      *
      * @ORM\Column(name="display_order", type="integer", nullable=true)
      */
-    private $displayOrder = 1;
+    private $displayOrder = 100;
     
 
     /**
