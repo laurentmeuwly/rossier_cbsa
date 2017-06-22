@@ -15,6 +15,9 @@ use InventoryBundle\Entity\Category;
 use InventoryBundle\Entity\Site;
 use InventoryBundle\Entity\Delivery;
 use InventoryBundle\Entity\DeliveryProduct;
+use Hackzilla\BarcodeBundle\Utility\Barcode;
+use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 
 use InventoryBundle\Form\TestType;
 
@@ -46,7 +49,6 @@ class AdminController extends EasyAdminController
     	$dps = $this->request->get('delivery')['deliveryProducts'];
     	$em = $this->getDoctrine()->getManager();
     	
-    	var_dump($dps);
     	foreach($dps as $dp)
     	{
     		$product = $em->getRepository('InventoryBundle:Product')->findOneById($dp['product']);
@@ -63,49 +65,13 @@ class AdminController extends EasyAdminController
     	
     }
     
-    public function formTestAction()
+    public function prePersistProductEntity($entity)
     {
-    	$request = $this->getRequest();
-    	$em = $this->getDoctrine()->getManager();
+    	$barcode = $entity->getInBarcode();
+    	$this->generateBarcodeImg($barcode);
+    	$barcode = $entity->getOutBarcode();
+    	$this->generateBarcodeImg($barcode);
     	
-    	if($request->isXmlHttpRequest()) { // pour vérifier la présence d'une requete Ajax
-    		$id = '';
-    		$id = $request->get('id');
-    		$product = $em->getRepository('InventoryBundle:Product')->getbyId($id);
-    		
-    		$tRes['id']=1;
-    		$tRes['nom']='hello';
-    		$response = new Response();
-    		$data = json_encode(tRes); // formater le résultat de la requête en json
-    		
-    		$response->headers->set('Content-Type', 'application/json');
-    		$response->setContent($data);
-    		
-    		return $response;
-    	} else {
-    		return new Response('et BIM ça plante');
-    	}
-    }
-    
-    public function prefillProductAction()
-    {
-    	$reuqest = $this->request();
-    	if($request->isXmlHttpRequest()) // pour vérifier la présence d'une requete Ajax
-    	{
-    		$id = $request->request->get('id');
-    		$selecteur = $request->request->get('select');
-    		 
-    		if ($id != null)
-    		{
-    			$data = $this->getDoctrine()
-    			->getManager()
-    			->getRepository('InventoryBundle:'.$selecteur)
-    			->$selecteur($id);
-    			 
-    			return new JsonResponse($data);
-    		}
-    	}
-    	return new Response("Zut, pas ajax ....");
     }
     
     public function createCategoryEntityFormBuilder($entity, $view)
@@ -148,45 +114,6 @@ class AdminController extends EasyAdminController
     }
     
     /**
-     * 
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     */
-    public function restockAction()
-    {
-    	$form = $this->createFormBuilder()->add('quantity')->getForm();
-    	
-    	return $this->render('InventoryBundle:Product:changeQty.html.twig', [
-    			'form' => $form->createView()
-    	]);
-    	
-    	/*$id = $this->request->query->get('id');
-    	$entity = $this->em->getRepository('InventoryBundle:Product')->find($id);
-    	$entity->setStock(10 + $entity->getStock());	// 10 = constante pour validation du procédé!
-    	$this->em->flush();
-    	
-    	// redirect to the 'list' view of the given entity
-    	return $this->redirectToRoute('easyadmin', array(
-    			'action' => 'list',
-    			'entity' => $this->request->query->get('entity'),
-    	));*/
-    }
-    
-    /**
-     * 
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse
-     */
-    public function updateCostAction()
-    {
-    	$id = $this->request->query->get('id');
-    	$entity = $this->em->getRepository('InventoryBundle:Product')->find($id);
-    	$entity->setCostPrice('9.99');	// 9.99 = constante pour validation du procédé!
-    	$this->em->flush();
-    	 
-    	// redirect to the 'list' view of the given entity
-    	return $this->redirectToRoute('easyadmin', $this->request->query->all());
-    }
-    
-    /**
      * @Route("/impressum", name="impressum")
      */
     
@@ -216,8 +143,34 @@ class AdminController extends EasyAdminController
     	}
     	
     	return $this->render('::docs.html.twig', array('files' => $files));
+    }  
+    
+    /**
+     * Store code as a png image
+     */
+    public function generateBarcodeImg($code, $filename=NULL)
+    {
+    	$barcode = $this->get('hackzilla_barcode');
+    	$barcode->setMode(Barcode::MODE_PNG);
+    	
+    	if($filename==NULL) {
+    		$filename = $code.'.png';
+    	} else {
+    		$filename .= '.png';
+    	}
+    	
+    	
+    	$fs = new FileSystem();
+    	$path = $this->container->getParameter('web_dir') . $this->container->getParameter('app.path.barcodes') . '/';
+    	
+    	if(!$fs->exists($path)) {
+    		try {
+    			$fs->mkdir($path, 0770);
+    		} catch (IOExceptionInterface $e) {
+    			echo "An error occurred while creating your directory at ".$e->getPath();
+    		}
+    	}
+    	
+    	return $barcode->save($code, $path . $filename);
     }
-    
-    
-    
 }
