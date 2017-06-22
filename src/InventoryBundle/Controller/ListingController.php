@@ -68,7 +68,7 @@ class ListingController extends Controller
 	    	if($data['cat_parent'] == 0) { // 0 => Tout le catalogue
 	    		$products = $em->getRepository('InventoryBundle:Product')->findBy(
 		    		array('toBePrinted' => true),
-		    		array('name' => 'ASC')
+		    		array('category' => 'ASC', 'displayOrder' => 'ASC', 'name' => 'ASC')
 		    			);
 	    	} else {
 	    		if( !isset($data['category'])  || (isset($data['category']) && $data['category']<=0)) {
@@ -76,14 +76,17 @@ class ListingController extends Controller
 	    		} else {
 	    			$products = $em->getRepository('InventoryBundle:Product')->findBy(
 	    					array('toBePrinted' => true, 'category' => $data['category']),
-	    					array('name' => 'ASC')
+	    					array('displayOrder' => 'ASC', 'name' => 'ASC')
 	    					);
 	    		}
 	    		
 	    		
 	    	}
 	    	
-	    	$html = $this->renderView('InventoryBundle:Listing:print_products_book.html.twig', array(
+	    	return $this->render('InventoryBundle:Listing:print_products_book.html.twig', array(
+	    			'products' => $products
+	    	));
+	    	/*$html = $this->renderView('InventoryBundle:Listing:print_products_book.html.twig', array(
 	    			'products' => $products
 	    	));
 	    	
@@ -99,7 +102,7 @@ class ListingController extends Controller
 	    					'Content-Type'          => 'application/pdf',
 	    					'Content-Disposition'   => 'attachment; filename="file.pdf"'
 	    			)
-	    			);
+	    			);*/
     	}
     }
     

@@ -52,6 +52,8 @@ class ProductRepository extends \Doctrine\ORM\EntityRepository
 			->select(['p'])
 			->from('InventoryBundle:Product', 'p')
 			->where($qb->expr()->in('p.category', ':subQuery'))
+			->addOrderBy('p.category', 'ASC')
+			->addOrderBy('p.displayOrder', 'ASC')
 			->setParameter('subQuery', $subQuery)
 			->getQuery()
 			;
