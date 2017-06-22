@@ -83,10 +83,10 @@ class ListingController extends Controller
 	    		
 	    	}
 	    	
-	    	return $this->render('InventoryBundle:Listing:print_products_book.html.twig', array(
+	    	/*return $this->render('InventoryBundle:Listing:print_products_book.html.twig', array(
 	    			'products' => $products
-	    	));
-	    	/*$html = $this->renderView('InventoryBundle:Listing:print_products_book.html.twig', array(
+	    	));*/
+	    	$html = $this->renderView('InventoryBundle:Listing:print_products_book.html.twig', array(
 	    			'products' => $products
 	    	));
 	    	
@@ -102,7 +102,7 @@ class ListingController extends Controller
 	    					'Content-Type'          => 'application/pdf',
 	    					'Content-Disposition'   => 'attachment; filename="file.pdf"'
 	    			)
-	    			);*/
+	    			);
     	}
     }
     
