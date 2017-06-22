@@ -31,7 +31,7 @@ easy_admin:
                 title: 'Modifier livraison'
                 fields:
                     - { type: 'group', label: 'Informations de la livraison', icon: 'truck', css_class: 'col-sm-4' }
-                    - { property: 'docType', label: 'Type' }
+                    - { property: 'docType', label: 'Type', type: 'choice', type_options: { choices: { 'SORTIE': 'SORTIE', 'RETOUR': 'RETOUR' } } }
                     - { property: 'deliveryDate', label: 'Date du bulletin' } 
                     - { property: 'site', label: 'Chantier'}
                     - { type: 'group', label: 'Détail de la livraison', icon: 'shopping-basket', css_class: 'new-row' }
