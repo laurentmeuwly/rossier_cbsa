@@ -2,16 +2,15 @@
 
 namespace InventoryBundle\Entity;
 
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Validator\Constraints as Assert;
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * Site
  *
  * @ORM\Table(name="site")
  * @ORM\Entity(repositoryClass="InventoryBundle\Repository\SiteRepository")
+ * @UniqueEntity("name")
  */
 class Site
 {	
