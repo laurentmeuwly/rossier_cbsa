@@ -9,12 +9,14 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Hackzilla\BarcodeBundle\Utility\Barcode;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * Product
  *
  * @ORM\Table(name="product")
  * @ORM\Entity(repositoryClass="InventoryBundle\Repository\ProductRepository")
+ * @UniqueEntity("name")
  * @Vich\Uploadable
  */
 class Product

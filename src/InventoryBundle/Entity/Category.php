@@ -6,12 +6,14 @@ use Doctrine\ORM\Mapping as ORM;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 use Symfony\Component\HttpFoundation\File\File;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * Category
  *
  * @ORM\Table(name="category")
  * @ORM\Entity(repositoryClass="InventoryBundle\Repository\CategoryRepository")
+ * @UniqueEntity("name")
  * @Vich\Uploadable
  */
 class Category
