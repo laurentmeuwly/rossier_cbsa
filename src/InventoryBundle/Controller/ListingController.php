@@ -51,8 +51,8 @@ class ListingController extends Controller
     {
     	$em = $this->getDoctrine()->getManager();
     	
-    	$catParents = $em->getRepository('InventoryBundle:Category')->findBy(array('parent' => NULL));
-    	$cat = $em->getRepository('InventoryBundle:Category')->findAll();
+    	$catParents = $em->getRepository('InventoryBundle:Category')->findBy(array('parent' => NULL), array('displayOrder' => 'ASC'));
+    	$cat = $em->getRepository('InventoryBundle:Category')->findAll(array(), array('displayOrder' => 'ASC'));
     	
     	$categories = array_diff($cat, $catParents);
  
@@ -62,17 +62,55 @@ class ListingController extends Controller
     		return $this->render('InventoryBundle:Listing:select_category.html.twig', array('catParents' => $catParents, 'categories' => $categories));
     	} else {
     		
-
 	    	$filePath = '/var/www/test.pdf';
 	    	
+	    	
+	    	
 	    	if($data['cat_parent'] == 0) { // 0 => Tout le catalogue
-	    		$products = $em->getRepository('InventoryBundle:Product')->findBy(
+	    		/*$products = $em->getRepository('InventoryBundle:Product')->findBy(
 		    		array('toBePrinted' => true),
 		    		array('category' => 'ASC', 'displayOrder' => 'ASC', 'name' => 'ASC')
-		    			);
+		    			);*/
+	    		$products = array();
+	    		foreach($catParents as $catParent) {
+	    			// retrieve products attached directly to parent category
+	    			$products = array_merge($products, $em->getRepository('InventoryBundle:Product')->findBy(
+	    					array('toBePrinted' => true, 'category' => $catParent),
+	    					array('displayOrder' => 'ASC', 'name' => 'ASC')
+	    					)
+	    					);
+	    			$categories = $em->getRepository('InventoryBundle:Category')->findBy(
+	    					array('parent' => $catParent),
+	    					array('displayOrder' => 'ASC', 'name' => 'ASC')
+	    					);
+	    			foreach($categories as $category) {
+	    				$products = array_merge($products, $em->getRepository('InventoryBundle:Product')->findBy(
+	    						array('toBePrinted' => true, 'category' => $category),
+	    						array('displayOrder' => 'ASC', 'name' => 'ASC')
+	    						)
+	    						);
+	    			}
+	    		}
 	    	} else {
 	    		if( !isset($data['category'])  || (isset($data['category']) && $data['category']<=0)) {
-	    			$products = $em->getRepository('InventoryBundle:Product')->findAllPrintableByParentCategory($data['cat_parent']);
+	    			//$products = $em->getRepository('InventoryBundle:Product')->findAllPrintableByParentCategory($data['cat_parent']);
+	    			$products = array();
+	    			$products = array_merge($products, $em->getRepository('InventoryBundle:Product')->findBy(
+	    					array('toBePrinted' => true, 'category' => $data['cat_parent']),
+	    					array('displayOrder' => 'ASC', 'name' => 'ASC')
+	    					)
+	    					);
+	    			$categories = $em->getRepository('InventoryBundle:Category')->findBy(
+	    					array('parent' => $data['cat_parent']),
+	    					array('displayOrder' => 'ASC', 'name' => 'ASC')
+	    					);
+	    			foreach($categories as $category) {
+	    				$products = array_merge($products, $em->getRepository('InventoryBundle:Product')->findBy(
+	    						array('toBePrinted' => true, 'category' => $category),
+	    						array('displayOrder' => 'ASC', 'name' => 'ASC')
+	    						)
+	    						);
+	    			}
 	    		} else {
 	    			$products = $em->getRepository('InventoryBundle:Product')->findBy(
 	    					array('toBePrinted' => true, 'category' => $data['category']),
@@ -86,6 +124,7 @@ class ListingController extends Controller
 	    	/*return $this->render('InventoryBundle:Listing:print_products_book.html.twig', array(
 	    			'products' => $products
 	    	));*/
+	    	
 	    	$html = $this->renderView('InventoryBundle:Listing:print_products_book.html.twig', array(
 	    			'products' => $products
 	    	));
