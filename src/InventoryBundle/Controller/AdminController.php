@@ -44,34 +44,122 @@ class AdminController extends EasyAdminController
     	return $response;
     }
     
+    public function preRemoveDeliveryEntity(Delivery $delivery)
+    {
+    	// as we change the content of a delivery, we have to update the stock of each product involved in this delivery
+    	
+    	$em = $this->getDoctrine()->getManager();
+    	$uow = $em->getUnitOfWork();
+    	// rollback current stock information
+    	$originalData = $uow->getOriginalEntityData($delivery);
+    	$odps = $originalData['deliveryProducts'];
+    	//var_dump($odps);
+    	foreach($odps as $odp)
+    	{
+    		$originalDP = $uow->getOriginalEntityData($odp);
+    		$p = $odp->getProduct();
+    	
+    		if(isset($originalDP['quantity'])) {
+    			if($originalData['docType'] == 'SORTIE') {
+    				$p->setStock($p->getStock() + $originalDP['quantity']);
+    			} else {
+    				$p->setStock($p->getStock() - $originalDP['quantity']);
+    			}
+    			$em->flush($p);
+    		}
+    	
+    	}
+
+    }
+    
     public function preUpdateDeliveryEntity(Delivery $delivery)
     {
-    	$dps = $this->request->get('delivery')['deliveryProducts'];
+    	// as we change the content of a delivery, we have to update the stock of each product involved in this delivery
+    	    	
     	$em = $this->getDoctrine()->getManager();
+    	$uow = $em->getUnitOfWork();
+
+    	// rollback current stock information
+    	$originalData = $uow->getOriginalEntityData($delivery);
     	
-    	foreach($dps as $dp)
+    	$deletedProducts = $delivery->getDeliveryProducts()->getDeleteDiff();
+    	foreach($deletedProducts as $ddp)
     	{
-    		$product = $em->getRepository('InventoryBundle:Product')->findOneById($dp['product']);
-    		//var_dump($product->getCostPrice());
-    		if($dp['deliveryCostPrice']=='') {
-    			$dp['deliveryCostPrice'] = $product->getCostPrice();
+    		$p = $ddp->getProduct();
+    	
+    		if($originalData['docType'] == 'SORTIE') {
+    			$p->setStock($p->getStock() + $ddp->getQuantity());
+    		} else {
+    			$p->setStock($p->getStock() - $ddp->getQuantity());
     		}
-    		//$this->request->get('delivery')['deliveryProducts'][$i]['deliveryCostPrice'] = $product->getCostPrice();
-    		//$dp['deliveryCostPrice'] = $product->getCostPrice();
+    		$em->flush($p);
+    	
+    	}
+    	
+    	$odps = $originalData['deliveryProducts'];
+    	foreach($odps as $odp)
+    	{
+    		$originalDP = $uow->getOriginalEntityData($odp);
+    		$p = $odp->getProduct();
+    		
+    		if(isset($originalDP['quantity'])) {
+    			if($originalData['docType'] == 'SORTIE') {
+	    			$p->setStock($p->getStock() + $originalDP['quantity']);
+	    		} else {
+	    			$p->setStock($p->getStock() - $originalDP['quantity']);
+	    		}
+	    		$em->flush($p);
+    		}
     		
     	}
     	
-    	//var_dump($this->request->get('delivery')['deliveryProducts']);
+    	if(isset($this->request->get('delivery')['deliveryProducts'])) {
+    		$dps = $this->request->get('delivery')['deliveryProducts'];
+    	
+	    	foreach($dps as $dp)
+	    	{
+	    		$product = $em->getRepository('InventoryBundle:Product')->findOneById($dp['product']);
+	    		
+	    		if($dp['deliveryCostPrice']=='') {
+	    			$dp['deliveryCostPrice'] = $product->getCostPrice();
+	    		}
+	    		
+	    		// update stock information
+	    		if($this->request->get('delivery')['docType'] == 'SORTIE') {
+    				$product->setStock($product->getStock() - $dp['quantity']);
+	    		} else {
+    				$product->setStock($product->getStock() + $dp['quantity']);
+	    		}
+    			$em->flush($product);
+	    		
+	    	}
+    	
+    	}
+    	
     	
     }
     
     public function prePersistProductEntity($entity)
-    {
+    {   	
     	$barcode = $entity->getInBarcode();
     	$this->generateBarcodeImg($barcode);
     	$barcode = $entity->getOutBarcode();
     	$this->generateBarcodeImg($barcode);
     	
+    }
+    
+    public function newProductAction()
+    {
+    	try {
+    		return parent::newAction();
+    	} catch(CustomForbiddenActionException $e) {
+    		$session = $this->request->getSession();
+    		$session->getFlashBag()->add('error', $e->getMessage());
+    		$refererUrl = $this->request->query->get('referer', '');
+    		return  !empty($refererUrl)
+    		? $this->redirect(urldecode($refererUrl))
+    		: $this->redirect($this->generateUrl('easyadmin', array('action' => 'list', 'entity' => $this->entity['name'])));
+    	}
     }
     
     public function createCategoryEntityFormBuilder($entity, $view)

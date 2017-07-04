@@ -62,7 +62,7 @@ class DeliveryProductType extends AbstractType
 		
 		
 		if($data->getQuantity()=="") {
-			$data->setQuantity(1);
+			$data->setQuantity(0);
 		}
 		if($data->getUnit()=="") {
 			$data->setUnit($product->getUnit());
